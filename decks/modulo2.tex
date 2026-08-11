@@ -1,0 +1,382 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[ Legal Prompting]{ Legal Prompting: Aprende a hablarle a la IA}
+\subtitle{ De la interacción básica a resultados jurídicos precisos (Sesión 1)}
+\author{Ricardo Reyes-Jimenez}
+\institute{Universidad de La Sabana}
+\date{\today}
+
+% Background image for title slide
+\usebackgroundtemplate{
+  \tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{Images/UniSabana.jpg}};
+}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Objetivos de la Clase 1}
+
+
+\begin{itemize}
+  \item Superar el ``Mito del Oráculo'' y entender el funcionamiento estadístico de la IA.
+  \item Dominar los 5 componentes estructurales de un prompt jurídico de alta precisión.
+  \item Aprender cuándo y cómo usar Zero-Shot, One-Shot y Few-Shot prompting.
+  \item Diseñar plantillas reutilizables para clonar el estilo de redacción de la firma.
+  \item Taller Práctico: Construcción de prompts para contratos y conceptos iniciales.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{El Mito del Oráculo: ¿Por qué falla la IA?}
+
+
+\begin{itemize}
+  \item \textbf{La falacia de la omnisciencia:} Creer que la IA ``sabe'' qué ley aplica o qué estilo prefiere tu firma sin que se lo digas.
+  \item \textbf{El costo de la vaguedad:} Un prompt vago (ej. \textit{``Haz un contrato de arrendamiento''}) produce una respuesta genérica, inútil y potencialmente peligrosa.
+  \item \textbf{Solución:} Reemplazar el modo ``buscador de Google'' por el modo ``instrucción delegada''.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Cómo Piensa un LLM: Probabilidad Semántica}
+
+
+\begin{itemize}
+  \item \textbf{No es una base de datos:} No busca archivos en una carpeta; genera palabras basadas en estadísticas de probabilidad.
+  \item \textbf{Predicción de Tokens:} Ante una palabra dada, calcula cuál es la palabra más probable que debería seguir \cite{surden2019}.
+  \item \textbf{El sesgo de lo común:} Sin restricciones específicas, la IA siempre elegirá la respuesta más común y genérica de internet.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{La Ventana de Contexto: Su Lienzo de Trabajo}
+
+
+\begin{itemize}
+  \item \textbf{¿Qué es?:} La cantidad de información que la IA puede ``mantener en memoria'' durante una sola conversación.
+  \item \textbf{Atención y Distracción:} A mayor volumen de información sin estructurar, la IA tiende a ignorar las instrucciones del medio (pérdida en el medio).
+  \item \textbf{Uso Eficiente:} Estructurar el contexto con etiquetas claras (ej. `[HECHOS]`, `[CONTRATO]`) para que la IA priorice correctamente.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Los 5 Componentes de un Prompt Legal Efectivo}
+
+
+Para garantizar consistencia y rigor en los entregables, todo prompt profesional debe estructurarse bajo estos 5 pilares \cite{sal2024}:
+
+1. \textbf{Rol:} La identidad y nivel de experiencia asignado a la IA.
+2. \textbf{Contexto:} Hechos del caso, jurisdicción y antecedentes.
+3. \textbf{Instrucción/Tarea:} El verbo exacto de lo que debe ejecutar.
+4. \textbf{Restricciones:} Límites legales, éticos y técnicos.
+5. \textbf{Formato de Salida:} La estructura visual del entregable.
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Componente 1: El Rol (Asignación de Identidad)}
+
+
+\begin{itemize}
+  \item \textbf{¿Por qué importa?:} El rol activa una red semántica específica dentro del modelo. No es lo mismo pedir un concepto como ``abogado tributarista'' que como ``juez de la república''.
+  \item \textbf{Definición precisa:} Debe incluir jerarquía, especialidad y jurisdicción.
+  \item \textbf{Ejemplo Pobre:} \textit{``Eres un abogado.''}
+  \item \textbf{Ejemplo Elite:} \textit{``Actúa como un Socio de Litigio Civil con 15 años de experiencia en la jurisdicción colombiana.''}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Componente 2: El Contexto (El Anclaje a la Realidad)}
+
+
+\begin{itemize}
+  \item \textbf{Propósito:} Delimitar el universo de hechos sobre el cual la IA debe operar.
+  \item \textbf{Estructura:} Separar los hechos materiales de las opiniones. Usar viñetas o bloques etiquetados.
+  \item \textbf{Ejemplo:}
+\end{itemize}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+[CONTEXTO DE HECHOS]
+1. Empresa A (arrendador) y Empresa B (arrendatario).
+2. Incumplimiento en el pago del canon por 3 meses consecutivos.
+3. El contrato tiene clausula de resolucion automatica.
+\end{lstlisting}
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Componente 3: La Instrucción (El Verbo de Acción)}
+
+
+\begin{itemize}
+  \item \textbf{Evitar la ambigüedad:} Usar verbos directos e imperativos.
+  \item \textbf{Segmentar la tarea:} Si la tarea es compleja, divídela en pasos secuenciales dentro del mismo prompt.
+  \item \textbf{Verbos recomendados:} \textit{Redacta, Analiza, Extrae, Compara, Sintetiza}.
+  \item \textbf{Ejemplo:} \textit{``Extrae todas las obligaciones del arrendatario y agrúpalas en obligaciones de hacer y no hacer.''}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Componente 4: Restricciones (El Blindaje del Prompt)}
+
+
+\begin{itemize}
+  \item \textbf{El escudo contra alucinaciones:} Las restricciones le dicen a la IA qué \textbf{NO} hacer.
+  \item \textbf{Tipos de restricciones:}
+  \begin{itemize}
+    \item \textbf{Normativas:} \textit{``Cita únicamente el Código de Comercio colombiano.''}
+    \item \textbf{De comportamiento:} \textit{``Si no encuentras una cláusula de indemnidad, escribe 'No detectada'. No asumas su existencia.''}
+    \item \textbf{De confidencialidad:} \textit{``No utilices nombres reales de personas naturales.''}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Componente 5: Formato de Salida (El Entregable)}
+
+
+\begin{itemize}
+  \item \textbf{Optimización del tiempo:} Ahorra horas de edición manual obligando a la IA a entregar la información formateada para tu uso final.
+  \item \textbf{Formatos comunes:}
+  \begin{itemize}
+    \item Tabla comparativa con columnas específicas.
+    \item Memorando ejecutivo con estructura de títulos en Markdown.
+    \item Listado con viñetas ordenadas de mayor a menor riesgo.
+  \end{itemize}
+  \item \textbf{Ejemplo:} \textit{``Presenta los riesgos identificados en una tabla con las columnas: Cláusula, Riesgo Asociado, Nivel de Riesgo (Alto/Medio/Bajo), y Redacción Alternativa Sugerida.''}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Deconstrucción de Prompts: El Caso Pobre}
+
+
+\textbf{Prompt Pobre:}
+> \textit{``Revisa este contrato y dime si tiene problemas. Es de un cliente en Bogotá.''}
+
+\begin{itemize}
+  \item \textbf{¿Por qué fallará?:}
+  \begin{itemize}
+    \item \textbf{Rol:} No asignado (la IA responderá como un asistente de chat genérico).
+    \item \textbf{Contexto:} Insuficiente (¿qué tipo de contrato?, ¿quién es el cliente?).
+    \item \textbf{Instrucción:} Vaga (``dime si tiene problemas'' es subjetivo).
+    \item \textbf{Restricciones:} Cero (riesgo total de inventar leyes de otros países).
+    \item \textbf{Formato:} Libre (probablemente entregará un bloque denso de texto).
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Deconstrucción de Prompts: La Alternativa Elite}
+
+
+\textbf{Prompt Elite:}
+> \textit{[ROL]: Actúa como un abogado especialista en contratos comerciales en Colombia.}
+> \textit{[CONTEXTO]: Mi cliente (arrendatario) va a firmar este borrador de contrato de local comercial en Bogotá.}
+> \textit{[INSTRUCCIÓN]: Analiza el contrato adjunto e identifica cláusulas abusivas o desequilibradas.}
+> \textit{[RESTRICCIONES]: Limita tu análisis al régimen comercial colombiano. No analices vivienda urbana. Si una cláusula es estándar, no la listes.}
+> \textit{[FORMATO]: Entrega el resultado en una tabla con: Cláusula analizada, Riesgo para el arrendatario, y Redacción sugerida.}
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Clasificación del Prompting: Shot Prompting}
+
+
+La forma en que presentamos ejemplos al modelo define la precisión del resultado \cite{murray2024}:
+
+\begin{itemize}
+  \item \textbf{Zero-Shot Prompting:} Cero ejemplos. La IA depende únicamente de su base conceptual general.
+  \item \textbf{One-Shot Prompting:} Se incluye un único ejemplo para ilustrar el formato o tono esperado.
+  \item \textbf{Few-Shot Prompting:} Se incluyen entre 3 y 5 ejemplos detallados de entrada y salida.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Zero-Shot Prompting en el Derecho}
+
+
+\begin{itemize}
+  \item \textbf{Cuándo usarlo:} Para tareas estándar de bajo riesgo cognitivo.
+  \item \textbf{Ejemplos idóneos:}
+  \begin{itemize}
+    \item Traducir un correo de lenguaje legal técnico a lenguaje ciudadano.
+    \item Resumir una providencia judicial larga en 5 puntos clave.
+    \item Extraer nombres de entidades y montos de una demanda.
+  \end{itemize}
+  \item \textbf{Riesgo:} Alta dependencia del ``azar estadístico'' del modelo.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{One-Shot Prompting en el Derecho}
+
+
+\begin{itemize}
+  \item \textbf{Cuándo usarlo:} Cuando el formato de salida es altamente personalizado o específico de tu firma.
+  \item \textbf{Dinámica:}
+  \begin{itemize}
+    \item \textit{Instrucción:} ``Redacta una cláusula de confidencialidad.''
+    \item \textit{Ejemplo:} ``Aquí tienes un ejemplo de cómo estructuramos la cláusula en nuestra firma: [Insertar Ejemplo].''
+    \item \textit{Tarea:} ``Ahora, redacta una similar para un contrato de desarrollo de software.''
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Few-Shot Prompting: Clonar el Estilo Jurídico}
+
+
+\begin{itemize}
+  \item \textbf{El secreto de la personalización:} Si quieres que la IA escriba conceptos jurídicos que suonen exactamente como tú, debes darle ejemplos de tu trabajo previo exitoso.
+  \item \textbf{Cómo estructurarlo:}
+  \begin{itemize}
+    \item \textbf{Ejemplo 1:} Hechos A $\rightarrow$ Concepto Redactado A.
+    \item \textbf{Ejemplo 2:} Hechos B $\rightarrow$ Concepto Redactado B.
+    \item \textbf{Nueva Entrada:} Hechos C $\rightarrow$ [La IA generará el Concepto C imitando el estilo de A y B].
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Few-Shot: Estructura Visual del Prompt}
+
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+[EJEMPLO 1]
+1. Entrada de hechos: ...
+2. Salida de concepto: ...
+===
+[EJEMPLO 2]
+1. Entrada de hechos: ...
+2. Salida de concepto: ...
+===
+[NUEVA TAREA]
+1. Entrada de hechos: [Nuevos Hechos de tu Cliente]
+2. Salida de concepto:
+\end{lstlisting}
+
+\textit{La IA detectará los patrones de puntuación, terminología legal, uso de citas y estructura formal de los ejemplos y los replicará.}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Taller Inicial: Diseña tus Primeros Prompts}
+
+
+\textbf{Instrucciones de la Actividad (45 Minutos):}
+
+1. \textbf{Seleccionar un reto real:} Ej. Redactar una carta de terminación de contrato laboral con justa causa, o un requerimiento extrajudicial de cobro.
+2. \textbf{Construir el prompt:} Escribir el prompt utilizando de manera estricta los 5 componentes (Rol, Contexto, Instrucción, Restricciones, Formato).
+3. \textbf{Prueba y Ajuste:} Ejecutar el prompt en el modelo y documentar las correcciones necesarias en la sección de Restricciones.
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Criterios de Evaluación de un Prompt Legal}
+
+
+Para auditar si tu prompt es de nivel profesional, verifica:
+
+\begin{itemize}
+  \item \textbf{¿Es reproducible?:} Si lo ejecutas 3 veces, ¿genera resultados consistentes en estructura y rigor?
+  \item \textbf{¿Es agnóstico al modelo?:} ¿Funciona de manera similar en Claude, Gemini y GPT-4?
+  \item \textbf{¿Controla la alucinación?:} ¿Contiene directrices de qué hacer ante vacíos de información?
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Preguntas y Cierre (Clase 1)}
+
+
+\begin{itemize}
+  \item \textbf{Reflexión final:} El prompt engineering no es programación; es el arte de delegar con precisión jurídica.
+  \item \textbf{Para la próxima sesión:} Entraremos en técnicas avanzadas de razonamiento secuencial (Chain-of-Thought) y frameworks de estandarización para toda la firma.
+\end{itemize}
+\textbf{¡Muchas gracias!}
+
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{Referencias}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

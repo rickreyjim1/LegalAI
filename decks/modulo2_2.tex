@@ -1,0 +1,381 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[ Técnicas Avanzadas y Framewor]{ Técnicas Avanzadas y Frameworks de Prompting}
+\subtitle{ Estandarización de procesos e ingeniería de razonamiento (Sesión 2)}
+\author{Ricardo Reyes-Jimenez}
+\institute{Universidad de La Sabana}
+\date{\today}
+
+% Background image for title slide
+\usebackgroundtemplate{
+  \tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{Images/UniSabana.jpg}};
+}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Objetivos de la Clase 2}
+
+
+\begin{itemize}
+  \item \textbf{Repaso (15 min):} Consolidar los 5 componentes del prompt y técnicas de shot prompting.
+  \item \textbf{Técnicas Avanzadas:} Dominar Chain-of-Thought, Break the Task Down y Super Prompting.
+  \item \textbf{Frameworks Metodológicos:} Implementar CARE, ADP y TAM en la práctica diaria de la firma.
+  \item \textbf{Auditoría Cruzada:} Usar técnicas de Red Teaming para encontrar vacíos legales y blindar entregables.
+  \item \textbf{Taller Avanzado:} Resolver un caso real de tu práctica profesional en vivo.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Repaso: Los 5 Componentes del Prompt}
+
+
+\begin{itemize}
+  \item Todo prompt profesional debe contener la estructura de 5 pilares para evitar la variabilidad estadística y las alucinaciones:
+  \begin{itemize}
+    \item \textbf{Rol:} ¿Quién es la IA? (Jurisdicción y experiencia).
+    \item \textbf{Contexto:} Hechos materiales limpios.
+    \item \textbf{Instrucción:} El verbo imperativo de la acción.
+    \item \textbf{Restricciones:} Límites técnicos y normativos duros.
+    \item \textbf{Formato:} Estructura visual exacta de la respuesta.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Repaso: Delimitando el Rol y Contexto}
+
+
+\begin{itemize}
+  \item \textbf{El Rol} no es un adorno; redirige la atención probabilística de la red neuronal hacia un corpus de texto especializado.
+  \item \textbf{El Contexto} debe segmentarse para evitar que la IA asuma datos inexistentes.
+  \item \textbf{Consejo:} Usar delimitadores visuales (ej. `\``\''\"` o `---`) para aislar el contexto del resto de las instrucciones del prompt.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Repaso: Instrucciones y Restricciones Robustas}
+
+
+\begin{table}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Instrucción Débil} \& \textbf{Instrucción Robusta} \\ \hline
+``Mira si este contrato está bien.'' \& ``Analiza la cláusula 5 e identifica riesgos de sobrefacturación.'' \\ \hline
+``Haz un memo legal.'' \& ``Redacta un memorando ejecutivo de 3 secciones bajo el formato Markdown.'' \\ \hline
+``Usa leyes de Colombia.'' \& ``Cita únicamente la Ley 1581 de 2012 y doctrina oficial de la SIC.'' \\ \hline
+\end{tabular}
+}
+\end{table}
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Repaso: Formatos y Shot Prompting}
+
+
+\begin{itemize}
+  \item \textbf{Shot Prompting} es el método más rápido para guiar la forma de trabajar del modelo:
+  \begin{itemize}
+    \item \textbf{Zero-Shot:} Para tareas de baja complejidad.
+    \item \textbf{One-Shot:} Cuando quieres fijar un formato visual específico.
+    \item \textbf{Few-Shot:} Clave para imitar el tono de redacción, estilo lingüístico y profundidad analítica de la firma.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Introducción a Técnicas Avanzadas}
+
+
+\begin{itemize}
+  \item Cuando el problema jurídico es complejo (ej. planificar una estrategia judicial o resolver un conflicto tributario cruzado), los prompts tradicionales de una sola instrucción fallan.
+  \item \textbf{¿Por qué?:} Los LLMs tienden a cometer errores si se les pide una conclusión de forma inmediata sin permitirles procesar los pasos lógicos intermedios \cite{openai2023}.
+  \item \textbf{Solución:} Ingeniería de razonamiento.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Chain-of-Thought (CoT): Razonamiento Secuencial}
+
+
+\begin{itemize}
+  \item \textbf{¿Qué es?:} Forzar al modelo a exteriorizar y desglosar su razonamiento paso a paso antes de emitir la conclusión jurídica final.
+  \item \textbf{Efecto:} Reduce las alucinaciones hasta en un 50\% porque alinea los tokens de razonamiento antes de calcular la respuesta definitiva.
+  \item \textbf{Instrucción Clave:} \textit{``Piensa paso a paso...''} o \textit{``Desglosa tu razonamiento legal bajo las siguientes fases...''}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{CoT en Acción: Evitando la Alucinación}
+
+
+\textbf{Prompt con CoT Aplicado:}
+> \textit{"Analiza si los hechos descritos configuran un despido injustificado bajo el Código Sustantivo del Trabajo.}
+> \textit{Antes de dar tu conclusión, sigue estrictamente este orden de razonamiento:}
+> \textit{1. Identifica la causal de terminación invocada por el empleador.}
+> \textit{2. Contrasta dicha causal con los requisitos formales de la ley.}
+> \textit{3. Revisa la jurisprudencia reciente aplicable.}
+> \textit{4. Concluye únicamente después de completar los pasos 1, 2 y 3."}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Break the Task Down: Descomposición de Tareas}
+
+
+\begin{itemize}
+  \item \textbf{El Principio:} No intentes resolver todo en un solo prompt masivo.
+  \item \textbf{Fases del Flujo de Trabajo:}
+  \begin{itemize}
+    \item \textbf{Paso 1 (Extracción):} Extrae los hechos clave del documento.
+    \item \textbf{Paso 2 (Análisis):} Cruza los hechos con la norma aplicable.
+    \item \textbf{Paso 3 (Redacción):} Redacta el concepto jurídico basado en el análisis del Paso 2.
+  \end{itemize}
+  \item \textbf{Resultado:} Cada paso genera una salida limpia y verificable, evitando la fatiga cognitiva del modelo.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Super Prompting: Prompts Interactivos}
+
+
+\begin{itemize}
+  \item \textbf{¿Qué es?:} Diseñar prompts que transforman a la IA en un consultor activo que hace preguntas antes de dar una respuesta.
+  \item \textbf{Estructura del Super Prompt:}
+  \begin{itemize}
+    \item \textit{``Actúa como un Socio de Litigio. Tu objetivo es ayudarme a preparar la contestación de la demanda. No redactes nada todavía. Hazme preguntas de una en una sobre los hechos del caso. Cuando tengas suficiente información, avísame y genera el primer borrador.''}
+  \end{itemize}
+  \item \textbf{Beneficio:} Evita que tengas que escribir un prompt de 3 páginas con todo el contexto de una sola vez.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Frameworks de Estandarización en la Firma}
+
+
+Para que una firma de abogados adopte IA a gran escala, no basta con dar accesos a los asociados; se deben estandarizar los flujos de trabajo mediante frameworks reutilizables.
+
+Analizaremos tres metodologías estratégicas:
+1. \textbf{CARE} (Para Análisis y Conceptos).
+2. \textbf{ADP} (Para Revisión y Auditoría).
+3. \textbf{TAM} (Para Redacción y Comunicación).
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{CARE Framework: Análisis y Conceptos}
+
+
+Diseñado para la elaboración de memorandos, conceptos jurídicos y análisis de viabilidad:
+
+\begin{itemize}
+  \item \textbf{C - Contexto:} Delimitar hechos y partes involucradas.
+  \item \textbf{A - Acción:} Definir la tarea jurídica (ej. \textit{``Evaluar el riesgo tributario...''}).
+  \item \textbf{R - Resultado:} Formato y extensión esperada del entregable.
+  \item \textbf{E - Evaluación:} Restricciones, leyes específicas a considerar y análisis de riesgos.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{CARE en Acción: Ejemplo Práctico}
+
+
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+[CONVENIO CARE]
+1. CONTEXTO: Cliente extranjero adquiere propiedad raiz en Colombia mediante fiducia.
+2. ACCION: Identificar la tarifa del impuesto de registro aplicable.
+3. RESULTADO: Memorando ejecutivo de 2 paginas con titulos en Markdown.
+4. EVALUACION: Limitate al Estatuto Tributario y Ley 223 de 1995. Advierte sobre los riesgos de interpretacion de la DIAN.
+\end{lstlisting}
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{ADP Framework: Auditoría y Revisión}
+
+
+Especialmente diseñado para la revisión automatizada de contratos e instrumentos jurídicos:
+
+\begin{itemize}
+  \item \textbf{A - Actor:} Definir desde qué posición se audita (ej. \textit{``Actúa como abogado del Arrendatario...''}).
+  \item \textbf{D - Documento:} Especificar el tipo de contrato y sus cláusulas clave.
+  \item \textbf{P - Propósito:} Qué se busca proteger o identificar (ej. \textit{``Limitar la responsabilidad por daños indirectos...''}).
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{ADP en Acción: Ejemplo Práctico}
+
+
+\textbf{Prompt con ADP:}
+> \textit{[ACTOR]: Eres el abogado de la Empresa Compradora.}
+> \textit{[DOCUMENTO]: Revisa el contrato de suministro adjunto.}
+> \textit{[PROPÓSITO]: Identifica cualquier cláusula que imponga penalidades unilaterales a mi cliente o que extienda los plazos de entrega sin compensación. Propón una redacción alternativa equitativa para cada riesgo encontrado.}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{TAM Framework: Redacción de Documentos}
+
+
+Ideal para redactar cartas formales, correos electrónicos a clientes, requerimientos extrajudiciales o comunicados corporativos:
+
+\begin{itemize}
+  \item \textbf{T - Tarea:} El objetivo de la comunicación (ej. \textit{``Solicitar la restitución del inmueble...''}).
+  \item \textbf{A - Audiencia:} A quién va dirigido y cuál debe ser la relación jerárquica/de tono.
+  \item \textbf{M - Método:} El canal y tono lingüístico (ej. \textit{``Formal, firme pero conciliador; a través de correo electrónico''}).
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{TAM en Acción: Ejemplo Práctico}
+
+
+\textbf{Prompt con TAM:}
+> \textit{[TAREA]: Redactar un requerimiento de cobro por mora en arrendamiento comercial.}
+> \textit{[AUDIENCIA]: Representante legal de la empresa arrendataria (relación comercial de 5 años que queremos conservar).}
+> \textit{[MÉTODO]: Correo electrónico formal, persuasivo, citando el contrato pero abriendo la puerta a un acuerdo de pago.}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Taller Avanzado: Clínica de Prompts Complejos}
+
+
+\textbf{Dinámica Grupal (60 Minutos):}
+
+1. \textbf{Elige tu Reto:} Un caso real y complejo de tu escritorio (ej. planeación de una defensa ante un ente de control).
+2. \textbf{Implementación de Framework:} Diseña un prompt estructurado usando el framework \textbf{CARE} combinado con \textbf{Chain-of-Thought}.
+3. \textbf{Ejecución y Auditoría:} Ejecuta el prompt en la IA y prepárate para la fase de Red Teaming.
+
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Red Teaming Legal: Auditoría Cruzada}
+
+
+\begin{itemize}
+  \item \textbf{El Paso Final:} Una vez que la IA te da una respuesta (ej. una contestación de demanda), no la asumas como perfecta.
+  \item \textbf{El Prompt de Red Teaming:}
+\end{itemize}
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+[INSTRUCCION]
+Actua como el abogado de la contraparte.
+Encuentra los 3 puntos mas debiles de la respuesta de la IA anterior.
+Dime como atacarias esos argumentos en el juzgado.
+\end{lstlisting}
+\begin{itemize}
+  \item \textbf{Resultado:} Un blindaje total del documento antes de la firma del abogado.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Buenas Prácticas Organizacionales}
+
+
+\begin{itemize}
+  \item \textbf{Biblioteca de Prompts:} Centralizar los prompts exitosos (CARE, ADP) en un documento compartido de la firma para evitar la pérdida de conocimiento.
+  \item \textbf{Capacitación Continua:} Los modelos cambian; auditar semestralmente que las plantillas sigan funcionando de manera óptima \cite{sal2024}.
+  \item \textbf{Control de Calidad:} Ningún entregable generado por IA sale de la firma sin la revisión final de un abogado matriculado.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Cierre y Próximos Pasos}
+
+
+\begin{itemize}
+  \item \textbf{Resumen:} Hemos pasado del prompt amateur a la ingeniería de razonamiento y frameworks estructurados.
+  \item \textbf{Tu Misión:} Implementar al menos una plantilla CARE o ADP en tus tareas de la próxima semana y medir las horas de trabajo ahorradas.
+  \item \textbf{Próximo Módulo (Módulo 3):} Automatización avanzada e integración de sistemas.
+\end{itemize}
+\textbf{¡Muchas gracias por su atención y compromiso!}
+
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{Referencias}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "legal-ai"
+version = "0.1.0"
+description = "Estrategia, herramientas y utilidades de Inteligencia Artificial para el sector legal."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "LegalAI Team"}
+]
+keywords = ["legaltech", "ai", "law", "prompt-engineering", "revealjs", "pptx"]
+
+dependencies = [
+    "python-docx>=1.0.0",
+    "pypdf>=3.17.0",
+    "markdown>=3.5",
+    "pyyaml>=6.0.1",
+    "jinja2>=3.1.2",
+    "click>=8.1.7",
+    "rich>=13.7.0",
+    "pydantic>=2.5.0",
+    "watchdog>=3.0.0",
+]
+
+[project.scripts]
+legal-ai = "legal_ai.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
