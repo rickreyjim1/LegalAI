@@ -1,0 +1,304 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[LegalAI Presentation]{LegalAI Presentation}
+\subtitle{}
+\author{Ricardo Reyes-Jimenez}
+\institute{Universidad de La Sabana}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{}
+```yaml
+title: ``IA en Diagnósticos y Decisiones Médicas''
+subtitle: ``Optimizando la Precisión y Eficiencia Clínica''
+author: ``Dr. IA''
+institute: ``Universidad de Medicina Digital''
+date: ``24 de Mayo de 2024''
+output: revealjs
+\end{frame}
+
+
+
+\begin{frame}[fragile]{IA en Diagnósticos y Decisiones Médicas}
+
+\textbf{Optimizando la Precisión y Eficiencia Clínica}
+
+Dr. IA
+Universidad de Medicina Digital
+24 de Mayo de 2024
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{1. Objetivos de la Sesión y Contexto General}
+
+
+\textbf{Objetivos de Aprendizaje}
+Al finalizar esta sesión, usted será capaz de:
+\begin{itemize}
+  \item Comprender el rol fundamental de la Inteligencia Artificial (IA) en el diagnóstico y la toma de decisiones médicas.
+  \item Analizar casos de estudio clave que demuestran la aplicación práctica de la IA en entornos clínicos.
+  \item Identificar los beneficios, desafíos y consideraciones éticas asociadas con la implementación de la IA en la medicina.
+\end{itemize}
+\textbf{Contexto General}
+La medicina está experimentando una transformación sin precedentes gracias a la IA. Esta tecnología ofrece herramientas para procesar y analizar volúmenes masivos de datos, prometiendo una revolución en cómo diagnosticamos enfermedades, personalizamos tratamientos y gestionamos la salud del paciente.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{2. Marco Conceptual y Conceptos Clave: ¿Qué es la IA en Medicina?}
+
+
+\textbf{Definición y Alcance}
+\begin{itemize}
+  \item \textbf{Inteligencia Artificial (IA):} Sistemas informáticos capaces de realizar tareas que normalmente requieren inteligencia humana, como el aprendizaje, la resolución de problemas y la toma de decisiones.
+  \item \textbf{Enfoque en Medicina:}
+  \begin{itemize}
+    \item \textbf{Diagnóstico:} Identificación de enfermedades o condiciones a partir de síntomas, resultados de pruebas e imágenes médicas.
+    \item \textbf{Decisión Médica:} Apoyo en la elección de tratamientos, gestión de riesgos y planificación de la atención al paciente.
+  \end{itemize}
+  \item \textbf{Componentes Clave:} Algoritmos, aprendizaje automático (Machine Learning), redes neuronales y procesamiento de lenguaje natural.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{3. Marco Conceptual y Conceptos Clave: Tipos de IA Aplicada}
+
+
+\textbf{Aprendizaje Automático (Machine Learning)}
+\begin{itemize}
+  \item \textbf{Aprendizaje Supervisado:} Utiliza datos etiquetados para predecir resultados.
+  \begin{itemize}
+    \item \textit{Ejemplo:} Clasificación de imágenes para detectar tumores (benignos/malignos).
+    \item \textit{Ejemplo:} Regresión para predecir la progresión de una enfermedad.
+  \end{itemize}
+  \item \textbf{Aprendizaje Profundo (Deep Learning):} Una subclase del aprendizaje automático que utiliza redes neuronales con múltiples capas.
+  \begin{itemize}
+    \item Especialmente potente en el análisis de datos complejos como imágenes médicas (radiografías, resonancias magnéticas, patología digital).
+  \end{itemize}
+\end{itemize}
+\textbf{Procesamiento del Lenguaje Natural (PLN)}
+\begin{itemize}
+  \item Permite a las máquinas entender, interpretar y generar lenguaje humano.
+  \item \textit{Aplicación Médica:} Análisis de historias clínicas electrónicas, notas de progreso y literatura científica para extraer información relevante y apoyar decisiones clínicas.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{4. Marco Conceptual y Conceptos Clave: Beneficios Clave de la IA}
+
+
+\textbf{Potencial Transformador}
+\begin{itemize}
+  \item \textbf{Mayor Precisión Diagnóstica:} Identificación de patrones sutiles que pueden pasar desapercibidos para el ojo humano, llevando a diagnósticos más tempranos y precisos.
+  \item \textbf{Eficiencia Mejorada:} Reducción del tiempo necesario para analizar grandes volúmenes de datos (imágenes, historiales), optimizando el flujo de trabajo clínico.
+  \item \textbf{Personalización del Tratamiento:} Análisis de datos genéticos, historial del paciente y respuestas a tratamientos para recomendar terapias individualizadas.
+  \item \textbf{Reducción de la Carga de Trabajo:} Automatización de tareas repetitivas o de cribado, permitiendo a los profesionales enfocarse en casos complejos y la interacción con el paciente.
+  \item \textbf{Acceso Mejorado:} Potencial para llevar diagnósticos especializados a áreas con escasez de expertos.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{5. Casos de Estudio y Ejemplos Prácticos Aplicados: Diagnóstico por Imágenes}
+
+
+\textbf{5.1. Cribado y Detección Temprana del Cáncer}
+\begin{itemize}
+  \item \textbf{Cáncer de Mama:} La IA demuestra un rendimiento excepcional en la interpretación de mamografías.
+  \begin{itemize}
+    \item Estudios comparan la IA con radiólogos humanos, mostrando eficacia en la detección de anomalías y reducción de falsos positivos/negativos.
+    \item \textit{Referencia:} [1] Rendimiento diagnóstico de la IA en el screening de cáncer de mama.
+  \end{itemize}
+\end{itemize}
+\textbf{5.2. Diagnóstico en Diversas Modalidades de Imagen}
+\begin{itemize}
+  \item \textbf{Radiología General:} La IA asiste en la interpretación de rayos X, tomografías computarizadas (TC) y resonancias magnéticas (RM).
+  \begin{itemize}
+    \item Detecta lesiones pulmonares, fracturas óseas, hemorragias cerebrales y otras patologías en diversas especialidades.
+    \item \textit{Referencia:} [2] Efectividad de la IA en el diagnóstico médico por imágenes.
+  \end{itemize}
+  \item \textbf{Oftalmología:} Detección temprana de retinopatía diabética o degeneración macular.
+  \item \textbf{Dermatología:} Análisis de imágenes dermatoscópicas para identificar lesiones cutáneas malignas.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{6. Casos de Estudio y Ejemplos Prácticos Aplicados: Soporte a la Decisión Clínica}
+
+
+\textbf{6.1. Análisis de Grandes Volúmenes de Datos del Paciente}
+\begin{itemize}
+  \item \textbf{Historias Clínicas Electrónicas (HCE):} La IA puede analizar años de datos (síntomas, resultados de laboratorio, medicación, diagnósticos previos).
+  \item \textbf{Generación de Alertas y Recomendaciones:}
+  \begin{itemize}
+    \item Identificación de pacientes en riesgo de sepsis, fallo renal o eventos adversos.
+    \item Sugerencia de la dosis óptima de medicamentos o la necesidad de pruebas adicionales.
+  \end{itemize}
+\end{itemize}
+\textbf{6.2. Personalización de Tratamientos y Guías Clínicas}
+\begin{itemize}
+  \item \textbf{Oncología:} Recomendación de terapias dirigidas basadas en el perfil genético del tumor y el paciente.
+  \item \textbf{Enfermedades Crónicas:} Ajuste de planes de manejo para diabetes, hipertensión o enfermedades cardíacas.
+  \item \textbf{Adherencia a Guías Clínicas:} La IA ayuda a los médicos a seguir las últimas directrices, reduciendo la variabilidad en la práctica y mejorando los resultados.
+  \begin{itemize}
+    \item \textit{Referencia:} [3] Soporte a la decisión clínica basado en IA: revisión de escopo.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{7. Ejercicios Prácticos y Actividades Interactivas: Ejercicio 1}
+
+
+\textbf{``IA en mi Consulta'' (5 minutos, individual/parejas)}
+
+\textbf{Instrucción:} Piense en un área específica de su práctica clínica o especialidad donde usted cree que la Inteligencia Artificial podría ser de gran utilidad.
+
+\textbf{Paso a paso:}
+\begin{itemize}
+  \item \textbf{Identifique una Tarea:} ¿Qué tarea repetitiva, compleja o que consume mucho tiempo podría ser mejorada por la IA? (Ej: revisión de imágenes, análisis de historiales, predicción de riesgo).
+  \item \textbf{Tipo de Datos:} ¿Qué tipo de datos necesitaría la IA para realizar esa tarea? (Ej: imágenes de radiología, datos de laboratorio, texto de notas clínicas).
+  \item \textbf{Beneficio Esperado:} ¿Cuál sería el principal beneficio de implementar la IA en esta tarea? (Ej: diagnóstico más rápido, mayor precisión, reducción de errores).
+\end{itemize}
+\textbf{Reflexión (breve discusión):} Comparta su idea con un compañero. ¿Hay similitudes o diferencias en sus perspectivas?
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{8. Ejercicios Prácticos y Actividades Interactivas: Ejercicio 2}
+
+
+\textbf{``Dilema Ético IA'' (7 minutos, grupos pequeños)}
+
+\textbf{Escenario:} Usted es un médico en un hospital que utiliza un sistema de IA avanzado para el diagnóstico. Un paciente llega con síntomas atípicos. El sistema de IA, tras analizar todos los datos disponibles, diagnostica una enfermedad rara y agresiva que usted, con su experiencia, considera improbable. Sin embargo, los marcadores de confianza del sistema de IA son muy altos.
+
+\textbf{Paso a paso:}
+\begin{itemize}
+  \item \textbf{Discuta en su grupo:} ¿Cómo manejaría esta situación?
+  \item \textbf{Considere:}
+  \begin{itemize}
+    \item ¿Confiaría ciegamente en la IA?
+    \item ¿Ignoraría la recomendación de la IA basándose en su juicio clínico?
+    \item ¿Qué pasos adicionales tomaría para validar o refutar el diagnóstico?
+    \item ¿Cómo comunicaría esta situación al paciente?
+  \end{itemize}
+\end{itemize}
+\textbf{Plenaria (breve):} Cada grupo comparte su enfoque y las razones detrás de sus decisiones.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{9. ``Sabías que...'' / Datos Curiosos}
+
+
+\textbf{Hallazgos Sorprendentes de la IA en Medicina}
+\begin{itemize}
+  \item \textbf{Supera a Expertos en Tareas Específicas:} En algunas tareas de diagnóstico por imagen, como la detección de cáncer de mama o retinopatía diabética, los sistemas de IA han demostrado un rendimiento igual o superior al de radiólogos y oftalmólogos humanos.
+  \item \textbf{Acelera el Descubrimiento de Fármacos:} La IA está revolucionando la fase inicial del desarrollo de nuevos medicamentos, identificando candidatos prometedores y prediciendo su eficacia y toxicidad en una fracción del tiempo tradicional.
+  \item \textbf{Reduce Errores Médicos:} Al analizar patrones en grandes conjuntos de datos, la IA puede identificar posibles errores en la medicación, omisiones en el cuidado o diagnósticos erróneos, actuando como una ``segunda opinión'' incansable.
+  \item \textbf{`\texttt{Caja Negra'' vs. IA Explicable:} Uno de los mayores desafíos es la interpretabilidad de algunos algoritmos complejos. Actualmente, gran parte de la investigación se centra en desarrollar }\texttt{IA explicable'' (XAI) para que los médicos puedan entender }`por qué'' un sistema de IA llegó a una conclusión.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{10. Conclusiones y Puntos Clave (Takeaways)}
+
+
+\textbf{Reflexiones Finales}
+\begin{itemize}
+  \item \textbf{IA como Potenciador, no Reemplazo:} La IA es una herramienta poderosa que mejora significativamente la capacidad diagnóstica y decisoria del médico, pero no pretende reemplazar el juicio clínico, la empatía y la consideración holística del paciente.
+  \item \textbf{Impacto Transformador en Imágenes:} La evidencia empírica resalta el rendimiento excepcional de la IA en la interpretación de imágenes médicas, conduciendo a diagnósticos más tempranos y precisos.
+  \item \textbf{Soporte Vital a la Decisión Clínica:} La IA procesa volúmenes masivos de datos de pacientes, generando recomendaciones y alertas que mejoran la adherencia a guías clínicas y la personalización de tratamientos.
+  \item \textbf{Desafíos y Consideraciones Éticas:} La implementación a gran escala requiere abordar la necesidad de datos de alta calidad, la interpretabilidad algorítmica, la regulación, la privacidad de datos y el sesgo potencial.
+  \item \textbf{Colaboración Humano-IA:} El futuro de la medicina radica en la sinergia entre la experiencia humana y la capacidad analítica de la IA, trabajando juntos para optimizar los resultados de los pacientes.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{11. Referencias Bibliográficas}
+
+
+[1] Unknown Authors, ``Rendimiento diagnóstico de la inteligencia artificial en el screening de cáncer de mama: una revisión sistemática,'' \textit{Revista Ocronos}, 2026. DOI: 10.58842/aeoc3355.
+
+[2] N. Guerrero Meza, E. Reyes Mauricio, J. Bastidas Jimbo, ``Efectividad de la inteligencia artificial en el diagnóstico médico por imágenes: Una revisión sistemática,'' \textit{Sapiens in Artificial Intelligence}, 2025. DOI: 10.71068/t20bpr35.
+
+[3] E. Semedo Correia, A. Valério Netto, ``Suporte à decisão clínica baseado em IA: revisão de escopo,'' \textit{Journal of Health Informatics}, vol. 17, 2025, Art. 1457. DOI: 10.59681/2175-4411.v17.2025.1457.
+```
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

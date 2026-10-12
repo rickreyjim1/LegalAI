@@ -19,9 +19,14 @@ def parse_markdown_slides(md_content: str) -> List[SlideData]:
     slides = []
     
     start_idx = 0
+    frontmatter = {}
     if lines and lines[0].strip() == "---":
         start_idx = 1
         while start_idx < len(lines) and lines[start_idx].strip() != "---":
+            line = lines[start_idx].strip()
+            if ":" in line:
+                key, val = line.split(":", 1)
+                frontmatter[key.strip()] = val.strip().strip('"').strip("'")
             start_idx += 1
         start_idx += 1
         
@@ -41,15 +46,16 @@ def parse_markdown_slides(md_content: str) -> List[SlideData]:
     if current_slide.title or current_slide.content_lines:
         slides.append(current_slide)
         
-    return slides
+    return slides, frontmatter
 
 def markdown_to_latex(content_lines: list[str]) -> str:
-    """Converts a list of markdown lines (with bullets) to LaTeX syntax."""
+    """Converts a list of markdown lines (with bullets/numbers/formatting) to LaTeX syntax."""
     latex_lines = []
     level = -1
     in_table = False
     
-    for line in content_lines:
+    for raw_line in content_lines:
+        line = raw_line
         if not line.strip():
             if not in_table and level < 0:
                 latex_lines.append("")
@@ -57,25 +63,47 @@ def markdown_to_latex(content_lines: list[str]) -> str:
         if "Notas del Mentor:" in line:
             continue
             
-        # Basic markdown to LaTeX formatting
-        clean = line
+        # Protect image tags from text escaping
+        img_placeholders = []
+        def save_img(m):
+            img_placeholders.append(m.group(0))
+            return f"@@IMGPH{len(img_placeholders)-1}@@"
+        
+        clean = re.sub(r'!\[(.*?)\]\((.*?)\)', save_img, line)
+
+        # Convert subheadings inside slide content (e.g. ## Subheading, ### Subheading) to bold text
+        if clean.strip().startswith("#"):
+            clean = re.sub(r'^\s*#+\s*(.*)', r'**\1**', clean)
+
         clean = re.sub(r'\*\*(.*?)\*\*', r'\\textbf{\1}', clean)
         clean = re.sub(r'__(.*?)__', r'\\textbf{\1}', clean)
         clean = re.sub(r'(?<!\*)\*(?!\s)(.*?)(?<!\s)\*(?!\*)', r'\\textit{\1}', clean)
         clean = re.sub(r'"([^"]*)"', r"``\1''", clean)
         
-        # Handle images: ![alt](path)
-        clean = re.sub(r'!\[(.*?)\]\((.*?)\)', r'\\begin{figure}\\centering\\includegraphics[height=0.6\\textheight,keepaspectratio]{\2}\\caption{\1}\\end{figure}', clean)
+        # Handle inline code: `code`
+        clean = re.sub(
+            r'`([^`]+)`',
+            lambda m: '\\texttt{' + m.group(1).replace('_', '\\_').replace('%', '\\%').replace('&', '\\&').replace('#', '\\#') + '}',
+            clean
+        )
         
-        # Handle regular links: [text](url) - must be done after images to avoid matching ![alt](path)
+        # Handle regular links: [text](url)
         clean = re.sub(r'(?<!!)\[([^\]]+)\]\(([^)]+)\)', r'\\href{\2}{\1}', clean)
         
         # Handle citations: [@citation]
         clean = re.sub(r'\[@(.*?)\]', r'\\cite{\1}', clean)
         
-        # Handle special LaTeX characters if needed (simple escape, but avoid double escaping)
-        # We will do a simple replace for % and & which are common in text
-        clean = clean.replace("%", "\\%").replace("&", "\\&")
+        # Handle special LaTeX characters (% & _ #) in plain text
+        clean = clean.replace("%", "\\%").replace("&", "\\&").replace("#", "\\#")
+        clean = re.sub(r'(?<!\\)_', r'\\_', clean)
+        
+        # Restore image tags with LaTeX figure syntax
+        for idx, img_tag in enumerate(img_placeholders):
+            m = re.match(r'!\[(.*?)\]\((.*?)\)', img_tag)
+            if m:
+                alt, path = m.group(1), m.group(2)
+                tex_img = f'\\begin{{figure}}\\centering\\includegraphics[height=0.6\\textheight,keepaspectratio]{{{path}}}\\caption{{{alt}}}\\end{{figure}}'
+                clean = clean.replace(f"@@IMGPH{idx}@@", tex_img)
         
         stripped = clean.strip()
         
@@ -101,12 +129,13 @@ def markdown_to_latex(content_lines: list[str]) -> str:
             latex_lines.append(r"}")
             latex_lines.append(r"\end{table}")
             
-        if stripped.startswith("* ") or stripped.startswith("- "):
+        list_match = re.match(r'^(\*|-|\d+\.)\s+(.*)', stripped)
+        if list_match:
             # Calculate indentation for nested lists
             indent_count = len(line) - len(line.lstrip(' \t'))
             current_level = 1 if indent_count >= 2 or line.startswith('\t') else 0
             
-            text = stripped[2:].strip()
+            text = list_match.group(2).strip()
             
             # Open nested itemize
             while level < current_level:
@@ -154,13 +183,14 @@ def build_tex_deck(md_file_path: str, output_path: Optional[str] = None) -> Path
         md_content = f.read()
 
     # Reuse the markdown parser from the PPTX builder
-    slides_data = parse_markdown_slides(md_content)
+    slides_data, frontmatter = parse_markdown_slides(md_content)
     
     # Process slides for LaTeX output
-    presentation_title = "LegalAI Presentation"
-    presentation_subtitle = ""
-    author = "Ricardo Reyes-Jimenez"
-    institute = "Universidad de La Sabana"
+    presentation_title = frontmatter.get("title", "LegalAI Presentation")
+    presentation_subtitle = frontmatter.get("subtitle", "")
+    author = frontmatter.get("author", "Ricardo Reyes-Jimenez")
+    institute = frontmatter.get("institute", "Universidad de La Sabana")
+    background_image = frontmatter.get("background_image", "")
     
     processed_slides = []
     
@@ -186,6 +216,23 @@ def build_tex_deck(md_file_path: str, output_path: Optional[str] = None) -> Path
         slide.latex_content = markdown_to_latex(slide.content_lines)
         processed_slides.append(slide)
         
+    # Check if slides already contain a references slide
+    has_ref_slide = any(
+        "referencia" in s.title.lower() or "bibliograf" in s.title.lower() or "reference" in s.title.lower()
+        for s in processed_slides
+    )
+    
+    # Check if a non-empty references.bib exists in client or current dir
+    md_path = Path(md_file_path)
+    client_refs = md_path.parent.parent / "references.bib" if md_path.parent.name == "original_documents" else Path.cwd() / "references.bib"
+    
+    if not client_refs.exists() and (Path.cwd() / "references.bib").exists():
+        client_refs = Path.cwd() / "references.bib"
+        
+    has_bib_file = client_refs.exists() and client_refs.stat().st_size > 50
+
+    show_bibtex = (not has_ref_slide) and has_bib_file
+
     # Setup Jinja environment with custom delimiters to avoid conflicting with LaTeX {}
     template_dir = Path(__file__).parent / "templates"
     env = Environment(
@@ -207,7 +254,9 @@ def build_tex_deck(md_file_path: str, output_path: Optional[str] = None) -> Path
         presentation_subtitle=presentation_subtitle,
         author=author,
         institute=institute,
-        slides=processed_slides
+        background_image=background_image,
+        slides=processed_slides,
+        show_bibtex=show_bibtex
     )
     
     with open(output_path, "w", encoding="utf-8") as f:

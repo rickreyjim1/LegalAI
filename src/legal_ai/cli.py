@@ -31,14 +31,22 @@ def project_info():
     table.add_column("Ruta Absolute", style="dim")
 
     workspace = Path.cwd()
-    modules = ["modulo1.md", "modulo2.md", "modulo3.md", "modulo4.md"]
-
+    if workspace.parent.name == "clients":
+        console.print(f"[bold]Cliente actual:[/bold] {workspace.name}")
+        base_dir = workspace
+    else:
+        # Default to root or try to show something generic
+        console.print(f"[bold]Modo Global (Sin cliente)[/bold] - Por favor, navega a clients/NOMBRE_CLIENTE")
+        base_dir = workspace
+        
+    modules = ["modulo1.md", "modulo2.md", "modulo3.md", "modulo4.md", "modulo2_4.md"]
+    
     for mod in modules:
-        mod_path = workspace / "original_documents" / mod
+        mod_path = base_dir / "original_documents" / mod
         status = "Existe" if mod_path.exists() else "Pendiente"
         color = "green" if mod_path.exists() else "yellow"
         table.add_row(mod, f"[{color}]{status}[/{color}]", str(mod_path))
-
+    
     console.print(table)
     console.print(f"\n[bold]Entorno Python:[/bold] {sys.version.split()[0]}")
     console.print(f"[bold]Directorio de Trabajo:[/bold] {workspace}")
@@ -50,8 +58,13 @@ def project_info():
 @click.option("--output", "-o", type=click.Path(path_type=Path), help="Ruta del archivo de salida (.tex).")
 def build_tex(input_file: Path, output: Path):
     """Compila un archivo Markdown de curso a una presentación LaTeX Beamer (.tex)."""
-    decks_dir = Path.cwd() / "decks"
-    decks_dir.mkdir(exist_ok=True)
+    # Detect if we are in a client structure: e.g. clients/Capgemini/original_documents/file.md
+    input_dir = input_file.parent
+    if input_dir.name == "original_documents":
+        decks_dir = input_dir.parent / "decks"
+    else:
+        decks_dir = Path.cwd() / "decks"
+    decks_dir.mkdir(exist_ok=True, parents=True)
     if not output:
         output = decks_dir / input_file.with_suffix(".tex").name
 
@@ -74,8 +87,12 @@ def build_pdf(input_file: Path, output: Path):
     import subprocess
     import shutil
     
-    decks_dir = Path.cwd() / "decks"
-    decks_dir.mkdir(exist_ok=True)
+    input_dir = input_file.parent
+    if input_dir.name == "original_documents":
+        decks_dir = input_dir.parent / "decks"
+    else:
+        decks_dir = Path.cwd() / "decks"
+    decks_dir.mkdir(exist_ok=True, parents=True)
     
     tex_output = decks_dir / input_file.with_suffix(".tex").name
     if not output:
@@ -94,8 +111,11 @@ def build_pdf(input_file: Path, output: Path):
         # We run pdflatex twice and bibtex in between if references exist
         # Need to run in the decks_dir so auxiliary files are generated there
         subprocess.run(["pdflatex", "-interaction=nonstopmode", tex_output.name], cwd=decks_dir, check=True, capture_output=True)
-        # Check if references.bib exists in the root folder, if so copy it to decks temporarily
-        refs = Path.cwd() / "references.bib"
+        # Check if references.bib exists in the client folder or root folder
+        refs = input_dir.parent / "references.bib"
+        if not refs.exists():
+            refs = Path.cwd() / "references.bib"
+        
         if refs.exists():
             shutil.copy(refs, decks_dir / "references.bib")
             console.print(f"[bold yellow]3. Procesando referencias con bibtex...[/bold yellow]")
@@ -153,6 +173,17 @@ def watch(directory: Path):
         observer.stop()
         console.print("\n[yellow]Monitoreo detenido.[/yellow]")
     observer.join()
+
+
+@main.command(name="generate")
+@click.argument("topic", type=str)
+@click.option("--output", "-o", type=click.Path(path_type=Path), help="Ruta del archivo Markdown de salida (.md).")
+@click.option("--expertise", "-e", type=str, default="Senior Researcher", help="Rol o especialidad del investigador (ej. 'Journalist', 'PhD in Medicine').")
+def generate(topic: str, output: Path, expertise: str):
+    """Genera una presentación Beamer completa (.md y .pdf) usando agentes con especialización personalizada."""
+    from legal_ai.agents.orchestrator import run_pipeline
+    output_str = str(output) if output else "original_documents/presentation.md"
+    run_pipeline(topic, output_str, expertise=expertise)
 
 
 @main.group(name="prompt")

@@ -1,0 +1,13 @@
+\frametitle{Ejercicio 4 (Para llevar): Framework TAM (Comunicación / Comercial)}
+
+
+\textbf{Contexto del Caso (Hechos para tu Prompt):}
+Tu firma de abogados debe enviar un requerimiento de pago a ``Distribuidora El Sol'', un cliente histórico de tu representado ``Fábrica La Luna''. La deuda es de \$50,000,000 COP y tiene 60 días de mora. El objetivo es cobrar el dinero rápidamente pero \textbf{sin destruir la relación comercial de 10 años}.
+
+\textbf{Tu Misión:}
+Aplica el framework TAM (Tarea, Audiencia, Método) dentro de un prompt para que la IA redacte el correo electrónico perfecto.
+\begin{itemize}
+  \item \textbf{Tarea:} Solicitar el pago de la deuda.
+  \item \textbf{Audiencia:} El Gerente General de ``Distribuidora El Sol'' (relación amistosa pero profesional).
+  \item \textbf{Método:} Correo electrónico persuasivo, conciliador pero firme, proponiendo un acuerdo de pago.
+\end{itemize}

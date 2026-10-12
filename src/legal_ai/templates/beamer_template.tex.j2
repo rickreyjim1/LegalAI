@@ -14,30 +14,48 @@
   commentstyle=\color{gray},
   showstringspaces=false
 }
-% Minimal look
+
+% Clean Theme Setup & Optimization
 \usetheme{Warsaw}
-%\setbeamertemplate{headline}
+\usecolortheme{default}
+\usefonttheme{serif}
+
+% Remove top headline bar and navigation clutter to maximize slide text space
+\setbeamertemplate{headline}{}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle continuation}{}
+
+% Slim, clean footline bar
 \setbeamertemplate{footline}{
   \leavevmode%
   \hbox{%
-    % Left: Section name
-    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
-      \hspace*{2ex}\insertsection
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertshortauthor
     \end{beamercolorbox}%
-    % Center: Presentation title
-    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
       \insertshorttitle
     \end{beamercolorbox}%
-    % Right: Slide numbers
-    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
       \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
     \end{beamercolorbox}%
   }%
   \vskip0pt%
 }
 
-\usecolortheme{default}
-\usefonttheme{serif}
+% Font size and list spacing optimizations to prevent text overflow
+\setbeamertemplate{itemize/enumerate body begin}{\small}
+\setbeamertemplate{itemize/enumerate subbody begin}{\footnotesize}
+\setbeamertemplate{itemize/enumerate subsubbody begin}{\scriptsize}
+
+\makeatletter
+\g@addto@macro\itemize{%
+  \setlength{\itemsep}{2pt}%
+  \setlength{\parsep}{1pt}%
+  \setlength{\topsep}{2pt}%
+  \setlength{\partopsep}{0pt}%
+}
+\makeatother
+
 \graphicspath{{../}{./}}
 \setbeamertemplate{caption}[numbered]
 
@@ -48,10 +66,12 @@
 \institute{<< institute >>}
 \date{\today}
 
+<% if background_image %>
 % Background image for title slide
 \usebackgroundtemplate{
-  \tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{Images/UniSabana.jpg}};
+  \tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{<< background_image >>}};
 }
+<% endif %>
 
 \begin{document}
 
@@ -64,20 +84,13 @@
 \usebackgroundtemplate{}
 
 <% for slide in slides %>
-<% if loop.last and slide.title == '¡Sigamos en Contacto!' %>
-\begin{frame}[allowframebreaks]{Referencias}
-  \bibliographystyle{apalike}
-  \bibliography{references}
-\end{frame}
-<% endif %>
-\begin{frame}[fragile]{<< slide.title >>}
+\begin{frame}[allowframebreaks,fragile]{<< slide.title >>}
 << slide.latex_content >>
 \end{frame}
-
 <% endfor %>
 
-<% if not slides or slides[-1].title != '¡Sigamos en Contacto!' %>
-\begin{frame}[allowframebreaks]{Referencias}
+<% if show_bibtex %>
+\begin{frame}[allowframebreaks]{References}
   \bibliographystyle{apalike}
   \bibliography{references}
 \end{frame}

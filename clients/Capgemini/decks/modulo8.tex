@@ -1,0 +1,166 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Module 8: Final Integration]{Module 8: Final Integration}
+\subtitle{The EM Crisis Simulation}
+\author{Ricardo Reyes-Jimenez}
+\institute{Capgemini}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Session Objective}
+
+
+\textbf{By the end of this module, the Engagement Manager will be able to:}
+
+1. Integrate all previously learned frameworks (5 Pillars, TAM, CARE, CoT).
+2. Execute a multi-step Copilot workflow to resolve a simulated project crisis \cite{cot2026}.
+3. Defend Capgemini's commercial interests while maintaining client trust.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{1. The Scenario: The Perfect Storm}
+
+
+\textbf{The Context:}
+You are managing the ``Horizon'' project. Yesterday, the client's Project Sponsor sent a furious email:
+1. They are withholding the Phase 2 payment, claiming the team missed the \textit{Response Time SLA} during a minor outage.
+2. They are demanding a new ``Automated Backup Dashboard'', claiming it was implicitly included in the original scope.
+
+\textbf{Your Goal:} Protect the revenue, reject the scope creep, and de-escalate the anger.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 1: Step 1 - SLA Defense}
+
+
+\textbf{Task:} Analyze the SOW to prove Capgemini is compliant.
+
+\begin{itemize}
+  \item \textbf{Provide Copilot with the SOW snippet:} \textit{(Assume the SOW states: ``Capgemini will respond to Sev-3 minor outages within 4 business hours.'')}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+\textit{``Act as a Contract Analyst. Review this SLA snippet: [Paste Snippet]. The client claims we missed the SLA because we took 3 hours to respond to a minor outage on a Saturday. Based strictly on the text, did Capgemini breach the SLA? Explain why using Chain-of-Thought reasoning.''}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 2: Step 2 - The Change Request}
+
+
+\textbf{Task:} Draft the CR for the new dashboard using the CARE framework.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+*"Draft the internal justification for a Change Request using the CARE framework.
+\textbf{Context:} The SOW only covers manual backup scripts.
+\textbf{Action:} Client is demanding an automated visual dashboard.
+\textbf{Result:} It requires 40 hours of effort (\$4,000).
+\textbf{Evaluation:} We can deliver it in Phase 3 if they sign the CR this week."*
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 3: Step 3 - The Diplomatic Email}
+
+
+\textbf{Task:} Combine the SLA defense and the CR into one email using the TAM framework.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+*"Now, draft the email to the frustrated Project Sponsor.
+\textbf{Task:} Politely inform them that the SLA was not breached (explain the business hours rule gently) and attach the drafted Change Request for the dashboard they requested.
+\textbf{Audience:} A tense executive who feels ignored.
+\textbf{Method:} Highly empathetic, professional, firm on the commercial boundaries. Use the 5 Pillars of prompting to structure your output."*
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Course Conclusion}
+
+
+\textbf{Congratulations!}
+
+You have completed the LegalAI for Engagement Managers course. You are now equipped to:
+\begin{itemize}
+  \item Write robust prompts (5 Pillars).
+  \item Structure difficult communications (TAM).
+  \item Audit contracts and negotiate scope (CARE \& CoT).
+  \item Manage your team effectively using AI-assisted objectivity.
+\end{itemize}
+\textbf{Final Reminder:} You are the Human in the Loop. The AI drafts, but \textit{you} deliver the value.
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

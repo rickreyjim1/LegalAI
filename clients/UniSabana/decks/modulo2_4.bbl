@@ -1,0 +1,18 @@
+\begin{thebibliography}{}
+
+\bibitem[{Congreso de la República de Colombia}, 2012]{ley1581}
+{Congreso de la República de Colombia} (2012).
+\newblock Ley 1581 de 2012: Disposiciones generales para la protección de
+  datos personales.
+
+\bibitem[OpenAI, 2023]{openai2023}
+OpenAI (2023).
+\newblock Gpt-4 technical report.
+\newblock \url{https://arxiv.org/abs/2303.08774}.
+
+\bibitem[{U.S. District Court, S.D.N.Y.}, 2023]{matavavianca}
+{U.S. District Court, S.D.N.Y.} (2023).
+\newblock Roberto mata v. avianca, inc. (no. 22-cv-1461).
+\newblock \url{https://casetext.com/case/mata-v-avianca-inc-2}.
+
+\end{thebibliography}

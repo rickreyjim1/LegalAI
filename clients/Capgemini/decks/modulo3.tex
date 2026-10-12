@@ -1,0 +1,233 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+
+% Clean Theme Setup & Optimization
+\usetheme{Warsaw}
+\usecolortheme{default}
+\usefonttheme{serif}
+
+% Remove top headline bar and navigation clutter to maximize slide text space
+\setbeamertemplate{headline}{}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle continuation}{}
+
+% Slim, clean footline bar
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+% Font size and list spacing optimizations to prevent text overflow
+\setbeamertemplate{itemize/enumerate body begin}{\small}
+\setbeamertemplate{itemize/enumerate subbody begin}{\footnotesize}
+\setbeamertemplate{itemize/enumerate subsubbody begin}{\scriptsize}
+
+\makeatletter
+\g@addto@macro\itemize{%
+  \setlength{\itemsep}{2pt}%
+  \setlength{\parsep}{1pt}%
+  \setlength{\topsep}{2pt}%
+  \setlength{\partopsep}{0pt}%
+}
+\makeatother
+
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Module 3: SOW Analysis & EM Pr]{Module 3: SOW Analysis & EM PromptLibrary}
+\subtitle{Risk Extraction & Scaling Knowledge for EMs}
+\author{Ricardo Reyes-Jimenez}
+\institute{Capgemini}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+\begin{frame}[allowframebreaks,fragile]{Session Objective}
+
+\textbf{By the end of this module, the Engagement Manager will be able to:}
+
+\begin{itemize}
+  \item Understand the value of an EM-specific PromptLibrary to scale knowledge.
+  \item Use MS Copilot to audit lengthy Statements of Work (SOWs) efficiently using reusable ``Blueprints''.
+  \item Extract commercial risks, hidden penalties, and ambiguous commitments.
+  \item Clarify vague Service Level Agreements (SLAs) into measurable  metrics.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{1. The Challenge of SOWs \& Manual Review}
+
+
+\textbf{SOWs are the baseline of profitability, but they are often dense and ambiguous.}
+
+\begin{itemize}
+  \item \textbf{The EM's Reality:} Inheriting an SOW drafted by Sales that contains unrealistic technical promises or hidden liabilities.
+  \item \textbf{The Manual Cost:} EMs spend hours reading hundreds of pages of legal and technical jargon just to establish a baseline.
+  \item \textbf{The AI Advantage:} Copilot can process dozens of pages in seconds, flagging contradictions between the \textit{Pricing Schedule} and the \textit{Technical Deliverables} \cite{sowAI2025}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{2. The Solution: An EM PromptLibrary}
+
+
+\begin{itemize}
+  \item \textbf{What is it?} A centralized, tested, and categorized repository of AI instructions (prompts) ready to be used by any Engagement Manager.
+  \item \textbf{The ``Prompt Blindness'' Problem:} An EM spends 40 minutes tweaking a prompt until Copilot perfectly extracts SOW risks. When the project starts, that perfect prompt is forgotten.
+  \item \textbf{Scaling Efficiency:} If that EM documents their successful prompt in a PromptLibrary, 50 other EMs can use it tomorrow, saving hundreds of hours across the practice.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{3. The ``Blueprint'' Concept}
+
+
+\begin{itemize}
+  \item A \textit{Blueprint} is a parameterized prompt. It is not a static text, but a formula that allows you to substitute variables for different clients or projects.
+  \item \textbf{Static Prompt (Bad):} \textit{``Summarize the Acme Corp SOW and find risks.''}
+  \item \textbf{Blueprint (Good):} \textit{``Act as a strict Capgemini Delivery Director. Review the attached [DOCUMENT TYPE] for [CLIENT INDUSTRY]. Extract any clause where we assume financial liability for [SPECIFIC RISK]. SOW Text: [TEXT]''}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{4. Anatomy of a Reusable EM Prompt}
+
+
+Every good \textit{Blueprint} in your library should have:
+
+\begin{itemize}
+  \item \textbf{Name \& Role:} e.g., \textit{EM Risk Assessor}.
+  \item \textbf{Base Context:} The immutable instruction (tone and format).
+  \item \textbf{Variables (Brackets):} The spaces the user must fill (e.g., \texttt{[SOW TEXT]}, \texttt{[INDUSTRY]}).
+  \item \textbf{Constraints:} What the AI must \textit{never} do (e.g., \textit{``Do not include general technical risks, focus ONLY on commercial penalties''}).
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{5. Security \& Confidentiality}
+
+
+\begin{itemize}
+  \item \textbf{Crucial Reminder:} When using Blueprints for SOW analysis, ensure you are using your \textbf{Capgemini Enterprise Copilot license}.
+  \item Real SOWs contain highly confidential client data, pricing, and strategic information.
+  \item Enterprise licenses ensure your data is not used to train public models.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{6. Risk Extraction Prompting}
+
+
+When uploading a document to Copilot, your instruction must be highly specific about \textit{what} constitutes a risk.
+
+\begin{itemize}
+  \item \textbf{Bad Prompt:} ``Summarize this SOW and tell me the risks.'' (Yields generic, unhelpful answers).
+  \item \textbf{Good Blueprint:} \textit{``Review the attached SOW. Extract any clause where Capgemini assumes financial liability for third-party software failures. List them in a table with columns: Clause, Page, and Mitigation Strategy.''}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Exercise 1: Building your SOW Risk Blueprint}
+
+
+\textbf{Context:} You are taking over a new Cloud Migration project. The SOW is 40 pages long.
+\textbf{Task:} Use Copilot to identify the top commercial risks and save your prompt as a Blueprint.
+
+\begin{itemize}
+  \item \textbf{Draft Blueprint to Try:}
+\end{itemize}
+\textit{``Act as a Capgemini Commercial Director. Review the attached SOW text [Paste Extract]. Identify the top 3 commercial risks related to [SPECIFIC CONCERN: e.g., timeline penalties, out-of-scope assumptions]. Present your findings in a markdown table with columns: 'Risk Description', 'SOW Section', and 'Suggested Mitigation'.''}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{7. Ambiguity in SLAs}
+
+
+\textbf{``The system must be fast and reliable.'' -> This is an unmanageable SLA.}
+
+\begin{itemize}
+  \item As an EM, you must translate subjective adjectives into objective metrics before project kickoff.
+  \item AI can help identify ``weasel words'' (e.g., \textit{reasonable, prompt, seamless}) and propose measurable alternatives.
+  \item Adding a ``SLA Clarification Blueprint'' to your library ensures all EMs standardize their approach to vague requirements.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Exercise 2: SLA Clarification Blueprint}
+
+
+\textbf{Context:} The client drafted an SLA clause that states: \textit{``Capgemini will resolve all critical bugs promptly to ensure seamless business continuity.''}
+\textbf{Task:} Use Copilot to rewrite this subjective clause into a measurable metric and save the Blueprint.
+
+\begin{itemize}
+  \item \textbf{Draft Blueprint to Try:}
+\end{itemize}
+\textit{``Analyze this SLA clause: '[INSERT SLA CLAUSE]'. Identify the subjective terms that pose an operational risk for delivery. Rewrite the clause using standard ITIL metrics (e.g., Response Time, Resolution Time in hours) so it is objective and measurable for our delivery team.''}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{8. Starting your PromptLibrary Today}
+
+
+\textbf{You don't need complex software to start.}
+
+\begin{itemize}
+  \item \textbf{Phase 1:} Start with a simple shared Excel or Word document in your team's Teams channel.
+  \item \textbf{Columns needed:} Prompt Name, Use Case, Blueprint (with brackets), Author, and Effectiveness Rating.
+  \item \textbf{The Goal:} Build a habit of documenting successful interactions with Copilot.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Recap \& Next Session}
+
+
+\textbf{Today we learned:}
+
+\begin{itemize}
+  \item The immense value of creating an EM PromptLibrary to scale knowledge.
+  \item How to structure reusable Blueprints with variables and constraints.
+  \item How to direct Copilot to find specific liabilities in dense contracts.
+  \item Using AI to eliminate ``weasel words'' and define objective SLAs.
+\end{itemize}
+\textbf{Next Session:}
+\textit{Module 4: Scope Creep \& Budget Control.} We will focus on detecting out-of-scope requests and drafting formal Change Requests (CRs) using the CARE framework.
+\end{frame}
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,175 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Módulo 2: Cómo Hablar con la I]{Módulo 2: Cómo Hablar con la IA}
+\subtitle{Ingeniería de Prompts en la Vida Real}
+\author{Ricardo Reyes-Jimenez}
+\institute{IA para Todos}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Objetivo de la Sesión}
+
+
+\textbf{Al finalizar este módulo, los participantes serán capaces de:}
+
+1. Comprender la diferencia entre un motor de búsqueda y un modelo de lenguaje.
+2. Estructurar peticiones precisas usando el marco de ``Los 5 Pilares''.
+3. Redactar comunicaciones efectivas aplicando el marco TAM (Tarea, Audiencia, Método).
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{1. El Mito del Buscador}
+
+
+\textbf{La IA no es Google. No busca, sino que razona probabilísticamente \cite{openai2023}.}
+
+\begin{itemize}
+  \item \textbf{Búsqueda en Google (Palabras clave):} ``Receta de pollo al horno''
+  \item \textbf{Búsqueda con IA (Contexto e Intención):} ``Actúa como un chef experto. Dame una receta de pollo al horno para 4 personas, considerando que una de ellas es alérgica al ajo y otra no come lácteos. Enumera los ingredientes y los pasos de forma clara.''
+\end{itemize}
+\textbf{Regla General:} Si tu petición (prompt) es más corta que un Tweet, probablemente estás subutilizando la herramienta y arriesgándote a recibir respuestas genéricas.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{2. Los 5 Pilares de una Petición Exitosa}
+
+
+Una petición vaga produce un resultado inútil. Una petición profesional necesita 5 pilares:
+
+1. \textbf{Rol:} Identidad de la IA (Ej. Nutricionista, Abogado, Ingeniero).
+2. \textbf{Contexto:} Hechos materiales y objetivos (Ej. Preparando un viaje, negociando un aumento).
+3. \textbf{Instrucción:} El verbo imperativo (Analizar, Extraer, Comparar).
+4. \textbf{Restricciones:} Límites y reglas de qué NO hacer (Ej. No usar lenguaje técnico).
+5. \textbf{Formato:} Resultado esperado (Tabla, correo de 2 párrafos, viñetas).
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejercicio Práctico: Aplicando los 5 Pilares}
+
+
+\textbf{Contexto:} Necesitas planear las vacaciones familiares, pero todos tienen gustos diferentes.
+\textbf{Tarea:} Usar los 5 pilares para obtener un itinerario perfecto.
+
+\begin{itemize}
+  \item \textbf{Ejemplo de Prompt:}
+\end{itemize}
+\textit{``[ROL] Actúa como un agente de viajes experto. [CONTEXTO] Voy a viajar a Madrid por 4 días con mi familia (dos adultos y dos niños pequeños). Nos gusta la historia, pero los niños se aburren en los museos. [INSTRUCCIÓN] Crea un itinerario equilibrado. [RESTRICCIONES] No incluyas actividades que duren más de 2 horas seguidas. [FORMATO] Presenta el itinerario en una tabla organizada por días y horarios.''}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{3. El Marco TAM (Tarea, Audiencia, Método)}
+
+
+Para escribir correos o mensajes importantes, la estructura del \textit{Por qué} es tan importante como el \textit{Qué}.
+
+\begin{itemize}
+  \item \textbf{T - Tarea:} ¿Qué se necesita hacer exactamente? (Ej. Cancelar una suscripción, pedir un descuento).
+  \item \textbf{A - Audiencia:} ¿Quién va a leer esto? ¿Cuál es su estado emocional o nivel de conocimiento? (Ej. Un representante de servicio al cliente saturado).
+  \item \textbf{M - Método:} ¿Cómo se debe entregar la información? (Ej. Un correo amable, directo y estructurado con viñetas).
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejercicio Práctico: El Marco TAM en Acción}
+
+
+\textbf{Contexto:} Un albañil o contratista hizo mal una remodelación en tu casa y necesitas exigirle que la repare sin que se ofenda ni abandone la obra.
+
+\begin{itemize}
+  \item \textbf{Ejemplo de Prompt:}
+\end{itemize}
+Necesito enviar un mensaje por WhatsApp sobre un problema en la obra.
+\textbf{Tarea:} Explicar que la pintura en la sala tiene manchas y debe repasarse este viernes sin costo extra.
+\textbf{Audiencia:} El contratista a cargo de la obra (muy orgulloso de su trabajo, pero algo informal).
+\textbf{Método:} Un mensaje amable pero firme, reconociendo primero el buen trabajo que hizo en la cocina, para luego pedirle que solucione la sala.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Recapitulando el Módulo}
+
+
+\textbf{Hoy hemos aprendido:}
+\begin{itemize}
+  \item Dejar de usar palabras clave y empezar a dar contexto.
+  \item Los \textbf{5 Pilares} garantizan resultados útiles y predecibles.
+  \item El \textbf{Marco TAM} nos ayuda a adaptar nuestro mensaje a la realidad de quien lo recibe.
+\end{itemize}
+\textbf{¡Sigan aprendiendo, sigan trabajando y sigan disfrutando de la Inteligencia Artificial!}
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

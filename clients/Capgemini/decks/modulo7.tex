@@ -1,0 +1,156 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Module 7: Information Retrieva]{Module 7: Information Retrieval}
+\subtitle{Leveraging MS Learn via Copilot}
+\author{Ricardo Reyes-Jimenez}
+\institute{Capgemini}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Session Objective}
+
+
+\textbf{By the end of this module, the Engagement Manager will be able to:}
+
+1. Understand the limitations of standard Copilot for internal document retrieval.
+2. Use Copilot to effectively query and summarize official \textbf{MS Learn} documentation.
+3. Translate complex technical concepts for non-technical stakeholders.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{1. Information Retrieval Reality for EMs}
+
+
+\textbf{You have standard Copilot, not a custom Agent.}
+
+\begin{itemize}
+  \item \textbf{The Limitation:} You cannot train the model on thousands of internal Capgemini PDFs permanently.
+  \item \textbf{The Workaround:} You must bring the context \textit{to} the chat, or direct Copilot to search the public web strategically (e.g., querying `learn.microsoft.com`) \cite{copilot2025}.
+  \item \textbf{The Value:} EMs often need to justify architectural decisions or compliance standards to clients. MS Learn is the ultimate source of truth for Microsoft ecosystem projects.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 1: Policy Retrieval from MS Learn}
+
+
+\textbf{Context:} The client is nervous about data governance in their new Azure deployment. You need the latest official Microsoft stance to reassure them.
+\textbf{Task:} Prompt Copilot to search MS Learn and summarize the governance best practices.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+\textit{``Search Microsoft Learn documentation for the latest best practices on 'Azure Data Governance'. Summarize the top 3 principles in a professional, reassuring email directed to a client's Chief Risk Officer. Include the source links at the bottom.''}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{2. Bridging the Technical Gap}
+
+
+\textbf{Engagement Managers are the bridge between developers and the business.}
+
+\begin{itemize}
+  \item Developers speak in acronyms; clients speak in ROI and Risk.
+  \item Copilot excels at analogy generation and technical summarization, making you a more effective communicator.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 2: Technical Summarization via Analogy}
+
+
+\textbf{Context:} Your technical lead insists on refactoring a monolithic application into microservices, but the client doesn't understand why it costs \$50,000 and delays the project.
+\textbf{Task:} Use Copilot to explain the concept using a relatable business analogy.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+\textit{``Explain the technical difference between a 'Monolithic Architecture' and 'Microservices'. Do not use heavy IT jargon. Instead, use an analogy related to managing a large corporate restaurant or kitchen. The goal is to justify to a non-technical CEO why migrating to microservices is worth the upfront investment.''}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Recap \& Next Session}
+
+
+\textbf{Today we learned:}
+\begin{itemize}
+  \item How to direct Copilot to authoritative sources like MS Learn.
+  \item How to use AI to translate dense technical architecture into business-friendly analogies.
+\end{itemize}
+\textbf{Next Session:}
+\textit{Module 8: Final Integration (Role-Play).} The ultimate test. We will run a multi-step crisis simulation combining SOW analysis, Scope Creep detection, and diplomatic communication.
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

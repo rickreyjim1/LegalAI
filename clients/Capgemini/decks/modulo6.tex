@@ -1,0 +1,164 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Module 6: Advanced Prompting]{Module 6: Advanced Prompting}
+\subtitle{Few-Shot and Chain-of-Thought}
+\author{Ricardo Reyes-Jimenez}
+\institute{Capgemini}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Session Objective}
+
+
+\textbf{By the end of this module, the Engagement Manager will be able to:}
+
+1. Clone their personal or corporate writing style using \textbf{Few-Shot Prompting}.
+2. Force the AI to reason sequentially using \textbf{Chain-of-Thought (CoT)}.
+3. Apply these advanced techniques to generate complex SteerCo (Steering Committee) reports.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{1. Cloning Your Style (Few-Shot Prompting)}
+
+
+\textbf{The AI should write like you, not like a generic robot.}
+
+\begin{itemize}
+  \item \textbf{Zero-Shot:} No examples provided. Good for simple tasks (e.g., summarizing).
+  \item \textbf{One-Shot:} Providing one example to define the format.
+  \item \textbf{Few-Shot:} Providing 2 to 3 examples of input/output to teach the AI your tone, vocabulary, and preferred corporate phrasing.
+\end{itemize}
+> \textbf{Why it matters:} EMs spend hours editing AI drafts because they sound ``too enthusiastic'' or ``robotic''. Few-Shot eliminates this editing time \cite{fewshot2025}.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 1: Few-Shot Style Cloning}
+
+
+\textbf{Context:} You need to announce a new Lead Architect joining the project. You want the email to sound exactly like your previous announcements.
+\textbf{Task:} Use Copilot to write the email based on your past examples.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+*"I need to announce that Sarah Connor is joining as our new Lead Architect on Monday. Write the email using the exact same tone and structure as these two previous examples I wrote:
+[Example 1: 'Team, please welcome John...']
+[Example 2: 'Hi everyone, starting tomorrow, David will be...']"*
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{2. Chain-of-Thought (CoT)}
+
+
+\textbf{Do not ask for the conclusion in Step 1.}
+
+\begin{itemize}
+  \item \textbf{The Concept:} Forcing the AI to ``think step-by-step'' before giving the final answer.
+  \item \textbf{The Benefit:} It drastically reduces hallucinations and logical errors in complex analytical tasks \cite{cot2026}.
+  \item \textbf{The Method:} Divide the prompt into sequential instructions: \textit{Extract -> Analyze -> Format}.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 2: CoT for SteerCo Reports}
+
+
+\textbf{Context:} You have 3 pages of messy, bulleted meeting notes from a chaotic weekly sync. You need a clean, 1-page executive summary for the SteerCo.
+\textbf{Task:} Use CoT to force the AI to categorize the notes before summarizing them.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+*"Process the following raw meeting notes [Paste Notes]. Do not give me the final summary immediately. Follow these steps sequentially:
+\textbf{Step 1:} Extract all mentions of budget issues.
+\textbf{Step 2:} Extract all mentions of timeline delays.
+\textbf{Step 3:} Based ONLY on the findings in Step 1 and 2, generate a 3-bullet executive summary suitable for a C-level Steering Committee."*
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Recap \& Next Session}
+
+
+\textbf{Today we learned:}
+\begin{itemize}
+  \item How to use \textbf{Few-Shot} prompting to eliminate ``AI-sounding'' text and save editing time.
+  \item How \textbf{Chain-of-Thought (CoT)} forces the AI to reason sequentially, yielding highly accurate executive summaries from messy data.
+\end{itemize}
+\textbf{Next Session:}
+\textit{Module 7: MS Learn \& Information Retrieval.} We will explore how to use Copilot to query official Microsoft documentation and governance policies securely.
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

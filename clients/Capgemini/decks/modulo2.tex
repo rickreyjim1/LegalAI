@@ -1,0 +1,177 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Module 2: Basic Prompt Enginee]{Module 2: Basic Prompt Engineering}
+\subtitle{Key Frameworks for EMs}
+\author{Ricardo Reyes-Jimenez}
+\institute{Capgemini}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Session Objective}
+
+
+\textbf{By the end of this module, the Engagement Manager will be able to:}
+
+1. Stop communicating with MS Copilot as if it were a search engine.
+2. Structure robust prompts using the \textbf{5 Pillars Framework}.
+3. Apply the \textbf{TAM Framework} (Task, Audience, Method) to draft precise stakeholder communications.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{1. The Search Engine Fallacy}
+
+
+\textbf{AI is not Google. It does not retrieve; it reasons (statistically).}
+
+\begin{itemize}
+  \item \textbf{Google Search:} ``Capgemini change request template'' (Keywords).
+  \item \textbf{MS Copilot:} ``Act as a Capgemini Delivery Executive. Draft a formal Change Request for a client who added 3 new reporting dashboards to the scope. Use a diplomatic but firm tone.'' (Context + Intent).
+\end{itemize}
+\textbf{Rule of Thumb:} If your prompt is shorter than a Tweet (280 characters), you are likely under-utilizing the AI and risking hallucinations.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{2. The 5 Pillars of Prompting}
+
+
+A vague prompt yields a useless document. Every professional prompt requires 5 pillars:
+
+1. \textbf{Role:} Identity of the AI (e.g., Senior Engagement Manager).
+2. \textbf{Context:} Objective and concrete material facts (Project status, client mood).
+3. \textbf{Instruction:} The imperative verb (Analyze, Extract, Compare).
+4. \textbf{Constraints:} Business limits and rules of what NOT to do.
+5. \textbf{Format:} Expected output (Table, 2-page memo, bullet points).
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 1: The 5 Pillars Makeover}
+
+
+\textbf{Context:} Your junior PM asked Copilot: \textit{``Write an email asking for a meeting agenda.''} The result was generic and unprofessional.
+\textbf{Task:} Rewrite this prompt using the 5 Pillars.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+\textit{``[ROLE] Act as an IT Project Manager. [CONTEXT] We have a SteerCo meeting tomorrow with the client's CIO, but they haven't sent the agenda topics yet. [INSTRUCTION] Draft a polite email requesting the agenda. [CONSTRAINTS] Do not sound accusatory; keep it under 3 paragraphs. [FORMAT] Output the email with a clear subject line.''}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{3. The TAM Framework}
+
+
+For persuasive communication, structuring the \textit{Why} is as important as the \textit{What}.
+
+\begin{itemize}
+  \item \textbf{T - Task:} What exactly needs to be done? (e.g., Explain a 2-week delay).
+  \item \textbf{A - Audience:} Who is reading this? What is their technical level and emotional state? (e.g., Non-technical CFO, highly frustrated).
+  \item \textbf{M - Method:} How should the information be delivered? (e.g., Executive summary followed by a mitigation plan).
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 2: Using TAM for Difficult Emails}
+
+
+\textbf{Context:} The offshore development team missed a critical deadline. You need to inform the client's VP of Engineering without damaging the relationship.
+\textbf{Task:} Use the TAM framework in MS Copilot to draft the communication.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+I need to send an email about a missed deadline.
+\textbf{Task:} Explain that the offshore team was delayed by 3 days due to unexpected server downtime, but we are allocating weekend resources to catch up.
+\textbf{Audience:} The client's VP of Engineering (technical, results-oriented, currently frustrated).
+\textbf{Method:} A direct, professional email starting with the bad news, immediately followed by the mitigation plan, using bullet points for clarity.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Recap \& Next Session}
+
+
+\textbf{Today we learned:}
+\begin{itemize}
+  \item Stop using keywords; start providing context.
+  \item The \textbf{5 Pillars} guarantee structured, predictable outputs.
+  \item The \textbf{TAM Framework} tailors the message to the stakeholder's reality.
+\end{itemize}
+\textbf{Next Session:}
+\textit{Module 3: Statement of Work (SOW) Analysis \& Review.} We will learn how to feed long documents into Copilot to extract hidden risks, ambiguous clauses, and SLA commitments.
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,269 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[ Legal Prompting]{ Legal Prompting: Integración y Ejercicios Prácticos}
+\subtitle{ Llevando la teoría a la práctica en el entorno legal}
+\author{Ricardo Reyes-Jimenez}
+\institute{Universidad de La Sabana}
+\date{\today}
+
+% Background image for title slide
+\usebackgroundtemplate{
+  \tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{Images/UniSabana.jpg}};
+}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Recap 1: IA y Derecho (Módulo 1)}
+
+
+\textbf{La IA no es un oráculo, es un motor probabilístico.}
+
+\begin{itemize}
+  \item \textbf{No es Google:} No busca en una base de datos de jurisprudencia; genera la palabra más probable.
+  \item \textbf{Orquestación:} Plataformas como Harvey usan sistemas multi-modelo y RAG (Recuperación Aumentada) para no alucinar.
+  \item \textbf{Privacidad (Ley 1581):} Usar modelos B2C gratuitos con datos de clientes viola el deber de confidencialidad \cite{ley1581}. Siempre exige ``Zero Data Retention''.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Recap 2: El Peligro de la Confianza Ciega}
+
+
+\textbf{Mata v. Avianca y las Alucinaciones}
+
+\begin{itemize}
+  \item Abogados sancionados por delegar la investigación sin verificar \cite{matavavianca}.
+  \item \textbf{Límites de la IA:} No conoce la ley de ayer ni los hechos no contados.
+  \item \textbf{Grounding:} Siempre proporciona a la IA los documentos (ej. el contrato) sobre los cuales basar su respuesta, no dejes que adivine.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Recap 3: Ética y Verificación Legal}
+
+
+\textbf{Tu firma es la responsable final.}
+
+\begin{itemize}
+  \item \textbf{Protocolo de Verificación:} 1. Subir PDF. 2. Prompt restrictivo. 3. Verificación humana cruzada.
+  \item \textbf{Formatos Estructurados:} Pide respuestas en JSON o Markdown para evitar ambigüedades.
+  \item \textbf{Regla de Oro:} La IA redacta el borrador, el abogado firma la responsabilidad.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Fundamentos del Prompt Legal: Los 5 Pilares (Módulo 2)}
+
+
+Un prompt vago = documento inútil. Todo prompt requiere 5 pilares:
+
+1. \textbf{Rol:} Identidad de la IA (Ej. Socio de Litigio en Colombia).
+2. \textbf{Contexto:} Hechos materiales objetivos y concretos.
+3. \textbf{Instrucción:} El verbo imperativo (Analiza, Extrae, Compara).
+4. \textbf{Restricciones:} Límites legales y reglas de qué NO hacer.
+5. \textbf{Formato:} Salida esperada (Tabla, memo de 2 hojas).
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Chain-of-Thought (CoT): Razonamiento Secuencial}
+
+
+\textbf{No le pidas la conclusión en el paso 1.}
+
+\begin{itemize}
+  \item Forzar a la IA a ``pensar paso a paso'' reduce alucinaciones drásticamente \cite{openai2023}.
+  \item \textbf{Instrucción:} ``Antes de dar tu veredicto, califica las pruebas, luego analiza la norma, y finalmente concluye.''
+  \item \textbf{Break the Task Down:} Divide la tarea en Extracción -> Análisis -> Redacción.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Clonando tu Estilo (Few-Shot Prompting)}
+
+
+\textbf{La IA debe escribir como tu firma, no como un robot genérico.}
+
+\begin{itemize}
+  \item \textbf{Zero-Shot:} Cero ejemplos. Tareas simples (ej. traducir idioma).
+  \item \textbf{One-Shot:} Un ejemplo para definir formato.
+  \item \textbf{Few-Shot:} 3 a 5 ejemplos de entrada y salida para imitar tu tono, estilo y terminología legal.
+  \item ``Aquí tienes un ejemplo de cómo redactamos los conceptos en la firma...''
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Frameworks de Estandarización: CARE y ADP}
+
+
+Sistemas para que toda la firma use IA con el mismo rigor.
+
+\begin{itemize}
+  \item \textbf{CARE (Conceptos):} Contexto, Acción, Resultado, Evaluación.
+  \item \textbf{ADP (Auditoría):} Actor, Documento, Propósito.
+  \item Útil para redactar memorandos y revisar cláusulas contractuales sistemáticamente.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Red Teaming Legal: El Blindaje}
+
+
+\textbf{La auditoría cruzada de los argumentos.}
+
+\begin{itemize}
+  \item Una vez que la IA redacte tu documento, no asumas que es perfecto.
+  \item \textbf{Prompt de Red Teaming:} ``Ahora actúa como el abogado de la contraparte. Encuentra 3 puntos débiles en tu propia respuesta y dime cómo los atacarías.''
+  \item Permite anticipar riesgos antes de enviar el documento.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejercicio 1: Los 5 Pilares (Civil)}
+
+
+\textbf{Revisión de Contrato Civil}
+\textit{Encuentren los hechos completos en el Handout (Caso 1).}
+
+\textbf{Tu Reto:} Construye un prompt usando estrictamente los 5 Pilares (Rol, Contexto, Instrucción, Restricciones, Formato).
+\textbf{Objetivo:} Pedir a la IA que identifique si existe un riesgo de resolución contractual por el incumplimiento de una cláusula específica.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejercicio 2: 5 Pilares + CoT + Few-Shot + CARE (Laboral)}
+
+
+\textbf{Concepto de Despido Injustificado}
+\textit{Encuentren los hechos completos en el Handout (Caso 2).}
+
+\textbf{Tu Reto:} Usando el Framework CARE, diseña un prompt que:
+
+1. Obligue a la IA a usar Chain-of-Thought (pensar paso a paso).
+2. Incluya ejemplos de tono (Few-Shot).
+\textbf{Objetivo:} Determinar la probabilidad de éxito de una demanda laboral.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejercicio 3: 5 Pilares + CoT + ADP + Red Team (Contratación)}
+
+
+\textbf{Auditoría de Cláusula de Indemnidad}
+\textit{Encuentren los hechos completos en el Handout (Caso 3).}
+
+\textbf{Tu Reto:} Usando el Framework ADP y CoT, diseña un prompt para auditar el contrato. Una vez que la IA responda, aplica un segundo prompt de Red Teaming.
+\textbf{Objetivo:} Identificar penalidades unilaterales y luego atacar la propia respuesta como la contraparte.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejercicio 4 (Para llevar): Framework TAM}
+
+
+\textbf{Requerimiento Extrajudicial (Técnica TAM)}
+\textit{Encuentren los detalles en el Handout (Caso 4).}
+
+\textbf{Tu Reto:} Este ejercicio explora la técnica TAM (Tarea, Audiencia, Método), ideal para redacción y comunicación.
+Diseña un prompt combinando los 5 Pilares con TAM para redactar un correo persuasivo de cobro comercial que conserve la relación con el cliente.
+
+\end{frame}
+
+
+
+\begin{frame}[allowframebreaks]{Referencias}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+\begin{frame}[fragile]{¡Sigamos en Contacto!}
+
+
+La Inteligencia Artificial avanza todos los días. ¡No duden en escribirme para compartir ideas, resolver dudas o seguir conversando sobre cómo la IA puede transformar su práctica jurídica!
+
+\begin{itemize}
+  \item \textbf{WhatsApp:} (57) 3012726157
+  \item \textbf{Email:} \href{mailto:rareyesj@gmail.com}{rareyesj@gmail.com}
+\end{itemize}
+\textbf{Recursos Adicionales:}
+
+\begin{itemize}
+  \item \textbf{Carpeta Compartida Google Drive:} https://drive.google.com/drive/folders/1qvTiL9MJnudELF89Zx9FbQrBMV0nDXa-?usp=sharing
+  \item \textbf{Página (Dr. Rodolfo Meza):}
+  \begin{itemize}
+    \item \href{https://d2poah66c6bwvj.cloudfront.net/legal-prompting/anatomia-prompt}{d2poah66c6bwvj.cloudfront.net/}
+    \item Usuario: unisabana
+    \item Contraseña: leg4la1
+  \end{itemize}
+\end{itemize}
+\textbf{¡Muchas gracias por su participación!}
+\end{frame}
+
+
+
+
+
+\end{document}

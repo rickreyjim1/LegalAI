@@ -1,0 +1,10 @@
+\frametitle{Recap \& Next Session}
+
+
+\textbf{Today we learned:}
+\begin{itemize}
+  \item How to use \textbf{Few-Shot} prompting to eliminate ``AI-sounding'' text and save editing time.
+  \item How \textbf{Chain-of-Thought (CoT)} forces the AI to reason sequentially, yielding highly accurate executive summaries from messy data.
+\end{itemize}
+\textbf{Next Session:}
+\textit{Module 7: MS Learn \& Information Retrieval.} We will explore how to use Copilot to query official Microsoft documentation and governance policies securely.

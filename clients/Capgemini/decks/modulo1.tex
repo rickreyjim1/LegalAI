@@ -1,0 +1,231 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Generative AI for Engagement M]{Generative AI for Engagement Managers}
+\subtitle{Optimizing Delivery and Operations}
+\author{Ricardo Reyes-Jimenez}
+\institute{Capgemini}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Session Objective}
+
+\textbf{By the end of this module, the Engagement Manager (EM) will be able to:}
+
+1. Understand what Generative AI is and how Large Language Models (LLMs) operate.
+2. Identify daily use cases in the project lifecycle (Sales, Delivery, Operations).
+3. Apply strict \textbf{Security and Privacy} principles when interacting with AI tools in corporate environments.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{1. Fundamentals: What is Generative AI?}
+
+
+\textbf{It is not magic, it is probability on a massive scale.}
+
+\begin{itemize}
+  \item \textbf{Artificial Intelligence (AI):} Systems that mimic cognitive capabilities.
+  \item \textbf{Generative AI:} A branch that creates \textit{new} content (text, code, images) from existing data.
+  \item \textbf{Microsoft Copilot:} Your primary AI assistant. As EMs, you are equipped with the standard MS Copilot license. This means you interact with state-of-the-art models (like GPT-5.2) through a chat interface, without the ability to build custom agents or specialized studio tools \cite{copilot2025}.
+  \item \textbf{Myth:} AI ``knows'' things.
+  \item \textbf{Reality:} AI calculates which word has the highest probability of following, based on billions of statistical parameters and your prompts.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{EM Use Cases (Sales \& Pre-Sales)}
+
+
+How does AI optimize the early stages of the lifecycle?
+
+\begin{itemize}
+  \item \textbf{RFP (Request for Proposal) Analysis:} Extracting key requirements from 200-page tenders in minutes.
+  \item \textbf{Value Proposition Drafts:} Generating the baseline for an Executive Summary highlighting Capgemini's differentiators.
+  \item \textbf{Risk Brainstorming:} Identifying potential project risks before signing based on similar industries.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{EM Use Cases (Delivery \& Operations)}
+
+
+The day-to-day of the EM and how to lighten the operational load:
+
+\begin{itemize}
+  \item \textbf{Contract Management (SOWs):} Summarizing obligations, milestones, and SLAs to align the technical team.
+  \item \textbf{Strategic Communications:} Drafting difficult emails to clients (e.g., justified delays, \textit{Scope Creep}).
+  \item \textbf{Executive Reporting:} Transforming raw weekly meeting notes into polished and structured \textit{SteerCo Reports}.
+  \item \textbf{Conflict Resolution:} Red Teaming simulations to prepare for difficult negotiations.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 1: Email Summarization \& Action Plan}
+
+
+\textbf{Context:} A client sends a long, emotional email complaining about a delayed milestone and subtly requesting three new features out of scope.
+\textbf{Task:} Use Copilot to extract the core issues and draft a professional response.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+\textit{``Act as a Capgemini Engagement Manager. Read the following client email [Paste Email]. Summarize the top 3 complaints. Then, draft a polite, solution-oriented response acknowledging the delay, but firmly clarifying that the new features require a Change Request (CR).''}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Security \& Privacy (The Golden Rule)}
+
+
+\textbf{As an Engagement Manager, you are the guardian of client data.}
+
+
+\begin{table}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l | l | l | l|}
+\hline
+\textbf{Tool Type} & \textbf{Examples} & \textbf{Risk} & \textbf{Golden Rule} \\ \hline
+\textbf{Public (Free)} & ChatGPT (Free), Gemini (Free) & High. Data trains the model. & \textbf{NEVER} enter confidential data, Client Names, SOWs, or financials. \\ \hline
+\textbf{Enterprise Licensed} & \textbf{MS Copilot (Your License)} & Low. Data does not train the base model. & Follow Capgemini's Cybersecurity policy. Safe for project data, but still rely on MS Learn guidelines for data governance. \\ \hline
+\end{tabular}
+}
+\end{table}
+\begin{itemize}
+  \item \textbf{Note on Custom Agents:} With the standard Copilot license, you cannot create custom Copilot Studio agents. You must maximize your productivity through pure Prompt Engineering in the standard chat interface and by leveraging \textbf{MS Learn} resources.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{The Role of the ``Human in the Loop''}
+
+
+\textbf{The final responsibility for any deliverable, code, or email generated by AI remains yours.}
+
+\begin{itemize}
+  \item AI is an excellent assistant (A 24/7 Junior Assistant).
+  \item AI suffers from \textbf{Hallucinations} (it invents data when it doesn't know the answer with certainty).
+  \item \textbf{Usage Protocol:}
+\end{itemize}
+1. Generate the draft with AI.
+2. Verify facts and figures by cross-referencing the original document.
+3. Add the human touch (empathy and business context).
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 2: Key Points Extraction (Requirements)}
+
+
+\textbf{Context:} You are handed a messy list of requirements or a raw Excel export for a new phase of the project.
+\textbf{Task:} Extract the most critical risks and deliverables for the EM to monitor.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+\textit{``Review the following raw list of project requirements [Paste Text]. Identify the top 5 most critical deliverables that carry the highest operational risk for our delivery team. Present them in a table, including a suggested mitigation strategy for each.''}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 3: Data ``Sanitization''}
+
+
+\textbf{Before sending to the AI (if using non-secure tools):}
+
+\begin{itemize}
+  \item \textit{Original:} ``The client BancoEstado owes us \$50,000 USD for Milestone 3 of the CoreBanking project.''
+  \item \textit{Sanitized:} ``The client [BANKING\_CLIENT] owes us [AMOUNT] for [MILESTONE] of the [TECH\_PROJECT].''
+\end{itemize}
+\textbf{Best Practices:} Create your own mental ``anonymization dictionary'' before copy-pasting a corporate email into the chat.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Recap \& Next Session}
+
+
+\textbf{Today we learned:}
+
+\begin{itemize}
+  \item Generative AI predicts text based on context.
+  \item It can accelerate pre-sales, delivery, and project management.
+  \item \textbf{Client data security is non-negotiable.}
+\end{itemize}
+\textbf{Next Session:}
+\textit{Module 2: Basic Prompt Engineering and Key Frameworks.} We will learn to stop asking AI for things as if it were Google and start programming it using natural language.
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

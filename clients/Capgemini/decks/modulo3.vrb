@@ -1,0 +1,13 @@
+\frametitle{Recap \& Next Session}
+
+
+\textbf{Today we learned:}
+
+\begin{itemize}
+  \item The immense value of creating an EM PromptLibrary to scale knowledge.
+  \item How to structure reusable Blueprints with variables and constraints.
+  \item How to direct Copilot to find specific liabilities in dense contracts.
+  \item Using AI to eliminate ``weasel words'' and define objective SLAs.
+\end{itemize}
+\textbf{Next Session:}
+\textit{Module 4: Scope Creep \& Budget Control.} We will focus on detecting out-of-scope requests and drafting formal Change Requests (CRs) using the CARE framework.

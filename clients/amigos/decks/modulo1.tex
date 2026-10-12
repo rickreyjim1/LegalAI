@@ -1,0 +1,159 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Módulo 1: Introducción a la In]{Módulo 1: Introducción a la Inteligencia Artificial}
+\subtitle{Mejorando nuestro día a día con IA}
+\author{Ricardo Reyes-Jimenez}
+\institute{IA para Todos}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Objetivo de la Sesión}
+
+
+\textbf{Al finalizar este módulo, los participantes serán capaces de:}
+
+1. Comprender los fundamentos de la Inteligencia Artificial en la vida cotidiana \cite{openai2023}.
+2. Aplicar la IA para resolver problemas diarios en diferentes profesiones.
+3. Mejorar la productividad y calidad del trabajo mediante herramientas de IA \cite{mckinsey2023}.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{1. La IA en el Consultorio (Médicos)}
+
+
+\textbf{La IA no reemplaza el criterio médico, pero acelera el diagnóstico y la investigación.}
+
+\begin{itemize}
+  \item \textbf{Caso Práctico:} Un médico necesita resumir el historial clínico de un paciente complejo o buscar interacciones farmacológicas recientes.
+  \item \textbf{Uso de IA:} ``Actúa como un asistente médico experto. Resume los siguientes 5 años de historial clínico, destacando alergias y condiciones crónicas, y enumera las posibles interacciones entre el Medicamento A y el Medicamento B según la literatura reciente.''
+\end{itemize}
+\textbf{Resultado:} Más tiempo para la atención al paciente y menos tiempo en el papeleo.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{2. Optimizando Cálculos y Estructuras (Ingenieros)}
+
+
+\textbf{Para los ingenieros, la IA es una herramienta de validación y automatización.}
+
+\begin{itemize}
+  \item \textbf{Caso Práctico:} Un ingeniero civil necesita redactar un informe sobre la fatiga de materiales para un cliente no técnico.
+  \item \textbf{Uso de IA:} ``Actúa como un ingeniero civil senior. Explica los riesgos de la fatiga de materiales en puentes colgantes a una audiencia sin conocimientos técnicos. Usa metáforas sencillas y mantén el tono profesional e informativo.''
+\end{itemize}
+\textbf{Resultado:} Comunicación clara con los clientes y reportes más rápidos.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{3. Análisis de Mercados y Tendencias (Economistas)}
+
+
+\textbf{La IA procesa grandes volúmenes de datos económicos en segundos.}
+
+\begin{itemize}
+  \item \textbf{Caso Práctico:} Un economista quiere analizar el sentimiento del mercado basado en las últimas noticias financieras.
+  \item \textbf{Uso de IA:} ``Actúa como un analista financiero. Toma el siguiente texto de noticias económicas y extrae el sentimiento general del mercado. Identifica las 3 principales tendencias y preséntalas en formato de viñetas (bullet points).''
+\end{itemize}
+\textbf{Resultado:} Decisiones más rápidas basadas en resúmenes precisos de la información.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{4. Eficiencia en el Trabajo Diario (Empleados)}
+
+
+\textbf{Cualquier oficinista puede reducir horas de trabajo repetitivo \cite{brynjolfsson2023}.}
+
+\begin{itemize}
+  \item \textbf{Caso Práctico:} Un empleado necesita redactar un correo electrónico delicado a su jefe solicitando una extensión de tiempo para un proyecto.
+  \item \textbf{Uso de IA:} ``Necesito escribir un correo a mi director. \textbf{Contexto:} El proyecto se retrasó 2 días por problemas con el proveedor. \textbf{Audiencia:} Mi jefe, que prefiere soluciones directas. \textbf{Método:} Un correo breve y profesional que empiece con el problema, seguido inmediatamente por mi plan para resolverlo trabajando unas horas extras el fin de semana.''
+\end{itemize}
+\textbf{Resultado:} Correos efectivos, profesionales y con menor nivel de estrés al redactarlos.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Recapitulando el Módulo}
+
+
+\textbf{Hoy hemos aprendido:}
+\begin{itemize}
+  \item La IA es una herramienta versátil para cualquier profesión.
+  \item Contextualizar el problema (rol, tarea, audiencia) mejora drásticamente los resultados.
+  \item La automatización de tareas tediosas nos permite enfocarnos en el trabajo de alto valor.
+\end{itemize}
+\textbf{¡Sigan aprendiendo, sigan trabajando y sigan disfrutando de la Inteligencia Artificial!}
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

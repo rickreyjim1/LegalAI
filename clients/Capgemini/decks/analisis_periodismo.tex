@@ -1,0 +1,280 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[LegalAI Presentation]{LegalAI Presentation}
+\subtitle{}
+\author{Ricardo Reyes-Jimenez}
+\institute{Universidad de La Sabana}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Análisis de Datos y Toma de Decisiones Usando IA}
+
+\textbf{Empoderando al Público en General en la Era Digital}
+
+\textbf{Presentado por:}
+[Su Nombre, Periodista \& Educador]
+\textbf{Instituto:}
+La Prensa y el Conocimiento Informado
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{2. Objetivos de la Sesión y Contexto General}
+
+
+\textbf{Objetivos}
+\begin{itemize}
+  \item \textbf{Comprender} cómo la IA influye en la toma de decisiones cotidianas.
+  \item \textbf{Identificar} la importancia de la confianza y la transparencia en sistemas de IA.
+  \item \textbf{Explorar} la necesidad de la IA Explicable (XAI) para usuarios no expertos.
+  \item \textbf{Desarrollar} una perspectiva crítica sobre las interacciones con la IA.
+\end{itemize}
+\textbf{Contexto General}
+La Inteligencia Artificial (IA) ya no es ciencia ficción; es una fuerza transformadora que moldea nuestras vidas. Desde recomendaciones de compra hasta diagnósticos de salud, la IA procesa vastas cantidades de datos para sugerir o tomar decisiones. Pero, ¿cómo funciona esto y qué significa para usted, el público en general?
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{3. Marco Conceptual: Análisis de Datos y la IA}
+
+
+\textbf{¿Qué es el Análisis de Datos?}
+\begin{itemize}
+  \item \textbf{Proceso de examinar, limpiar, transformar y modelar datos} para descubrir información útil, informar conclusiones y apoyar la toma de decisiones.
+  \item En la era digital, implica trabajar con \textbf{``Big Data''}: volúmenes masivos de información de diversas fuentes (internet, redes sociales, sensores, transacciones).
+\end{itemize}
+\textbf{La IA como Motor del Análisis}
+\begin{itemize}
+  \item La IA dota a los sistemas de la \textbf{capacidad de aprender de los datos} y realizar tareas que normalmente requieren inteligencia humana.
+  \item \textbf{Algoritmos de IA} pueden identificar patrones complejos, hacer predicciones y automatizar procesos de decisión a una escala y velocidad inalcanzables para los humanos.
+  \item \textbf{Ejemplo:} Un sistema de IA puede analizar millones de historiales médicos para predecir riesgos de enfermedades o recomendar tratamientos.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{4. Conceptos Clave para una IA Responsable}
+
+
+\textbf{La Importancia de la Confianza}
+\begin{itemize}
+  \item \textbf{Definición:} La creencia en la fiabilidad, honestidad y capacidad de un sistema de IA para actuar en nuestro mejor interés.
+  \item \textbf{Hallazgo Clave (Lei \& Bennett, 2026):} En dominios sensibles como la salud mental, la confianza pública es \textit{fundamental}. Sin ella, la adopción y aceptación de la IA en decisiones críticas se limita.
+  \item \textbf{Consecuencia:} Si desconfiamos de un sistema de IA, es probable que ignoremos sus recomendaciones, incluso si son precisas.
+\end{itemize}
+\textbf{La Transparencia como Base de la Confianza}
+\begin{itemize}
+  \item \textbf{Definición:} La capacidad de comprender cómo un sistema de IA llega a una decisión o recomendación.
+  \item No significa conocer cada línea de código, sino entender la lógica general, los datos utilizados y los factores influyentes.
+  \item \textbf{Reto:} Muchos modelos de IA son ``cajas negras'' debido a su complejidad, haciendo difícil explicar su razonamiento.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{5. Conceptos Clave: IA Explicable (XAI)}
+
+
+\textbf{¿Qué es la IA Explicable (XAI)?}
+\begin{itemize}
+  \item \textbf{Objetivo:} Desarrollar sistemas de IA que no solo sean precisos, sino también capaces de \textbf{explicar sus decisiones} de una manera comprensible para los usuarios humanos.
+  \item \textbf{Para el público en general:} Esto significa interfaces intuitivas y explicaciones adaptadas a personas sin experiencia técnica.
+\end{itemize}
+\textbf{¿Por qué necesitamos la XAI?}
+\begin{itemize}
+  \item \textbf{Construir Confianza:} Si entendemos por qué un sistema de IA hizo algo, es más probable que confiemos en él.
+  \item \textbf{Facilitar la Auditoría:} Permite identificar sesgos, errores o injusticias en los algoritmos.
+  \item \textbf{Empoderar al Usuario:} Nos da la capacidad de cuestionar y validar las decisiones de la IA, manteniendo nuestra autonomía.
+  \item \textbf{Cumplir con Regulaciones:} Cada vez más, las leyes exigen transparencia en las decisiones algorítmicas (ej. GDPR).
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{6. Casos de Estudio: La IA en Acción}
+
+
+\textbf{1. El Consumidor y el \textit{Big Data}}
+\begin{itemize}
+  \item \textbf{Escenario:} Cada vez que interactuamos online (compras, redes sociales, búsquedas), generamos datos.
+  \item \textbf{IA Aplicada:} Algoritmos analizan este \textit{big data} para predecir comportamientos y preferencias.
+  \item \textbf{Ejemplo Práctico:} Sistemas de recomendación en plataformas de streaming o comercio electrónico, publicidad personalizada.
+  \item \textbf{Impacto (Autores Desconocidos, 2026):} La IA influye significativamente en nuestras decisiones de compra, a menudo sin que seamos plenamente conscientes de la complejidad de los datos y modelos detrás.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{7. Casos de Estudio: La IA en Acción (Continuación)}
+
+
+\textbf{2. IA en Decisiones Críticas y la Necesidad de XAI}
+\begin{itemize}
+  \item \textbf{Escenario:} La IA se utiliza en campos con alto impacto, como la medicina, las finanzas o la justicia.
+  \item \textbf{Problema:} Una decisión errónea o sesgada puede tener graves consecuencias.
+  \item \textbf{Ejemplo Práctico:} Un algoritmo bancario que deniega un préstamo, un sistema de IA médica que recomienda un tratamiento.
+  \item \textbf{La Solución de XAI (Valentin, 2026; Cambria et al., 2026; Salih \& Petersen, 2025):} La investigación actual se centra en diseñar sistemas que no solo den un resultado, sino que también expliquen el ``por qué''.
+  \begin{itemize}
+    \item \textbf{Meta:} Que un médico pueda entender la lógica detrás de un diagnóstico de IA o que una persona sepa por qué se le denegó un servicio.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{8. Ejercicio Práctico: Desentrañando la Influencia de la IA}
+
+
+\textbf{Actividad: ``Mi Día con la IA Oculta''}
+
+\textbf{Objetivo:} Reflexionar sobre cómo la IA ya forma parte de nuestras decisiones cotidianas y cuestionar su transparencia.
+
+\textbf{Instrucciones (Paso a Paso):}
+\begin{itemize}
+  \item \textbf{Elija una decisión o interacción reciente:}
+  \begin{itemize}
+    \item Una compra online.
+    \item La película/serie que vio anoche.
+    \item La ruta que tomó para llegar a un lugar.
+    \item Una noticia que le apareció en redes sociales.
+    \item Una sugerencia de amistad o contacto.
+  \end{itemize}
+  \item \textbf{Identifique la probable influencia de la IA:}
+  \begin{itemize}
+    \item ¿Qué datos cree que la IA usó para sugerirle eso? (Ej. Historial de compras, ubicación, intereses de amigos, clics anteriores).
+    \item ¿Cómo pudo la IA haber ``personalizado'' esa experiencia para usted?
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{9. Ejercicio Práctico: Desentrañando la Influencia de la IA (Continuación)}
+
+
+\textbf{Reflexión y Debate}
+
+\textbf{Preguntas para el Grupo (o para reflexionar individualmente):}
+
+\begin{itemize}
+  \item \textbf{Transparencia:} ¿Le resultó obvio por qué la IA le sugirió o le llevó a tomar esa decisión? ¿O se sintió como una ``caja negra''?
+  \item \textbf{Confianza:} ¿Confiaba plenamente en la decisión o sugerencia de la IA? ¿Por qué sí o por qué no?
+  \item \textbf{Control:} ¿Sintió que usted tenía el control final sobre la decisión, o que la IA le ``empujó'' hacia una opción específica?
+  \item \textbf{Mejora:} ¿Qué tipo de información o explicación le hubiera gustado recibir del sistema de IA para entender mejor su lógica?
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{10. ¿Sabías que...? Datos Curiosos y Reveladores}
+
+
+\begin{itemize}
+  \item \textbf{La Confianza es la Moneda del Futuro Digital:} Sin una base sólida de confianza, la adopción pública de la IA en decisiones importantes (como la salud) será muy limitada. La IA no solo debe ser precisa, sino también percibida como justa y transparente.
+  \item \textbf{Influencia Ubicua e Invisible:} La IA ya moldea muchas de nuestras decisiones diarias, desde qué productos compramos hasta qué contenido consumimos, a menudo sin que seamos plenamente conscientes. Nuestra autonomía se ve sutilmente influenciada por algoritmos diseñados para optimizar resultados específicos.
+  \item \textbf{La Brecha de Explicabilidad es un Desafío Crítico:} Existe una necesidad urgente de `\texttt{IA Explicable para Usuarios No Expertos''. Sin una XAI eficaz y centrada en el ser humano, el público corre el riesgo de volverse }`operadores de caja negra'', usando herramientas sin comprender sus implicaciones o cómo llegaron a sus conclusiones.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{11. Conclusiones y Puntos Clave (Takeaways)}
+
+
+\textbf{La IA como Herramienta de Empoderamiento}
+\begin{itemize}
+  \item La IA es una herramienta poderosa para el análisis de datos y la toma de decisiones, pero su potencial completo y ético solo se logra con la participación informada del público.
+\end{itemize}
+\textbf{La Triada Fundamental: Confianza, Transparencia, Explicabilidad}
+\begin{itemize}
+  \item Para que la IA sea beneficiosa y aceptada por todos, debe ser diseñada pensando en la \textbf{confianza}, ofrecer \textbf{transparencia} en sus procesos y ser \textbf{explicable} a usuarios no técnicos.
+\end{itemize}
+\textbf{Su Rol como Ciudadano Digital}
+\begin{itemize}
+  \item Es crucial desarrollar un \textbf{pensamiento crítico} sobre las interacciones con la IA, cuestionar las recomendaciones y exigir mayor claridad en su funcionamiento.
+\end{itemize}
+\textbf{El futuro de la IA reside en cómo la entendemos, la usamos y la gobernamos juntos.}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{12. Referencias Bibliográficas}
+
+
+\begin{itemize}
+  \item Cambria, E., Malandri, L., \& Nobani, N. (2026). \textit{Human-Centred Approaches for Non-Expert Users in Explainable AI}. En: \textit{Explainable Artificial Intelligence: A Comprehensive Guide} (pp. 100-115). Chapman and Hall/CRC. DOI: 10.1201/9781003713371-6
+  \item Lei, Y., \& Bennett, S. (2026). \textit{Understanding Public Trust in AI-Based Clinical Psychological Decision-Making: A Qualitative Study}. OSF Preprints. DOI: 10.31234/osf.io/u96y5\_v1
+  \item Salih, A., \& Petersen, S. (2025). \textit{Explainable AI: A Practical Guide for Non-Technical Users}. TechRxiv. DOI: 10.36227/techrxiv.175623444.44455008/v2
+  \item (Autores Desconocidos). (2026). \textit{Big Data Analytics and Consumer Behaviour: Understanding the Role of AI in Decision Making}. Journal of Consumer Psychology and Human Interaction, 14(2), 1-15. DOI: 10.64971/j.cph.ijsdip.v14.i2.1.2026
+  \item Valentin, D. (2026). \textit{Explainable AI for Non-Expert Users: A Systematic Mapping Study using the Petersen et al. SMS Approach}. Social Science Research Network. DOI: 10.2139/ssrn.7436539
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

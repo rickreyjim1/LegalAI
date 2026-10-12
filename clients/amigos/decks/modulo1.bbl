@@ -1,0 +1,21 @@
+\begin{thebibliography}{}
+
+\bibitem[Brynjolfsson et~al., 2023]{brynjolfsson2023}
+Brynjolfsson, E., Li, D., and Raymond, L.~R. (2023).
+\newblock Generative ai at work.
+\newblock NBER Working Paper No. 31161,
+  \url{https://www.nber.org/papers/w31161}.
+
+\bibitem[{McKinsey \& Company}, 2023]{mckinsey2023}
+{McKinsey \& Company} (2023).
+\newblock The economic potential of generative ai: The next productivity
+  frontier.
+\newblock
+  \url{https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier}.
+
+\bibitem[OpenAI, 2023]{openai2023}
+OpenAI (2023).
+\newblock Gpt-4 technical report.
+\newblock \url{https://arxiv.org/abs/2303.08774}.
+
+\end{thebibliography}

@@ -1,0 +1,163 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Module 4: Scope Creep & Budget]{Module 4: Scope Creep & Budget Control}
+\subtitle{Drafting Change Requests}
+\author{Ricardo Reyes-Jimenez}
+\institute{Capgemini}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Session Objective}
+
+
+\textbf{By the end of this module, the Engagement Manager will be able to:}
+
+1. Use AI to systematically detect out-of-scope requests in client communications.
+2. Draft structured, professional Change Requests (CRs) using MS Copilot.
+3. Master the \textbf{CARE Framework} for justifying additional budget and timelines.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{1. The Anatomy of Scope Creep}
+
+
+\textbf{``It's just a quick favor'' is the EM's worst nightmare.}
+
+\begin{itemize}
+  \item \textbf{The Problem:} Small requests bypass the formal CR process, slowly draining the project's margin and exhausting the delivery team.
+  \item \textbf{The Solution:} Use MS Copilot to cross-reference casual email requests against the formal SOW scope baseline to objectively flag discrepancies.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 1: Scope Creep Detection}
+
+
+\textbf{Context:} The client emails you asking to add ``a simple export to PDF button'' to the reporting dashboard.
+\textbf{Task:} Have Copilot analyze the request against the original scope.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+\textit{``I have received a new request from the client: [Paste Client Email]. Here is the original approved scope for the reporting module: [Paste SOW bullet points]. Act as a strict Project Manager. Analyze if the new request is covered by the original scope. If it is NOT, explain why in one paragraph suitable to be sent back to the client.''}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{2. The CARE Framework for CRs}
+
+
+When you must ask for more money or time, structure is your best defense \cite{prompting2025}.
+
+\begin{itemize}
+  \item \textbf{C - Context:} The current situation (what was originally agreed).
+  \item \textbf{A - Action:} The new requirement requested by the client.
+  \item \textbf{R - Result:} The impact on timeline, resources, and budget.
+  \item \textbf{E - Evaluation:} The final proposal or options presented to the client.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Exercise 2: Drafting a Formal Change Request}
+
+
+\textbf{Context:} You have confirmed the ``PDF export button'' is out of scope. It will take 2 developers 1 week, costing \$5,000.
+\textbf{Task:} Use the CARE framework to draft the formal CR.
+
+\begin{itemize}
+  \item \textbf{Draft Prompt to Try:}
+\end{itemize}
+*"Draft a formal Change Request email to the client using the CARE framework.
+\textbf{Context:} Original scope only included web dashboards.
+\textbf{Action:} Client requested a PDF export feature.
+\textbf{Result:} Requires 2 developers for 1 week, adding \$5,000 to the budget.
+\textbf{Evaluation:} We can start next week if approved today, otherwise it moves to Phase 2.
+Keep the tone professional, objective, and partnership-oriented."*
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Recap \& Next Session}
+
+
+\textbf{Today we learned:}
+\begin{itemize}
+  \item How to use AI as an objective judge to detect Scope Creep.
+  \item The \textbf{CARE framework} for structuring complex business justifications.
+  \item Drafting Change Requests that protect margins without alienating the client.
+\end{itemize}
+\textbf{Next Session:}
+\textit{Module 5: Team Management \& Operational Risks.} We will explore how to use Copilot for Red Teaming (stress-testing your plans) and drafting constructive feedback for the delivery team.
+\end{frame}
+
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

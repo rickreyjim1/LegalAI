@@ -1,0 +1,11 @@
+\frametitle{Recap \& Next Session}
+
+
+\textbf{Today we learned:}
+\begin{itemize}
+  \item How to use AI as a ``Red Team'' to objectively find flaws in our project plans.
+  \item The value of AI in neutralizing emotion when dealing with team performance issues.
+  \item Translating frustration into actionable, professional feedback.
+\end{itemize}
+\textbf{Next Session:}
+\textit{Module 6: Advanced Prompting Techniques.} We will learn how to clone your personal writing style (Few-Shot) and how to force the AI to reason sequentially (Chain-of-Thought) for complex SteerCo reports.

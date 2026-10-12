@@ -1,0 +1,278 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+
+% Clean Theme Setup & Optimization
+\usetheme{Warsaw}
+\usecolortheme{default}
+\usefonttheme{serif}
+
+% Remove top headline bar and navigation clutter to maximize slide text space
+\setbeamertemplate{headline}{}
+\setbeamertemplate{navigation symbols}{}
+
+% Slim, clean footline bar
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+% Font size and list spacing optimizations to prevent text overflow
+\setbeamertemplate{itemize/enumerate body begin}{\small}
+\setbeamertemplate{itemize/enumerate subbody begin}{\footnotesize}
+\setbeamertemplate{itemize/enumerate subsubbody begin}{\scriptsize}
+
+\makeatletter
+\g@addto@macro\itemize{%
+  \setlength{\itemsep}{2pt}%
+  \setlength{\parsep}{1pt}%
+  \setlength{\topsep}{2pt}%
+  \setlength{\partopsep}{0pt}%
+}
+\makeatother
+
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Nuevos Negocios y Oportunidade]{Nuevos Negocios y Oportunidades de Mercado con IA}
+\subtitle{Revolucionando las Ferreterías a través de las 4P: Producto, Plaza, Promoción, Precio}
+\author{Experto en Marketing y Oportunidades de Mercado}
+\institute{Consultoría Estratégica para el Sector Ferretero}
+\date{\today}
+
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+\begin{frame}[allowframebreaks,fragile]{Objetivos de la Sesión y Contexto General}
+
+
+\textbf{Objetivos}
+
+\begin{itemize}
+  \item \textbf{Comprender} el impacto transformador de la Inteligencia Artificial (IA) en las 4P del marketing (Producto, Plaza, Promoción, Precio) dentro del sector ferretero.
+  \item \textbf{Identificar} nuevas oportunidades de negocio y ventajas competitivas que la IA puede ofrecer a las ferreterías.
+  \item \textbf{Aplicar} conceptos clave mediante ejemplos prácticos y ejercicios interactivos para visualizar la implementación de la IA.
+\end{itemize}
+\textbf{Contexto General}
+
+El panorama actual de negocios exige innovación constante. La Inteligencia Artificial, que antes parecía ciencia ficción, es ahora una herramienta poderosa para optimizar operaciones y mejorar la experiencia del cliente. Para el sector ferretero, tradicionalmente robusto pero a menudo rezagado en la adopción tecnológica, la IA presenta una oportunidad única para modernizarse y prosperar.
+
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Marco Conceptual y Conceptos Clave}
+
+
+\textbf{Inteligencia Artificial (IA) en el Retail}
+
+\begin{itemize}
+  \item \textbf{Definición}: Sistemas que imitan la inteligencia humana para realizar tareas, aprender de los datos y mejorar con el tiempo.
+  \item \textbf{Relevancia para Ferreterías}: Permite pasar de la gestión reactiva a la predictiva y proactiva, optimizando desde la cadena de suministro hasta la interacción con el cliente.
+\end{itemize}
+\textbf{Las 4P del Marketing (Repaso Breve)}
+
+\begin{itemize}
+  \item \textbf{Producto}: Lo que se ofrece al mercado para satisfacer una necesidad.
+  \item \textbf{Plaza (Distribución)}: Cómo el producto llega al consumidor.
+  \item \textbf{Promoción}: Cómo se comunica el valor del producto al consumidor.
+  \item \textbf{Precio}: El valor monetario que el consumidor paga por el producto.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Marco Conceptual y Conceptos Clave (Cont.)}
+
+
+\textbf{1. Producto Mediado por IA en Ferreterías}
+
+La IA potencia el desarrollo y la gestión de la oferta de productos.
+
+\begin{itemize}
+  \item \textbf{Curación Personalizada de Productos}: La IA analiza el historial de compras, patrones de navegación y descripciones de proyectos (ej. ``remodelar un baño'') para recomendar herramientas, materiales y productos complementarios específicos.
+  \item \textbf{Demanda Predictiva para Productos de Nicho}: Para el hardware especializado, la IA pronostica la demanda con mayor precisión, asegurando la disponibilidad de piezas o materiales con largos plazos de entrega.
+  \item \textbf{Diseño y Personalización Asistida por IA}: La IA puede ayudar a los clientes a diseñar soluciones personalizadas (ej. estanterías, cortes a medida) sugiriendo materiales y dimensiones óptimas basándose en el inventario.
+  \item \textbf{Hallazgo Empírico Clave}: Las estrategias exitosas de productos con IA surgen de una comprensión profunda de los puntos de dolor del cliente y las ineficiencias operativas. \textit{(Referencia: ``Identifying and Evaluating AI Opportunities'', 2025)}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Marco Conceptual y Conceptos Clave (Cont.)}
+
+
+\textbf{2. Plaza Mediada por IA en Ferreterías}
+
+La IA optimiza la logística y la experiencia en el punto de venta.
+
+\begin{itemize}
+  \item \textbf{Navegación y Diseño Optimizado en Tienda}: La IA analiza patrones de tráfico y rutas de compra para sugerir una ubicación óptima de productos, guiando a los clientes de manera más eficiente.
+  \item \textbf{Gestión Inteligente de Inventario y Cadena de Suministro}: La IA pronostica la demanda por SKU, optimiza el almacenamiento, automatiza pedidos y gestiona la entrega de última milla para artículos voluminosos.
+  \item \textbf{Centros de Micro-Cumplimiento Hiperlocales}: La IA identifica ubicaciones óptimas para centros de cumplimiento más pequeños y automatizados que sirven a un grupo de ferreterías o entregan directamente a los clientes.
+  \item \textbf{Hallazgos Empíricos Clave}:
+  \begin{itemize}
+    \item Los enfoques basados en datos, impulsados por IA, son críticos para eficiencias significativas en la cadena de suministro, minimizando faltantes y optimizando almacenamiento. \textit{(Referencia: Katangoori, A., 2026)}
+    \item La IA crea cadenas de suministro más resilientes y responsivas, adaptándose a demandas estacionales o escaseces inesperadas. \textit{(Referencia: Liotine, M., 2026)}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Casos de Estudio y Ejemplos Prácticos Aplicados}
+
+
+\textbf{3. Promoción Mediada por IA en Ferreterías}
+
+La IA transforma la promoción, haciéndola personalizada y efectiva.
+
+\begin{itemize}
+  \item \textbf{Campañas de Marketing Hiper-Personalizadas}: La IA segmenta clientes por tipo de proyecto, nivel de habilidad o marcas preferidas, entregando promociones a medida (ej. descuentos en herramientas para contratistas, talleres de fontanería).
+  \item \textbf{Creación de Contenido y Engagement Impulsado por IA}: La IA genera guías de proyectos personalizadas, videos instructivos o chatbots interactivos que responden a preguntas complejas sobre el uso de productos.
+  \item \textbf{Servicio al Cliente y Soporte Predictivo}: La IA identifica clientes propensos a la deserción o aquellos que necesitan soporte proactivo para proyectos en curso, permitiendo intervenciones con ofertas o asistencia específicas.
+  \item \textbf{Hallazgos Empíricos Clave}:
+  \begin{itemize}
+    \item Efectividad de la IA en la creación de experiencias de marketing personalizadas, especialmente en publicidad e-commerce y redes sociales (videos cortos de proyectos DIY). \textit{(Referencia: Qiu, X., 2026)}
+    \item La IA redefine la interacción con el cliente con estrategias de marketing adaptativas (ej. asistentes virtuales que guían en compras complejas). \textit{(Referencia: Sahay, S., 2026)}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Casos de Estudio y Ejemplos Prácticos Aplicados (Cont.)}
+
+
+\textbf{4. Precio Mediado por IA en Ferreterías}
+
+La IA permite estrategias de precios dinámicas y optimizadas.
+
+\begin{itemize}
+  \item \textbf{Precios Dinámicos para Productos Perecederos o Estacionales}: Para artículos con vida útil limitada (ej. ciertos químicos) o estacionalidad (ej. herramientas de jardinería), la IA ajusta los precios en tiempo real para maximizar ventas y minimizar pérdidas.
+  \item \textbf{Inteligencia Competitiva de Precios}: La IA monitorea los precios de la competencia para miles de SKUs, permitiendo a las ferreterías ajustar sus precios estratégicamente para mantenerse competitivas sin sacrificar márgenes.
+  \item \textbf{Precios y Paquetes Personalizados}: Para clientes leales o pedidos de proyectos grandes, la IA identifica niveles óptimos de descuento o paquetes que aseguran ventas manteniendo la rentabilidad.
+  \item \textbf{Hallazgo Empírico Clave}: Los algoritmos de Machine Learning optimizan eficazmente los precios dinámicos en el comercio minorista al analizar fluctuaciones de demanda, niveles de inventario y precios de la competencia. \textit{(Referencia: ``Machine Learning-based Pricing Optimization for Dynamic Pricing in Online Retail'', 2024)}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Ejercicios Prácticos y Actividades Interactivas}
+
+
+\textbf{Ejercicio 1: ``Mi Ferretería con IA''}
+
+\begin{itemize}
+  \item \textbf{Instrucciones}:
+  \begin{itemize}
+    \item Elija una de las 4P (Producto, Plaza, Promoción, Precio) que crea que tiene mayor potencial de mejora con IA en una ferretería.
+    \item Identifique un problema específico dentro de esa P en una ferretería tradicional.
+    \item Proponga una solución concreta utilizando la Inteligencia Artificial.
+    \item Describa brevemente cómo esta solución beneficiaría al cliente y al negocio.
+  \end{itemize}
+  \item \textbf{Tiempo}: 5 minutos para pensar individualmente, 5 minutos para compartir en parejas.
+  \item \textbf{Discusión}: ¿Qué soluciones encontraron? ¿Cuáles fueron las más innovadoras?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Ejercicios Prácticos y Actividades Interactivas (Cont.)}
+
+
+\textbf{Ejercicio 2: ``Ideas Disruptivas''}
+
+\begin{itemize}
+  \item \textbf{Instrucciones}:
+  \begin{itemize}
+    \item En grupos pequeños (3-4 personas), piensen en un servicio completamente nuevo o una transformación radical de un servicio existente en una ferretería, que solo sea posible gracias a la IA.
+    \item Imaginen un futuro cercano: ¿cómo la IA puede ir más allá de la optimización y crear una experiencia fundamentalmente diferente para los clientes de ferreterías?
+    \item Prepárense para presentar su idea en 1 minuto.
+  \end{itemize}
+  \item \textbf{Tiempo}: 10 minutos para brainstorming en grupo.
+  \item \textbf{Discusión}: Presentación de las ideas y retroalimentación abierta.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Sabías que... Datos Curiosos y Transformadores}
+
+
+\textbf{1. El Ascenso del ``Asesor de Proyectos con IA''}
+
+\begin{itemize}
+  \item Más allá de vender productos, la IA posiciona a las ferreterías como ``asesores de proyectos'' indispensables. Esto incluye planes de proyecto generados por IA, asistencia para la resolución de problemas y conexión con profesionales locales. Un cambio significativo de ventas transaccionales a provisión integral de servicios.
+\end{itemize}
+\textbf{2. Localización y Eficiencia Hiperpotenciadas por IA en la Cadena de Suministro}
+
+\begin{itemize}
+  \item El profundo impacto de la IA en la optimización de la cadena de suministro (Plaza) permite a las ferreterías alcanzar niveles de eficiencia sin precedentes en la gestión de inventario, almacenamiento y entrega. Esto se traduce en una ventaja competitiva a través de costos reducidos y disponibilidad superior de productos, incluso para artículos muy especializados.
+\end{itemize}
+\textbf{3. De Marketing Masivo a Viajes DIY Micro-Segmentados}
+
+\begin{itemize}
+  \item El cambio más significativo que la IA aporta a la promoción es la capacidad de adaptar el marketing al proyecto específico de cada cliente (DIY o profesional). Esto permite ofertas extremadamente relevantes y oportunas (ej. ``¿planeando una terraza? Aquí tienes herramientas y materiales esenciales'') que fomentan una lealtad más profunda y mayores tasas de conversión.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Conclusiones y Puntos Clave (Takeaways)}
+
+
+\textbf{Conclusiones}
+
+La Inteligencia Artificial no es una moda pasajera, sino una herramienta estratégica que redefine el panorama de oportunidades de negocio en el sector ferretero. Al integrar la IA en las 4P del marketing, las ferreterías pueden:
+
+\begin{itemize}
+  \item \textbf{Mejorar} la oferta de productos con personalización y precisión.
+  \item \textbf{Optimizar} la logística y la experiencia de compra en la Plaza.
+  \item \textbf{Transformar} la Promoción hacia un engagement más relevante y efectivo.
+  \item \textbf{Refinar} las estrategias de Precio para una mayor competitividad y rentabilidad.
+\end{itemize}
+\textbf{Puntos Clave}
+
+\begin{itemize}
+  \item \textbf{La IA es un catalizador para la innovación} y la eficiencia en ferreterías.
+  \item \textbf{La personalización} es el nuevo estándar en todas las facetas del negocio.
+  \item \textbf{La cadena de suministro inteligente} es clave para la competitividad.
+  \item \textbf{Las ferreterías pueden evolucionar} de meros proveedores a asesores de proyectos.
+  \item \textbf{La adopción temprana} de la IA generará una ventaja competitiva significativa.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Referencias Bibliográficas}
+
+
+\begin{itemize}
+  \item Katangoori, A. (2026). \textit{An empirical analysis of data-driven supply chain optimization in retail and logistics}. Supply Chain Analytics. DOI: 10.1016/j.sca.2026.100206
+  \item Liotine, M. (2026). \textit{AI opportunities in supply chain and logistics}. Technology in Supply Chain Management and Logistics. DOI: 10.1016/b978-0-443-21797-5.00004-9
+  \item Qiu, X. (2026). \textit{Deep Analysis of Digital Marketing Trends and Social Media Strategies: Case Studies in Short-Video Promotion, E-commerce Advertising, and AI-Personalized Marketing}. Academic Journal of Management and Social Sciences. DOI: 10.54097/2jv8ve30
+  \item Unknown Authors. (2024). \textit{Machine Learning-based Pricing Optimization for Dynamic Pricing in Online Retail}. Journal of Informatics Education and Research. DOI: 10.52783/jier.v4i3.1564
+  \item Unknown Authors. (2025). \textit{Identifying and Evaluating AI Opportunities}. The AI Product Playbook. DOI: 10.1002/9781394352463.ch8
+\end{itemize}
+\end{frame}
+
+
+
+
+\end{document}

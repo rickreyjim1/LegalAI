@@ -1,0 +1,130 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+% Minimal look
+\usetheme{Warsaw}
+%\setbeamertemplate{headline}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    % Left: Section name
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertsection
+    \end{beamercolorbox}%
+    % Center: Presentation title
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    % Right: Slide numbers
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\usecolortheme{default}
+\usefonttheme{serif}
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[Handout - Ejercicios Prácticos]{Handout - Ejercicios Prácticos (Módulo 2.4)}
+\subtitle{}
+\author{Ricardo Reyes-Jimenez}
+\institute{Universidad de La Sabana}
+\date{\today}
+
+% Background image for title slide
+\usebackgroundtemplate{
+  \tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{Images/UniSabana.jpg}};
+}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+
+\begin{frame}[fragile]{Ejercicio 1: Los 5 Pilares (Civil - Revisión de Contrato)}
+
+
+\textbf{Contexto del Caso (Hechos para tu Prompt):}
+Tu cliente, ``Inversiones ABC'', firmó un contrato civil de compraventa de un lote comercial con ``Constructora XYZ''. El contrato establecía el pago en 3 cuotas. La segunda cuota se retrasó 5 días por un problema bancario. La Constructora XYZ ha enviado una notificación de resolución automática del contrato basándose en la Cláusula 8.
+
+\textbf{Cláusula 8 del Contrato:} ``El retraso superior a 3 días calendario en el pago de cualquier cuota dará derecho al vendedor a resolver de plano este contrato sin necesidad de requerimiento judicial previo.''
+
+\textbf{Tu Misión:}
+Redactar un prompt utilizando los 5 Pilares (Rol, Contexto, Instrucción, Restricciones, Formato) para que la IA evalúe si la cláusula 8 es aplicable o si constituye abuso del derecho según la jurisprudencia civil colombiana.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejercicio 2: 5 Pilares + CoT + Few-Shot + CARE (Laboral)}
+
+
+\textbf{Contexto del Caso (Hechos para tu Prompt):}
+El empleado ``Juan Pérez'', que lleva 3 años en la empresa, fue despedido alegando ``justa causa'' debido a ausencias reiteradas. Sin embargo, Juan afirma que las ausencias fueron por calamidad doméstica comprobada, pero el departamento de RRHH nunca revisó sus soportes médicos y no se hizo un proceso disciplinario previo.
+
+\textbf{Tu Misión:}
+Usando el esquema CARE (Contexto, Acción, Resultado, Evaluación), redacta un prompt que obligue a la IA a realizar un análisis secuencial (Chain-of-Thought) antes de dar el veredicto sobre si el despido fue legal. Además, incluye al menos un ejemplo (Few-Shot) de cómo quieres que redacte la respuesta final (ej. ``En nuestra firma, siempre concluimos con un subtítulo de Recomendación Estratégica: ...'').
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejercicio 3: 5 Pilares + CoT + ADP + Red Team (Contratación)}
+
+
+\textbf{Contexto del Caso (Hechos para tu Prompt):}
+Representas al ``Proveedor P'' (una PYME de tecnología). Le están pidiendo firmar un contrato de servicios con ``Megacorporación S.A.''.
+
+\textbf{Cláusula 12 (Indemnidad):} ``El Proveedor se obliga a mantener indemne a Megacorporación S.A. por cualquier daño directo, indirecto, lucro cesante o daño reputacional derivado de cualquier interrupción del servicio de software, sin límite de cuantía.''
+
+\textbf{Tu Misión:}
+1. \textbf{Fase 1 (ADP):} Usa el framework ADP (Actor, Documento, Propósito) y CoT para auditar la Cláusula 12, indicando por qué es desproporcionada y proponiendo una nueva redacción con un límite de responsabilidad (cap).
+2. \textbf{Fase 2 (Red Teaming):} Una vez que la IA proponga la nueva redacción mitigada, envíale un segundo prompt ordenándole actuar como el abogado de Megacorporación S.A., pidiéndole que ataque tu nueva redacción y encuentre 3 razones para rechazarla.
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Ejercicio 4 (Para llevar): Framework TAM (Comunicación / Comercial)}
+
+
+\textbf{Contexto del Caso (Hechos para tu Prompt):}
+Tu firma de abogados debe enviar un requerimiento de pago a ``Distribuidora El Sol'', un cliente histórico de tu representado ``Fábrica La Luna''. La deuda es de \$50,000,000 COP y tiene 60 días de mora. El objetivo es cobrar el dinero rápidamente pero \textbf{sin destruir la relación comercial de 10 años}.
+
+\textbf{Tu Misión:}
+Aplica el framework TAM (Tarea, Audiencia, Método) dentro de un prompt para que la IA redacte el correo electrónico perfecto.
+\begin{itemize}
+  \item \textbf{Tarea:} Solicitar el pago de la deuda.
+  \item \textbf{Audiencia:} El Gerente General de ``Distribuidora El Sol'' (relación amistosa pero profesional).
+  \item \textbf{Método:} Correo electrónico persuasivo, conciliador pero firme, proponiendo un acuerdo de pago.
+\end{itemize}
+\end{frame}
+
+
+
+
+\end{document}
