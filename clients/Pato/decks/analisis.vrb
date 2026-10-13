@@ -1,8 +1,0 @@
-\frametitle{Referencias Bibliográficas}
-
-
-\begin{itemize}
-  \item Guduru, S. (2021). Automated Policy Enforcement in DevSecOps: OPA, Kyverno, and Tekton Chains for Supply Chain Integrity. \textit{International Journal of Science and Research (IJSR)}, 10(5). DOI: 10.21275/sr210513123637
-  \item Shenoy, A., S. P, Honnavali, P. (2025). Runtime Threat Mitigation in Kubernetes Using Falco, Falcosidekick, and Kyverno: An Automated Pod Deletion Approach. \textit{2025 IEEE 7th International Conference on Computing, Communication and Automation (ICCCA)}. DOI: 10.1109/iccca66364.2025.11325363
-  \item Sagaram, T., S. P, Honnavalli, P. (2025). Multi-Layered Runtime Defense Against Cryptocurrency Mining in Kubernetes Using Falco, Kyverno, and Behavior Analytics. \textit{2025 66th International Scientific Conference on Information Technology and Management Science of Riga Technical University (ITMS)}. DOI: 10.1109/itms67030.2025.11236625
-\end{itemize}
