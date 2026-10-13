@@ -347,7 +347,7 @@ La gobernanza es lo que convierte ese activo en una ventaja competitiva sostenib
 
 ## Cierre del Módulo 3
 
-Construir una PromptLibrary no consiste en coleccionar prompts.
+Construir una  PromptLibrary no consiste en coleccionar prompts.
 
 Consiste en construir un sistema para capturar, compartir y escalar el conocimiento jurídico de una organización.
 
