@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.13)  13 OCT 2026 21:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.13)  13 OCT 2026 21:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1092,7 +1092,7 @@ Dictionary: translator-theorem-dictionary, Language: English
 LaTeX Info: Redefining \. on input line 87.
 LaTeX Info: Redefining \% on input line 87.
  (modulo_3_2_merged.nav)
-<../Images/UniSabana.jpg, id=29, 840.13875pt x 357.58594pt>
+<../Images/UniSabana.jpg, id=33, 840.13875pt x 357.58594pt>
 File: ../Images/UniSabana.jpg Graphic file (type jpg)
 <use ../Images/UniSabana.jpg>
 Package pdftex.def Info: ../Images/UniSabana.jpg  used on input line 92.
@@ -1146,12 +1146,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ]
 \openout4 = `modulo_3_2_merged.vrb'.
 
- (modulo_3_2_merged.vrb
-
-Package natbib Warning: Citation `sal2024' on page 8 undefined on input line 4.
-
-
-) [8
+ (modulo_3_2_merged.vrb) [8
 
 ]
 \openout4 = `modulo_3_2_merged.vrb'.
@@ -1166,8 +1161,7 @@ Package natbib Warning: Citation `sal2024' on page 8 undefined on input line 4.
 ]
 \openout4 = `modulo_3_2_merged.vrb'.
 
-
-(modulo_3_2_merged.vrb
+ (modulo_3_2_merged.vrb
 Overfull \hbox (21.90097pt too wide) in paragraph at lines 7--16
  [] 
  []
@@ -1256,6 +1250,8 @@ Overfull \hbox (21.90097pt too wide) in paragraph at lines 7--16
 
 (modulo_3_2_merged.vrb) [26
 
+] (modulo_3_2_merged.bbl) [27
+
 ]
 \tf@nav=\write6
 \openout6 = `modulo_3_2_merged.nav'.
@@ -1267,9 +1263,6 @@ Overfull \hbox (21.90097pt too wide) in paragraph at lines 7--16
 \openout8 = `modulo_3_2_merged.snm'.
 
 
-
-Package natbib Warning: There were undefined citations.
-
 (modulo_3_2_merged.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
@@ -1279,13 +1272,13 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `modulo_3_2_merged.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+(rerunfilecheck)             Checksum: 4DA9D9096664261F8FF2D57C905AD89C;98.
  ) 
 Here is how much of TeX's memory you used:
- 28372 strings out of 467871
- 556852 string characters out of 5417407
- 934418 words of memory out of 5000000
- 56599 multiletter control sequences out of 15000+600000
+ 28394 strings out of 467871
+ 557241 string characters out of 5417407
+ 934465 words of memory out of 5000000
+ 56614 multiletter control sequences out of 15000+600000
  644598 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,123p,418b,824s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1306,9 +1299,9 @@ dpi600\ecrm0600.pk> <C:\Users\Ricardo\AppData\Local\MiKTeX\fonts/pk/ljfour/jkna
 ppen/ec/dpi600\ecrm0800.pk> <C:\Users\Ricardo\AppData\Local\MiKTeX\fonts/pk/ljf
 our/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Ricardo\AppData\Local\MiKTeX\font
 s/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk>
-Output written on modulo_3_2_merged.pdf (26 pages, 549227 bytes).
+Output written on modulo_3_2_merged.pdf (27 pages, 555316 bytes).
 PDF statistics:
- 910 PDF objects out of 1000 (max. 8388607)
- 53 named destinations out of 1000 (max. 500000)
- 120 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 937 PDF objects out of 1000 (max. 8388607)
+ 57 named destinations out of 1000 (max. 500000)
+ 128 words of extra memory for PDF output out of 10000 (max. 10000000)
 

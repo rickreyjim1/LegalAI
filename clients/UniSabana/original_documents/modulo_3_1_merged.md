@@ -7,7 +7,7 @@ background_image: Images/UniSabana.jpg
 # Módulo 3: Sesión 1
 
 ## Portada
-**Título:** Diseñando una  PromptLibrary Jurídica (Sesión 1)
+**Título:** Diseñando una PromptLibrary Jurídica (Sesión 1)
 **Subtítulo:** De la destreza individual a la infraestructura institucional de la firma
 **Notas del Mentor:** *¡Bienvenidos al Módulo 3! Hasta hoy aprendieron a dialogar eficazmente con los modelos de lenguaje. Ahora damos el salto más importante: convertir esa habilidad personal en un activo duradero para toda la organización. Empezamos a construir la infraestructura de conocimiento de la firma del futuro.* [Dinámica de apertura: Preguntar al grupo: "¿Quién ha logrado un resultado brillante con ChatGPT, cerró la ventana y al día siguiente tuvo que volver a inventarlo desde cero?"]
 

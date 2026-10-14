@@ -8,6 +8,15 @@
 \usepackage{hyperref}
 \usepackage[spanish,es-noquoting]{babel}
 \usepackage[round]{natbib}
+\usepackage{amssymb}
+
+% Unicode character fallbacks for pdflatex
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\DeclareUnicodeCharacter{2190}{\ensuremath{\leftarrow}}
+\DeclareUnicodeCharacter{25B2}{\ensuremath{\blacktriangle}}
+\DeclareUnicodeCharacter{25BC}{\ensuremath{\blacktriangledown}}
+\DeclareUnicodeCharacter{2014}{---}
+\DeclareUnicodeCharacter{2013}{--}
 
 \lstset{
   basicstyle=\ttfamily\small,
@@ -62,7 +71,7 @@
 \setbeamertemplate{caption}[numbered]
 
 % Title info
-\title[ Diseñando una  PromptLibrary ]{ Diseñando una  PromptLibrary Jurídica (Sesión 1)}
+\title[ Diseñando una PromptLibrary J]{ Diseñando una PromptLibrary Jurídica (Sesión 1)}
 \subtitle{ De la destreza individual a la infraestructura institucional de la firma}
 \author{Ricardo Reyes-Jimenez}
 \institute{Universidad de La Sabana}
@@ -413,6 +422,11 @@ En derecho, la precisión radica en los límites que imponemos a la máquina:
 \end{frame}
 
 
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
 
 
 \end{document}

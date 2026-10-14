@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.13)  13 OCT 2026 21:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.13)  13 OCT 2026 21:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -946,6 +946,13 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count378
 )
+   defining Unicode char U+2192 (decimal 8594)
+   defining Unicode char U+2190 (decimal 8592)
+   defining Unicode char U+25B2 (decimal 9650)
+   defining Unicode char U+25BC (decimal 9660)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2013 (decimal 8211)
+
 (C:\Users\Ricardo\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerthemeWar
 saw.sty
 (C:\Users\Ricardo\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamerinnerthe
@@ -972,24 +979,24 @@ Package babel Info: 'spanish' activates 'spanish' shorthands.
 )
 \openout1 = `modulo_3_1_merged.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1051,7 +1058,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 .cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 78.
+Package hyperref Info: Link coloring OFF on input line 87.
  (modulo_3_1_merged.out) (modulo_3_1_merged.out)
 \@outlinefile=\write5
 \openout5 = `modulo_3_1_merged.out'.
@@ -1082,13 +1089,13 @@ Dictionary: translator-numbers-dictionary, Language: English
 Dictionary: translator-theorem-dictionary, Language: English 
 )
 \c@lstlisting=\count386
-LaTeX Info: Redefining \. on input line 78.
-LaTeX Info: Redefining \% on input line 78.
+LaTeX Info: Redefining \. on input line 87.
+LaTeX Info: Redefining \% on input line 87.
  (modulo_3_1_merged.nav)
-<../Images/UniSabana.jpg, id=29, 840.13875pt x 357.58594pt>
+<../Images/UniSabana.jpg, id=33, 840.13875pt x 357.58594pt>
 File: ../Images/UniSabana.jpg Graphic file (type jpg)
 <use ../Images/UniSabana.jpg>
-Package pdftex.def Info: ../Images/UniSabana.jpg  used on input line 83.
+Package pdftex.def Info: ../Images/UniSabana.jpg  used on input line 92.
 (pdftex.def)             Requested size: 455.24496pt x 256.08667pt.
  [1
 
@@ -1231,6 +1238,12 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 
 (modulo_3_1_merged.vrb) [26
 
+] (modulo_3_1_merged.bbl
+
+Package natbib Warning: Empty `thebibliography' environment on input line 3.
+
+) [27
+
 ]
 \tf@nav=\write6
 \openout6 = `modulo_3_1_merged.nav'.
@@ -1250,13 +1263,13 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
 Package rerunfilecheck Info: File `modulo_3_1_merged.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+(rerunfilecheck)             Checksum: 4DA9D9096664261F8FF2D57C905AD89C;98.
  ) 
 Here is how much of TeX's memory you used:
- 28306 strings out of 467871
- 555676 string characters out of 5417407
- 932419 words of memory out of 5000000
- 56552 multiletter control sequences out of 15000+600000
+ 28326 strings out of 467871
+ 556020 string characters out of 5417407
+ 932451 words of memory out of 5000000
+ 56566 multiletter control sequences out of 15000+600000
  640111 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,123p,459b,824s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1278,9 +1291,9 @@ ppen/ec/dpi600\ecrm0600.pk> <C:\Users\Ricardo\AppData\Local\MiKTeX\fonts/pk/ljf
 our/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\Ricardo\AppData\Local\MiKTeX\font
 s/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Ricardo\AppData\Local\MiK
 TeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk>
-Output written on modulo_3_1_merged.pdf (26 pages, 549955 bytes).
+Output written on modulo_3_1_merged.pdf (27 pages, 551893 bytes).
 PDF statistics:
- 914 PDF objects out of 1000 (max. 8388607)
- 53 named destinations out of 1000 (max. 500000)
- 120 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 927 PDF objects out of 1000 (max. 8388607)
+ 56 named destinations out of 1000 (max. 500000)
+ 128 words of extra memory for PDF output out of 10000 (max. 10000000)
 
