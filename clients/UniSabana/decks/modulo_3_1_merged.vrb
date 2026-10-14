@@ -1,0 +1,12 @@
+\frametitle{Cierre de la Sesión 1 y Hoja de Ruta}
+
+\begin{itemize}
+  \item \textbf{Hito de Hoy:} Pasamos del conocimiento tácito y aislado a activos organizacionales documentados. Ya crearon su primer Blueprint institucional.
+  \item \textbf{Para la Sesión 2 (Mañana):}
+  \begin{itemize}
+    \item Descubriremos por qué los prompts fallan y cómo refinarlos con técnicas Few-Shot.
+    \item Aprenderemos a construir \textbf{Pipelines modulares} para procesos complejos.
+    \item Analizaremos la hoja de ruta de escalabilidad y la \textbf{Gobernanza del Comité de IA}.
+  \end{itemize}
+  \item \textbf{¡Guarden sus Blueprints y los resultados de sus pruebas de fuego!}
+\end{itemize}

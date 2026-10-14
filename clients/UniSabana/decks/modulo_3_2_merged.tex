@@ -1,0 +1,480 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[spanish,es-noquoting]{babel}
+\usepackage[round]{natbib}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false
+}
+
+% Clean Theme Setup & Optimization
+\usetheme{Warsaw}
+\usecolortheme{default}
+\usefonttheme{serif}
+
+% Remove top headline bar and navigation clutter to maximize slide text space
+\setbeamertemplate{headline}{}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{frametitle continuation}{}
+
+% Slim, clean footline bar
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{2ex}\insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+% Font size and list spacing optimizations to prevent text overflow
+\setbeamertemplate{itemize/enumerate body begin}{\small}
+\setbeamertemplate{itemize/enumerate subbody begin}{\footnotesize}
+\setbeamertemplate{itemize/enumerate subsubbody begin}{\scriptsize}
+
+\makeatletter
+\g@addto@macro\itemize{%
+  \setlength{\itemsep}{2pt}%
+  \setlength{\parsep}{1pt}%
+  \setlength{\topsep}{2pt}%
+  \setlength{\partopsep}{0pt}%
+}
+\makeatother
+
+\graphicspath{{../}{./}}
+\setbeamertemplate{caption}[numbered]
+
+% Title info
+\title[ Escalando tu PromptLibrary Ju]{ Escalando tu PromptLibrary Jurídica (Sesión 2)}
+\subtitle{ De colección aislada de prompts a sistema organizacional con gobernanza}
+\author{Ricardo Reyes-Jimenez}
+\institute{Universidad de La Sabana}
+\date{\today}
+
+
+% Background image for title slide
+\usebackgroundtemplate{
+  \tikz\node[opacity=0.3]{\includegraphics[width=\paperwidth,height=\paperheight]{Images/UniSabana.jpg}};
+}
+
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Reset background for normal slides
+\usebackgroundtemplate{}
+
+
+\begin{frame}[allowframebreaks,fragile]{Objetivos de la Sesión 2 (2 Horas)}
+
+\begin{itemize}
+  \item \textbf{Dominar el Troubleshooting Jurídico:} Métodos sistemáticos de iteración cuando el modelo falla o alucina.
+  \item \textbf{Aplicar la Técnica Few-Shot y Grounding Estricto:} Anclaje probatorio para erradicar inconsistencias.
+  \item \textbf{Construir Prompts Modulares y Pipelines Jurídicos:} Encadenamiento de instrucciones para litigios y contratos.
+  \item \textbf{Comprender los 5 Niveles de Madurez en IA:} De las notas personales al repositorio institucional en SharePoint.
+  \item \textbf{Diseñar la Gobernanza Institucional:} Estructuración del Comité de IA, flujos de aprobación y auditoría de modelos.
+  \item \textbf{Superar la barrera cultural:} Políticas de incentivos, Tone at the Top y métricas clave de adopción (KPIs).
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Recapitulación: ¿Qué Tenemos Hasta Ahora?}
+
+\begin{itemize}
+  \item Un cambio de mentalidad: La IA no es solo para el individuo, es para la institución.
+  \item Un archivo base compartido con nuestras primeras plantillas.
+  \item Blueprints con variables delimitadas en corchetes \texttt{[ ]}.
+  \item \textbf{Una certeza aprendida:} El primer intento \textbf{casi nunca es perfecto}. La IA puede ser excesivamente creativa cuando exigimos rigor dogmático, o demasiado literal cuando buscamos análisis estratégico.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{La Regla de Oro del Prompting Jurídico}
+
+> \textit{``El primer prompt nunca es el definitivo. Todo Blueprint es una hipótesis de trabajo que debe evolucionar con la práctica.''}
+
+\begin{itemize}
+  \item Si la IA se equivoca o genera un resultado deficiente, rara vez se debe a una limitación del modelo.
+  \item En el 90\% de los casos, la causa es:
+  \begin{itemize}
+    \item Ambigüedad en las instrucciones.
+    \item Falta de restricciones negativas explícitas.
+    \item Ausencia de un ejemplo guía.
+    \item O dispersión por una tarea excesivamente amplia.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{El Ciclo de Vida de un Blueprint Institucional}
+
+\begin{itemize}
+  \item \textbf{Creación:} Se formula el borrador inicial con variables parametrizadas.
+  \item \textbf{Prueba de Campo:} Se ejecuta con un expediente o contrato real (anonimizado).
+  \item \textbf{Retroalimentación (Feedback):} Se documenta qué falló (ej. tono informal, citas inexistentes, exceso de longitud).
+  \item \textbf{Refinamiento:} Se ajusta la instrucción agregando restricciones y ejemplos.
+  \item \textbf{Aprobación Colegiada:} Pasa la revisión de pares o del líder de área.
+  \item \textbf{Publicación Oficial:} Se sube al catálogo institucional como ``Estándar Oro''.
+  \item \textbf{Auditoría Periódica:} Se revalida ante actualizaciones de modelos de lenguaje.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Troubleshooting Jurídico: Cuando el Prompt Falla}
+
+\begin{itemize}
+  \item \textbf{Síntoma 1: El modelo alucina normas o hechos.}
+  \begin{itemize}
+    \item \textit{Causa:} Falta de ``Anclaje'' (Grounding).
+    \item \textit{Remedio:} Ordenar expresamente: \textit{``Básate ÚNICAMENTE en el texto adjunto. Tienes estrictamente prohibido asumir, extrapolar o citar antecedentes que no figuren en este documento.''}
+  \end{itemize}
+  \item \textbf{Síntoma 2: El modelo divaga o redacta 4 páginas de teoría general.}
+  \begin{itemize}
+    \item \textit{Causa:} Amplitud temática descontrolada.
+    \item \textit{Remedio:} Acotar el alcance: \textit{``Limítate exclusivamente a la cláusula de terminación unilateral. Omite consideraciones sobre el resto del contrato.''}
+  \end{itemize}
+  \item \textbf{Síntoma 3: El tono no es apto para un juez o cliente corporativo.}
+  \begin{itemize}
+    \item \textit{Causa:} Ausencia de definición de audiencia y registro lingüístico.
+    \item \textit{Remedio:} \textit{``Adopta un tono forense sobrio y persuasivo, propio de un alegato de conclusión ante tribunal arbitral.''}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Caso Práctico de Refinamiento en 4 Pasos}
+
+\begin{itemize}
+  \item \textbf{Versión 0 (Ingenua):}
+  \begin{itemize}
+    \item \textit{``Resume este caso laboral.''} -> Resultado: 5 páginas de prosa genérica inútil.
+  \end{itemize}
+  \item \textbf{Versión 1 (+ Formato):}
+  \begin{itemize}
+    \item \textit{``Resume este caso laboral en máximo 4 viñetas ejecutivas.''}
+  \end{itemize}
+  \item \textbf{Versión 2 (+ Restricción Negativa y Hechos Probados):}
+  \begin{itemize}
+    \item \textit{``Resume este caso en 4 viñetas. Incluye únicamente hechos plenamente probados. NO incluyas opiniones doctrinarias ni valoraciones subjetivas.''}
+  \end{itemize}
+  \item \textbf{Versión 3 (+ Rol Especializado y Variables):}
+  \begin{itemize}
+    \item \textit{``Actúa como conjuez laboral. Analiza el expediente \texttt{[TEXTO]}. Identifica en 4 viñetas: 1. Cargo desempeñado, 2. Causal alegada de despido, 3. Prueba reina aportada, 4. Riesgo de condena por despido injusto.''}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Técnica Few-Shot: Guiar con Ejemplos Concretos}
+
+\begin{itemize}
+  \item Los modelos de lenguaje responden exponencialmente mejor a \textbf{ejemplos demostrativos} que a explicaciones teóricas abstractas \cite{sal2024}.
+  \item \textbf{Zero-Shot:} Instrucción pura sin ejemplos (\textit{``Haz una ficha jurisprudencial''}).
+  \item \textbf{Few-Shot:} Instrucción + un ejemplo modelo de cómo debe lucir el resultado exacto:
+\end{itemize}
+```text
+[INSTRUCCIÓN]: Extrae el problema jurídico del siguiente fallo.
+[EJEMPLO DE SALIDA ESPERADA]:
+``¿Vulnera el empleador el fuero de estabilidad laboral reforzada al despedir a un trabajador con incapacidad médica sin autorización previa del Ministerio del Trabajo?''
+[CASO A ANALIZAR]: [EXPEDIENTE]
+```
+
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Grounding Jurídico: Operar en Circuito Cerrado}
+
+\begin{itemize}
+  \item En el ejercicio profesional, el riesgo reputacional y legal de una alucinación es intolerable.
+  \item \textbf{Grounding (Anclaje):} Forzar al modelo a extraer conocimiento única y exclusivamente del universo de información proporcionado por el usuario.
+  \item \textbf{Fórmula de Anclaje Blindado:}
+  \begin{itemize}
+    \item \textit{``Tus respuestas deben extraerse con fidelidad literal del anexo. Si la respuesta a una pregunta no se encuentra taxativamente en el texto, responde: 'Dato no verificable en el expediente suministrado'. Bajo ninguna circunstancia completes vacíos fácticos.''}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{El Mito del ``Super-Prompt''}
+
+\begin{itemize}
+  \item \textbf{Error Común:} Intentar que un solo mega-prompt de 80 líneas lea la demanda, conteste los hechos, proponga excepciones, busque jurisprudencia y redacte el memorial.
+  \item \textbf{¿Por qué fracasa?}
+  \begin{itemize}
+    \item La atención del modelo se fragmenta (efecto \textit{Lost in the Middle}).
+    \item La calidad del razonamiento se degrada en instrucciones compuestas.
+    \item No hay puntos de control intermedio para que el abogado valide la información.
+  \end{itemize}
+  \item \textbf{La Solución Profesional:} \textbf{Prompts Modulares y Cadenas de Procesamiento (Pipelines).}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{¿Qué es un Prompt Modular? (Encadenamiento)}
+
+\begin{itemize}
+  \item Descomponer un flujo de trabajo jurídico complejo en una serie de pasos discretos, secuenciales y auditables.
+  \item \textbf{Principio de Encadenamiento:} La salida del Prompt 1 se convierte en el insumo directo del Prompt 2.
+\end{itemize}
+```
+┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
+│  Paso 1: EXTRACCIÓN  │ ──> │  Paso 2: ANÁLISIS    │ ──> │ Paso 3: GENERACIÓN   │
+│  (Hechos y Fechas)   │     │ (Contradicciones)   │     │ (Borrador Memorial)│
+└──────────────────┘     └──────────────────┘     └──────────────────┘
+▲                        ▲                        ▲
+[Control 1]              [Control 2]              [Control 3]
+```
+
+\begin{itemize}
+  \item \textbf{Ventaja:} El abogado valida cada etapa antes de avanzar al siguiente eslabón.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Pipeline Jurídico 1: Revisión Contractual en 4 Etapas}
+
+\begin{itemize}
+  \item \textbf{Etapa 1 (Inventario de Cláusulas):}
+  \begin{itemize}
+    \item Extrae todas las cláusulas relativas a: plazo, terminación anticipada, penalidades, ley aplicable y resolución de disputas.
+  \end{itemize}
+  \item \textbf{Etapa 2 (Semáforo de Riesgos):}
+  \begin{itemize}
+    \item Compara las cláusulas extraídas en la Etapa 1 contra nuestra política de negociación. Clasifica cada cláusula en: Verde (Aceptable), Amarillo (Negociable), Rojo (Crítica).
+  \end{itemize}
+  \item \textbf{Etapa 3 (Matriz de Contingencias):}
+  \begin{itemize}
+    \item Construye una tabla con las cláusulas en Rojo y Amarillo explicando el impacto financiero potencial para el cliente.
+  \end{itemize}
+  \item \textbf{Etapa 4 (Redacción Alternativa):}
+  \begin{itemize}
+    \item Redacta una propuesta de redacción alternativa defensiva para cada cláusula clasificada en Rojo.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Pipeline Jurídico 2: Teoría del Caso en Litigio}
+
+\begin{itemize}
+  \item \textbf{Etapa 1 (Extracción Cronológica Fáctica):}
+  \begin{itemize}
+    \item Lee las comunicaciones cruzadas y genera una línea de tiempo estricta (Fecha - Remitente - Destinatario - Hecho Relevante).
+  \end{itemize}
+  \item \textbf{Etapa 2 (Mapeo Probatorio):}
+  \begin{itemize}
+    \item Cruza cada hecho de la cronología con la prueba documental que lo respalda. Señala hechos huérfanos de prueba.
+  \end{itemize}
+  \item \textbf{Etapa 3 (Detección de Inconsistencias):}
+  \begin{itemize}
+    \item Compara la declaración del demandante con las actas firmadas. Identifica contradicciones cronológicas o materiales.
+  \end{itemize}
+  \item \textbf{Etapa 4 (Borrador de Alegato de Conclusión):}
+  \begin{itemize}
+    \item Con las inconsistencias detectadas, estructura los argumentos de cierre enfocados en la falta de credibilidad probatoria.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Los 5 Niveles de Madurez en IA para Organizaciones Legales}
+
+\begin{itemize}
+  \item \textbf{Nivel 1 (Individual / Shadow AI):} Abogados usando cuentas personales; cero visibilidad institucional; alto riesgo de filtración.
+  \item \textbf{Nivel 2 (Compartición Informal):} Consejos y prompts compartidos por WhatsApp o canales informales de Teams; sin versión oficial.
+  \item \textbf{Nivel 3 (Biblioteca Documentada):} Repositorio formal en Excel/Notion con Blueprints y variables parametrizadas.
+  \item \textbf{Nivel 4 (Gobernanza Institucional):} Repositorio oficial en SharePoint/Intranet con control de versiones, tags y Comité de IA.
+  \item \textbf{Nivel 5 (Optimización y Automatización Continua):} Blueprints integrados en sistemas de gestión documental (ERP/DMS) y agentes autónomos.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{La Hoja de Ruta Tecnológica}
+
+\begin{itemize}
+  \item \textbf{Fase 1: Personal (Semana 1 - 2)}
+  \begin{itemize}
+    \item Herramientas: Bloc de notas, OneNote, Notion personal.
+    \item Foco: Descubrimiento y pruebas individuales.
+  \end{itemize}
+  \item \textbf{Fase 2: Compartida (Semana 3 - 6)}
+  \begin{itemize}
+    \item Herramientas: Excel en OneDrive, Google Sheets, Canal temático de Teams.
+    \item Foco: Colaboración entre pares y estandarización de Blueprints.
+  \end{itemize}
+  \item \textbf{Fase 3: Institucional (Mes 2 en adelante)}
+  \begin{itemize}
+    \item Herramientas: SharePoint institucional, Copilot Studio, herramientas especializadas.
+    \item Foco: Búsqueda por tags (\texttt{\\#M\\&A}, \texttt{\\#LitigioLaboral}), control de acceso y versionado.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{La Regla de los 3 Clics (Ergonomía Digital)}
+
+\begin{itemize}
+  \item \textbf{Principio Fundamental de Adopción:}
+\end{itemize}
+> \textit{``Si para usar un Blueprint el abogado tiene que dar más de 3 clics, buscar una clave olvidada o abrir una plataforma ajena a su rutina, la PromptLibrary morirá por abandono.''}
+\begin{itemize}
+  \item \textbf{Integración en el Flujo de Trabajo:}
+  \begin{itemize}
+    \item El repositorio debe residir donde el abogado pasa el 90\% de su jornada: \textbf{Word, Outlook, Teams o su gestor de expedientes}.
+    \item Accesos directos y plantillas ancladas en la barra de herramientas.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{El Peligro del ``Cementerio de Prompts''}
+
+\begin{itemize}
+  \item ¿Por qué fracasan las iniciativas de PromptLibraries en despachos legales?
+  \begin{itemize}
+    \item Se crea una carpeta llamada \textit{``Prompts Varios''}.
+    \item Todo el mundo sube borradores sin probar ni pulir.
+    \item A los 3 meses hay 150 archivos desordenados, duplicados y obsoletos.
+    \item Nadie sabe cuál funciona y todos vuelven a su método manual.
+  \end{itemize}
+  \item \textbf{La Solución Innegociable:} \textbf{Gobernanza y Control de Calidad.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Gobernanza: El Comité de IA Jurídica}
+
+\begin{itemize}
+  \item \textbf{¿Quién decide qué Blueprint se convierte en estándar de la firma?}
+  \item \textbf{Composición sugerida del Comité:}
+  \begin{itemize}
+    \item \textbf{Socio Director / Dirección Jurídica:} Garantiza alineación con la estrategia.
+    \item \textbf{Líder de Innovación / Knowledge Manager:} Custodio de la PromptLibrary.
+    \item \textbf{Responsable de TI:} Seguridad informática y herramientas.
+    \item \textbf{Oficial de Cumplimiento / Privacidad:} Verificación de protección de datos.
+  \end{itemize}
+  \item \textbf{Funciones:} Sesionar mensualmente para revisar propuestas, auditar resultados y actualizar plantillas.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Flujo de Aprobación Institucional}
+
+```
+┌─────────────────────────────────┐
+│ 1. Propuesta Individual        │  Un abogado diseña y prueba un Blueprint prometedor.
+└────────────────┬────────────────┘
+▼
+┌─────────────────────────────────┐
+│ 2. Prueba por Pares (Peer Review)│  Dos colegas de área lo prueban con casos reales.
+└────────────────┬────────────────┘
+▼
+┌─────────────────────────────────┐
+│ 3. Validación del Comité de IA  │  Revisión de confidencialidad, rigor y formato.
+└────────────────┬────────────────┘
+▼
+┌─────────────────────────────────┐
+│ 4. Publicación en SharePoint    │  Asignación de código oficial y difusión al equipo.
+└─────────────────────────────────┘
+```
+
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Sostenibilidad: Auditoría Periódica de Modelos}
+
+\begin{itemize}
+  \item \textbf{La IA no es estática:} Los proveedores actualizan los modelos constantemente (GPT-4 vs GPT-4o vs Claude 3.5 Sonnet).
+  \item Un prompt que funcionaba de maravilla en una versión previa puede comportarse de manera distinta tras un cambio de arquitectura del modelo.
+  \item \textbf{Protocolo de Mantenimiento:}
+  \begin{itemize}
+    \item Auditar y re-probar los Blueprints más críticos cada \textbf{3 a 6 meses}.
+    \item Registrar en la PromptLibrary para qué modelo exacto fue certificado cada Blueprint.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Cultura y Adopción: Tone at the Top}
+
+\begin{itemize}
+  \item El obstáculo más complejo en la transformación digital de una firma legal no es el software: \textbf{es la resistencia cultural de los abogados}.
+  \item \textbf{El ejemplo de los líderes (Tone at the Top):}
+  \begin{itemize}
+    \item Si los Socios Directores o Magistrados desdeñan la IA o no abren la PromptLibrary, los asociados junior no la utilizarán por temor a ser juzgados.
+    \item Los líderes deben patrocinar públicamente los casos de éxito internos.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Sistema de Incentivos y Reconocimiento}
+
+\begin{itemize}
+  \item ¿Cómo motivar a los abogados a documentar y compartir sus mejores prompts?
+  \item \textbf{Estrategias probadas en firmas internacionales:}
+  \begin{itemize}
+    \item \textbf{Reconocimiento Público:} Distinción mensual al \textit{``Blueprint del Mes''} (aquel que más horas o fricción ahorró).
+    \item \textbf{Evaluación de Desempeño:} Incluir la contribución a la innovación y gestión del conocimiento como criterio en la evaluación anual.
+    \item \textbf{Banco de Tiempo:} Premiar a los autores de Blueprints aprobados con horas computables a su meta interna.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Métricas de Éxito y KPIs de la PromptLibrary}
+
+Para justificar el tiempo y los recursos invertidos, midan con rigor:
+\begin{itemize}
+  \item \textbf{Tasa de Adopción Activa:} Porcentaje de abogados que consultan la biblioteca al menos 3 veces por semana.
+  \item \textbf{Horas Hombre Ahorradas:} Estimación mensual de tiempo liberado de tareas mecánicas.
+  \item \textbf{Índice de Reutilización:} Cuántas veces se ejecuta cada Blueprint en el repositorio.
+  \item \textbf{Tasa de Hallazgos Críticos:} Cláusulas riesgosas o errores probatorios detectados oportunamente gracias a los Pipelines.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Taller Práctico: Diseñando la Gobernanza (15 Minutos)}
+
+\textbf{Dinámica por Mesas de Trabajo:}
+\begin{itemize}
+  \item \textbf{Flujograma Rápido:} Definan en 3 pasos cómo pasará un prompt desde el computador del asociado hasta el repositorio oficial de su firma o entidad.
+  \item \textbf{Definición de KPIs:} Escojan 2 métricas concretas con las que medirán el éxito en los primeros 90 días.
+  \item \textbf{Mecanismo de Adopción:} Propongan 1 incentivo realista para que los abogados contribuyan activamente sin sentirlo como una carga burocrática.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Plenaria: Obstáculos Reales para el Lunes a las 8:00 AM}
+
+\begin{itemize}
+  \item ¿Qué resistencia real anticipan en sus equipos al llegar a la oficina?
+  \begin{itemize}
+    \item \textit{``No tengo tiempo para documentar prompts.''}
+    \item \textit{``Prefiero hacer las cosas a mi manera tradicional.''}
+    \item \textit{``¿Y si la IA me quita el trabajo?''}
+  \end{itemize}
+  \item \textbf{Respuesta Estratégica:}
+  \begin{itemize}
+    \item La IA no va a reemplazar al abogado; \textbf{el abogado que domina sistemas de IA y PromptLibraries va a reemplazar al abogado que no los utiliza}.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks,fragile]{Reflexión de Cierre del Módulo 3}
+
+\begin{itemize}
+  \item La Inteligencia Artificial Generativa democratizó la programación: \textbf{redactar prompts con rigor jurídico es programar en español}.
+  \item Su PromptLibrary es ahora el \textbf{código fuente de su organización}.
+  \item Trátenla con el mismo cuidado, rigor y orgullo con el que tratan su banco de jurisprudencia y precedentes.
+  \item \textbf{¡Felicitaciones por dar el paso de usuarios casuales a arquitectos institucionales de la IA jurídica!}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[allowframebreaks]{References}
+  \bibliographystyle{apalike}
+  \bibliography{references}
+\end{frame}
+
+
+\end{document}

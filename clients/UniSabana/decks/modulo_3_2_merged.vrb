@@ -1,0 +1,18 @@
+\frametitle{¿Qué es un Prompt Modular? (Encadenamiento)}
+
+\begin{itemize}
+  \item Descomponer un flujo de trabajo jurídico complejo en una serie de pasos discretos, secuenciales y auditables.
+  \item \textbf{Principio de Encadenamiento:} La salida del Prompt 1 se convierte en el insumo directo del Prompt 2.
+\end{itemize}
+```
+┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
+│  Paso 1: EXTRACCIÓN  │ ──> │  Paso 2: ANÁLISIS    │ ──> │ Paso 3: GENERACIÓN   │
+│  (Hechos y Fechas)   │     │ (Contradicciones)   │     │ (Borrador Memorial)│
+└──────────────────┘     └──────────────────┘     └──────────────────┘
+▲                        ▲                        ▲
+[Control 1]              [Control 2]              [Control 3]
+```
+
+\begin{itemize}
+  \item \textbf{Ventaja:} El abogado valida cada etapa antes de avanzar al siguiente eslabón.
+\end{itemize}
