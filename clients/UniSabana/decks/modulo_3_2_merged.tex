@@ -8,6 +8,15 @@
 \usepackage{hyperref}
 \usepackage[spanish,es-noquoting]{babel}
 \usepackage[round]{natbib}
+\usepackage{amssymb}
+
+% Unicode character fallbacks for pdflatex
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\DeclareUnicodeCharacter{2190}{\ensuremath{\leftarrow}}
+\DeclareUnicodeCharacter{25B2}{\ensuremath{\blacktriangle}}
+\DeclareUnicodeCharacter{25BC}{\ensuremath{\blacktriangledown}}
+\DeclareUnicodeCharacter{2014}{---}
+\DeclareUnicodeCharacter{2013}{--}
 
 \lstset{
   basicstyle=\ttfamily\small,
@@ -186,14 +195,12 @@
   \item Los modelos de lenguaje responden exponencialmente mejor a \textbf{ejemplos demostrativos} que a explicaciones teóricas abstractas \cite{sal2024}.
   \item \textbf{Zero-Shot:} Instrucción pura sin ejemplos (\textit{``Haz una ficha jurisprudencial''}).
   \item \textbf{Few-Shot:} Instrucción + un ejemplo modelo de cómo debe lucir el resultado exacto:
+  \begin{itemize}
+    \item \texttt{[INSTRUCCIÓN]:} Extrae el problema jurídico del siguiente fallo.
+    \item \texttt{[EJEMPLO ESPERADO]:} \textit{``¿Vulnera el empleador el fuero de estabilidad laboral reforzada al despedir a un trabajador con incapacidad médica sin autorización previa del Ministerio del Trabajo?''}
+    \item \texttt{[CASO A ANALIZAR]:} \texttt{[EXPEDIENTE]}
+  \end{itemize}
 \end{itemize}
-```text
-[INSTRUCCIÓN]: Extrae el problema jurídico del siguiente fallo.
-[EJEMPLO DE SALIDA ESPERADA]:
-``¿Vulnera el empleador el fuero de estabilidad laboral reforzada al despedir a un trabajador con incapacidad médica sin autorización previa del Ministerio del Trabajo?''
-[CASO A ANALIZAR]: [EXPEDIENTE]
-```
-
 \end{frame}
 
 \begin{frame}[allowframebreaks,fragile]{Grounding Jurídico: Operar en Circuito Cerrado}
@@ -227,17 +234,17 @@
 \begin{itemize}
   \item Descomponer un flujo de trabajo jurídico complejo en una serie de pasos discretos, secuenciales y auditables.
   \item \textbf{Principio de Encadenamiento:} La salida del Prompt 1 se convierte en el insumo directo del Prompt 2.
-\end{itemize}
-```
-┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│  Paso 1: EXTRACCIÓN  │ ──> │  Paso 2: ANÁLISIS    │ ──> │ Paso 3: GENERACIÓN   │
-│  (Hechos y Fechas)   │     │ (Contradicciones)   │     │ (Borrador Memorial)│
-└──────────────────┘     └──────────────────┘     └──────────────────┘
-▲                        ▲                        ▲
-[Control 1]              [Control 2]              [Control 3]
-```
-
-\begin{itemize}
+\begin{table}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l | l | l|}
+\hline
+\textbf{Etapa del Pipeline} & \textbf{Enfoque Operativo} & \textbf{Punto de Control Humano} \\ \hline
+\textbf{Paso 1: Extracción} & Identificación de hechos y fechas clave & \textbf{Control 1:} Validación de insumos iniciales \\ \hline
+\textbf{Paso 2: Análisis} & Detección de contradicciones probatorias & \textbf{Control 2:} Control de consistencia jurídica \\ \hline
+\textbf{Paso 3: Generación} & Redacción del borrador de memorial & \textbf{Control 3:} Revisión y aprobación final \\ \hline
+\end{tabular}
+}
+\end{table}
   \item \textbf{Ventaja:} El abogado valida cada etapa antes de avanzar al siguiente eslabón.
 \end{itemize}
 \end{frame}
@@ -313,7 +320,7 @@
   \item \textbf{Fase 3: Institucional (Mes 2 en adelante)}
   \begin{itemize}
     \item Herramientas: SharePoint institucional, Copilot Studio, herramientas especializadas.
-    \item Foco: Búsqueda por tags (\texttt{\\#M\\&A}, \texttt{\\#LitigioLaboral}), control de acceso y versionado.
+    \item Foco: Búsqueda por tags (\texttt{\#M\&A}, \texttt{\#LitigioLaboral}), control de acceso y versionado.
   \end{itemize}
 \end{itemize}
 \end{frame}
@@ -364,24 +371,24 @@
 
 \begin{frame}[allowframebreaks,fragile]{Flujo de Aprobación Institucional}
 
-```
-┌─────────────────────────────────┐
-│ 1. Propuesta Individual        │  Un abogado diseña y prueba un Blueprint prometedor.
-└────────────────┬────────────────┘
-▼
-┌─────────────────────────────────┐
-│ 2. Prueba por Pares (Peer Review)│  Dos colegas de área lo prueban con casos reales.
-└────────────────┬────────────────┘
-▼
-┌─────────────────────────────────┐
-│ 3. Validación del Comité de IA  │  Revisión de confidencialidad, rigor y formato.
-└────────────────┬────────────────┘
-▼
-┌─────────────────────────────────┐
-│ 4. Publicación en SharePoint    │  Asignación de código oficial y difusión al equipo.
-└─────────────────────────────────┘
-```
-
+\begin{itemize}
+  \item \textbf{1. Propuesta Individual:}
+  \begin{itemize}
+    \item Un abogado diseña y prueba un Blueprint prometedor en sus casos rutinarios.
+  \end{itemize}
+  \item \textbf{2. Prueba por Pares (Peer Review):}
+  \begin{itemize}
+    \item Dos colegas de área lo prueban con casos reales para verificar replicabilidad.
+  \end{itemize}
+  \item \textbf{3. Validación del Comité de IA:}
+  \begin{itemize}
+    \item Revisión institucional de confidencialidad, rigor dogmático y formato.
+  \end{itemize}
+  \item \textbf{4. Publicación en SharePoint:}
+  \begin{itemize}
+    \item Asignación de código oficial en la PromptLibrary y difusión al equipo.
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}[allowframebreaks,fragile]{Sostenibilidad: Auditoría Periódica de Modelos}
@@ -470,11 +477,6 @@ Para justificar el tiempo y los recursos invertidos, midan con rigor:
 \end{frame}
 
 
-
-\begin{frame}[allowframebreaks]{References}
-  \bibliographystyle{apalike}
-  \bibliography{references}
-\end{frame}
 
 
 \end{document}

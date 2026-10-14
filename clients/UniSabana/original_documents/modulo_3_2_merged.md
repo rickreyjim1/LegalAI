@@ -83,12 +83,9 @@ background_image: Images/UniSabana.jpg
 * Los modelos de lenguaje responden exponencialmente mejor a **ejemplos demostrativos** que a explicaciones teóricas abstractas [@sal2024].
 * **Zero-Shot:** Instrucción pura sin ejemplos (*"Haz una ficha jurisprudencial"*).
 * **Few-Shot:** Instrucción + un ejemplo modelo de cómo debe lucir el resultado exacto:
-  ```text
-  [INSTRUCCIÓN]: Extrae el problema jurídico del siguiente fallo.
-  [EJEMPLO DE SALIDA ESPERADA]:
-  "¿Vulnera el empleador el fuero de estabilidad laboral reforzada al despedir a un trabajador con incapacidad médica sin autorización previa del Ministerio del Trabajo?"
-  [CASO A ANALIZAR]: [EXPEDIENTE]
-  ```
+  * `[INSTRUCCIÓN]:` Extrae el problema jurídico del siguiente fallo.
+  * `[EJEMPLO ESPERADO]:` *"¿Vulnera el empleador el fuero de estabilidad laboral reforzada al despedir a un trabajador con incapacidad médica sin autorización previa del Ministerio del Trabajo?"*
+  * `[CASO A ANALIZAR]:` `[EXPEDIENTE]`
 
 ---
 
@@ -114,14 +111,11 @@ background_image: Images/UniSabana.jpg
 * Descomponer un flujo de trabajo jurídico complejo en una serie de pasos discretos, secuenciales y auditables.
 * **Principio de Encadenamiento:** La salida del Prompt 1 se convierte en el insumo directo del Prompt 2.
 
-```
-┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│  Paso 1: EXTRACCIÓN  │ ──> │  Paso 2: ANÁLISIS    │ ──> │ Paso 3: GENERACIÓN   │
-│  (Hechos y Fechas)   │     │ (Contradicciones)   │     │ (Borrador Memorial)│
-└──────────────────┘     └──────────────────┘     └──────────────────┘
-         ▲                        ▲                        ▲
-    [Control 1]              [Control 2]              [Control 3]
-```
+| Etapa del Pipeline | Enfoque Operativo | Punto de Control Humano |
+| :--- | :--- | :--- |
+| **Paso 1: Extracción** | Identificación de hechos y fechas clave | **Control 1:** Validación de insumos iniciales |
+| **Paso 2: Análisis** | Detección de contradicciones probatorias | **Control 2:** Control de consistencia jurídica |
+| **Paso 3: Generación** | Redacción del borrador de memorial | **Control 3:** Revisión y aprobación final |
 
 * **Ventaja:** El abogado valida cada etapa antes de avanzar al siguiente eslabón.
 
@@ -204,23 +198,14 @@ background_image: Images/UniSabana.jpg
 ---
 
 ## Flujo de Aprobación Institucional
-```
-┌─────────────────────────────────┐
-│ 1. Propuesta Individual        │  Un abogado diseña y prueba un Blueprint prometedor.
-└────────────────┬────────────────┘
-                 ▼
-┌─────────────────────────────────┐
-│ 2. Prueba por Pares (Peer Review)│  Dos colegas de área lo prueban con casos reales.
-└────────────────┬────────────────┘
-                 ▼
-┌─────────────────────────────────┐
-│ 3. Validación del Comité de IA  │  Revisión de confidencialidad, rigor y formato.
-└────────────────┬────────────────┘
-                 ▼
-┌─────────────────────────────────┐
-│ 4. Publicación en SharePoint    │  Asignación de código oficial y difusión al equipo.
-└─────────────────────────────────┘
-```
+* **1. Propuesta Individual:**
+  * Un abogado diseña y prueba un Blueprint prometedor en sus casos rutinarios.
+* **2. Prueba por Pares (Peer Review):**
+  * Dos colegas de área lo prueban con casos reales para verificar replicabilidad.
+* **3. Validación del Comité de IA:**
+  * Revisión institucional de confidencialidad, rigor dogmático y formato.
+* **4. Publicación en SharePoint:**
+  * Asignación de código oficial en la PromptLibrary y difusión al equipo.
 
 ---
 
