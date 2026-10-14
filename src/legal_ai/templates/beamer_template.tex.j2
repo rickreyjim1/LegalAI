@@ -1,4 +1,6 @@
 \documentclass[aspectratio=169]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage{tikz}
 \usepackage{graphicx}
 \usepackage{listings}
@@ -6,6 +8,15 @@
 \usepackage{hyperref}
 \usepackage[spanish,es-noquoting]{babel}
 \usepackage[round]{natbib}
+\usepackage{amssymb}
+
+% Unicode character fallbacks for pdflatex
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\DeclareUnicodeCharacter{2190}{\ensuremath{\leftarrow}}
+\DeclareUnicodeCharacter{25B2}{\ensuremath{\blacktriangle}}
+\DeclareUnicodeCharacter{25BC}{\ensuremath{\blacktriangledown}}
+\DeclareUnicodeCharacter{2014}{---}
+\DeclareUnicodeCharacter{2013}{--}
 
 \lstset{
   basicstyle=\ttfamily\small,

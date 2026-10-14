@@ -82,7 +82,8 @@ def build_tex(input_file: Path, output: Path):
 @main.command(name="build-pdf")
 @click.argument("input_file", type=click.Path(exists=True, path_type=Path))
 @click.option("--output", "-o", type=click.Path(path_type=Path), help="Ruta del archivo de salida (.pdf).")
-def build_pdf(input_file: Path, output: Path):
+@click.option("--watch", "-w", is_flag=True, default=False, help="Monitorea cambios en el archivo Markdown y recompila automáticamente.")
+def build_pdf(input_file: Path, output: Path, watch: bool = False):
     """Compila un archivo Markdown de curso a una presentación PDF vía MikTeX (pdflatex)."""
     import subprocess
     import shutil
@@ -98,38 +99,81 @@ def build_pdf(input_file: Path, output: Path):
     if not output:
         output = decks_dir / input_file.with_suffix(".pdf").name
 
-    console.print(f"[bold yellow]1. Generando LaTeX desde:[/bold yellow] {input_file.name}")
-    try:
-        out_path = build_tex_deck(md_file_path=str(input_file), output_path=str(tex_output))
-        console.print(f"[bold green][OK] Código fuente LaTeX generado:[/bold green] {out_path}")
-    except Exception as e:
-        console.print(f"[bold red]Error al generar archivo LaTeX:[/bold red] {e}")
-        sys.exit(1)
-        
-    console.print(f"[bold yellow]2. Compilando PDF usando pdflatex...[/bold yellow]")
-    try:
-        # We run pdflatex twice and bibtex in between if references exist
-        # Need to run in the decks_dir so auxiliary files are generated there
-        subprocess.run(["pdflatex", "-interaction=nonstopmode", tex_output.name], cwd=decks_dir, check=True, capture_output=True)
-        # Check if references.bib exists in the client folder or root folder
-        refs = input_dir.parent / "references.bib"
-        if not refs.exists():
-            refs = Path.cwd() / "references.bib"
-        
-        if refs.exists():
-            shutil.copy(refs, decks_dir / "references.bib")
-            console.print(f"[bold yellow]3. Procesando referencias con bibtex...[/bold yellow]")
-            subprocess.run(["bibtex", tex_output.stem], cwd=decks_dir, check=False, capture_output=True)
-            subprocess.run(["pdflatex", "-interaction=nonstopmode", tex_output.name], cwd=decks_dir, check=True, capture_output=True)
-            subprocess.run(["pdflatex", "-interaction=nonstopmode", tex_output.name], cwd=decks_dir, check=True, capture_output=True)
+    def compile_once():
+        console.print(f"[bold yellow]1. Generando LaTeX desde:[/bold yellow] {input_file.name}")
+        try:
+            out_path = build_tex_deck(md_file_path=str(input_file), output_path=str(tex_output))
+            console.print(f"[bold green][OK] Código fuente LaTeX generado:[/bold green] {out_path}")
+        except Exception as e:
+            console.print(f"[bold red]Error al generar archivo LaTeX:[/bold red] {e}")
+            return False
             
-        console.print(f"[bold green][OK] PDF generado exitosamente:[/bold green] {output.name}")
-    except subprocess.CalledProcessError as e:
-        console.print(f"[bold red]Error en la compilación de MikTeX:[/bold red]\n{e.output.decode('utf-8', errors='ignore')}")
-        sys.exit(1)
-    except FileNotFoundError:
-        console.print(f"[bold red]Error: No se encontró 'pdflatex'. Asegúrate de que MikTeX esté instalado y en el PATH del sistema.[/bold red]")
-        sys.exit(1)
+        console.print(f"[bold yellow]2. Compilando PDF usando pdflatex...[/bold yellow]")
+        try:
+            # We run pdflatex twice and bibtex in between if references exist
+            subprocess.run(["pdflatex", "-interaction=nonstopmode", tex_output.name], cwd=decks_dir, check=True, capture_output=True, stdin=subprocess.DEVNULL)
+            # Check if references.bib exists in the client folder or root folder
+            refs = input_dir.parent / "references.bib"
+            if not refs.exists():
+                refs = Path.cwd() / "references.bib"
+            
+            if refs.exists():
+                shutil.copy(refs, decks_dir / "references.bib")
+                console.print(f"[bold yellow]3. Procesando referencias con bibtex...[/bold yellow]")
+                subprocess.run(["bibtex", tex_output.stem], cwd=decks_dir, check=False, capture_output=True, stdin=subprocess.DEVNULL)
+                subprocess.run(["pdflatex", "-interaction=nonstopmode", tex_output.name], cwd=decks_dir, check=True, capture_output=True, stdin=subprocess.DEVNULL)
+                subprocess.run(["pdflatex", "-interaction=nonstopmode", tex_output.name], cwd=decks_dir, check=True, capture_output=True, stdin=subprocess.DEVNULL)
+                
+            console.print(f"[bold green][OK] PDF generado exitosamente:[/bold green] {output.name}")
+            return True
+        except subprocess.CalledProcessError as e:
+            err_msg = e.output.decode('utf-8', errors='ignore')
+            try:
+                console.print(f"[bold red]Error en la compilación de MikTeX:[/bold red]\n{err_msg}")
+            except Exception:
+                safe_msg = err_msg.encode('ascii', errors='replace').decode('ascii')
+                print(f"Error en la compilación de MikTeX:\n{safe_msg}")
+            return False
+        except FileNotFoundError:
+            console.print(f"[bold red]Error: No se encontró 'pdflatex'. Asegúrate de que MikTeX esté instalado y en el PATH del sistema.[/bold red]")
+            sys.exit(1)
+
+    compile_once()
+
+    if watch:
+        import time
+        from watchdog.observers import Observer
+        from watchdog.events import FileSystemEventHandler
+
+        class SingleFileChangeHandler(FileSystemEventHandler):
+            def __init__(self, target_path: Path):
+                self.target_path = target_path.resolve()
+                self.last_run = 0
+
+            def on_modified(self, event):
+                if not event.is_directory and Path(event.src_path).resolve() == self.target_path:
+                    current_time = time.time()
+                    if current_time - self.last_run > 1.0:
+                        self.last_run = current_time
+                        console.print(f"\n[bold magenta]¡Cambio detectado![/bold magenta] Recompilando: {self.target_path.name}")
+                        compile_once()
+
+        watch_dir = input_file.resolve().parent
+        event_handler = SingleFileChangeHandler(input_file)
+        observer = Observer()
+        observer.schedule(event_handler, str(watch_dir), recursive=False)
+        observer.start()
+
+        console.print(f"\n[bold cyan][WATCH] Monitoreando cambios en tiempo real:[/bold cyan] {input_file.name}")
+        console.print("[dim]Presiona Ctrl+C para detener el monitoreo.[/dim]")
+
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            observer.stop()
+            console.print("\n[yellow]Monitoreo detenido.[/yellow]")
+        observer.join()
 
 
 @main.command(name="watch")

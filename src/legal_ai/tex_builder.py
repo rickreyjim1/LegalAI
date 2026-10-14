@@ -78,14 +78,14 @@ def markdown_to_latex(content_lines: list[str]) -> str:
         clean = re.sub(r'\*\*(.*?)\*\*', r'\\textbf{\1}', clean)
         clean = re.sub(r'__(.*?)__', r'\\textbf{\1}', clean)
         clean = re.sub(r'(?<!\*)\*(?!\s)(.*?)(?<!\s)\*(?!\*)', r'\\textit{\1}', clean)
-        clean = re.sub(r'"([^"]*)"', r"``\1''", clean)
-        
-        # Handle inline code: `code`
+        # Handle inline code: `code` (before quotes so `` doesn't clash with backticks)
         clean = re.sub(
             r'`([^`]+)`',
             lambda m: '\\texttt{' + m.group(1).replace('_', '\\_').replace('%', '\\%').replace('&', '\\&').replace('#', '\\#') + '}',
             clean
         )
+
+        clean = re.sub(r'"([^"]*)"', r"``\1''", clean)
         
         # Handle regular links: [text](url)
         clean = re.sub(r'(?<!!)\[([^\]]+)\]\(([^)]+)\)', r'\\href{\2}{\1}', clean)
@@ -93,9 +93,31 @@ def markdown_to_latex(content_lines: list[str]) -> str:
         # Handle citations: [@citation]
         clean = re.sub(r'\[@(.*?)\]', r'\\cite{\1}', clean)
         
-        # Handle special LaTeX characters (% & _ #) in plain text
-        clean = clean.replace("%", "\\%").replace("&", "\\&").replace("#", "\\#")
+        # Handle special LaTeX characters (% & _ #) in plain text without double-escaping
+        clean = re.sub(r'(?<!\\)%', r'\\%', clean)
+        clean = re.sub(r'(?<!\\)&', r'\\&', clean)
+        clean = re.sub(r'(?<!\\)#', r'\\#', clean)
         clean = re.sub(r'(?<!\\)_', r'\\_', clean)
+        
+        # Replace common Unicode symbols and box-drawing characters that pdflatex cannot render
+        unicode_map = {
+            '→': r'$\rightarrow$',
+            '←': r'$\leftarrow$',
+            '▲': r'$\blacktriangle$',
+            '▼': r'$\blacktriangledown$',
+            '►': r'$\blacktriangleright$',
+            '◄': r'$\blacktriangleleft$',
+            '─': '-', '━': '=', '│': '|', '┃': '|',
+            '┌': '+', '┐': '+', '└': '+', '┘': '+',
+            '├': '+', '┤': '+', '┬': '+', '┴': '+', '┼': '+',
+            '╔': '+', '╗': '+', '╚': '+', '╝': '+',
+            '╠': '+', '╣': '+', '╦': '+', '╩': '+', '╬': '+',
+            '═': '=', '║': '|',
+            '•': r'\textbullet{} ', '…': r'\dots{}',
+        }
+        for u_char, tex_equiv in unicode_map.items():
+            if u_char in clean:
+                clean = clean.replace(u_char, tex_equiv)
         
         # Restore image tags with LaTeX figure syntax
         for idx, img_tag in enumerate(img_placeholders):
@@ -149,7 +171,10 @@ def markdown_to_latex(content_lines: list[str]) -> str:
                 level -= 1
                 
             indent_str = "  " * (level + 1)
-            latex_lines.append(f"{indent_str}\\item {text}")
+            if text.startswith("["):
+                latex_lines.append(f"{indent_str}\\item {{{text}}}")
+            else:
+                latex_lines.append(f"{indent_str}\\item {text}")
         else:
             # Close all itemize environments if regular text is encountered
             while level >= 0:
