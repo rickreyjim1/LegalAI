@@ -256,3 +256,15 @@ En derecho, la precisión radica en los límites que imponemos a la máquina:
   * Aprenderemos a construir **Pipelines modulares** para procesos complejos.
   * Analizaremos la hoja de ruta de escalabilidad y la **Gobernanza del Comité de IA**.
 * **¡Guarden sus Blueprints y los resultados de sus pruebas de fuego!**
+
+---
+
+## ¡Sigamos en Contacto!
+
+La Inteligencia Artificial avanza todos  los días. ¡No duden en escribirme para compartir ideas, resolver dudas o seguir conversando sobre cómo la IA puede transformar su práctica jurídica!
+
+* **WhatsApp:** (57) 3012726157
+* **Email:** [rareyesj@gmail.com](mailto:rareyesj@gmail.com)
+
+**¡Muchas gracias por su participación!**
+

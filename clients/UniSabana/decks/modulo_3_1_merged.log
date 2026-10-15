@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.13)  13 OCT 2026 21:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.10.13)  14 OCT 2026 20:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1238,11 +1238,17 @@ LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
 
 (modulo_3_1_merged.vrb) [26
 
-] (modulo_3_1_merged.bbl
+]
+\openout4 = `modulo_3_1_merged.vrb'.
+
+ (modulo_3_1_merged.vrb) [27
+
+]
+(modulo_3_1_merged.bbl
 
 Package natbib Warning: Empty `thebibliography' environment on input line 3.
 
-) [27
+) [28
 
 ]
 \tf@nav=\write6
@@ -1266,10 +1272,10 @@ Package rerunfilecheck Info: File `modulo_3_1_merged.out' has not changed.
 (rerunfilecheck)             Checksum: 4DA9D9096664261F8FF2D57C905AD89C;98.
  ) 
 Here is how much of TeX's memory you used:
- 28326 strings out of 467871
- 556020 string characters out of 5417407
+ 28332 strings out of 467871
+ 556138 string characters out of 5417407
  932451 words of memory out of 5000000
- 56566 multiletter control sequences out of 15000+600000
+ 56568 multiletter control sequences out of 15000+600000
  640111 words of font info for 60 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,123p,459b,824s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1291,9 +1297,9 @@ ppen/ec/dpi600\ecrm0600.pk> <C:\Users\Ricardo\AppData\Local\MiKTeX\fonts/pk/ljf
 our/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\Ricardo\AppData\Local\MiKTeX\font
 s/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Ricardo\AppData\Local\MiK
 TeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk>
-Output written on modulo_3_1_merged.pdf (27 pages, 551893 bytes).
+Output written on modulo_3_1_merged.pdf (28 pages, 558841 bytes).
 PDF statistics:
- 927 PDF objects out of 1000 (max. 8388607)
- 56 named destinations out of 1000 (max. 500000)
+ 952 PDF objects out of 1000 (max. 8388607)
+ 58 named destinations out of 1000 (max. 500000)
  128 words of extra memory for PDF output out of 10000 (max. 10000000)
 

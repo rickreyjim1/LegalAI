@@ -267,3 +267,14 @@ Para justificar el tiempo y los recursos invertidos, midan con rigor:
 * Su PromptLibrary es ahora el **código fuente de su organización**.
 * Trátenla con el mismo cuidado, rigor y orgullo con el que tratan su banco de jurisprudencia y precedentes.
 * **¡Felicitaciones por dar el paso de usuarios casuales a arquitectos institucionales de la IA jurídica!**
+
+---
+
+## ¡Sigamos en Contacto!
+
+La Inteligencia Artificial avanza todos los días. ¡No duden en escribirme para compartir ideas, resolver dudas o seguir conversando sobre cómo la IA puede transformar su práctica jurídica!
+
+* **WhatsApp:** (57) 3012726157 
+* **Email:** [rareyesj@gmail.com](mailto:rareyesj@gmail.com)
+
+**¡Muchas gracias por su participación!**

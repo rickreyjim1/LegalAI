@@ -8,7 +8,7 @@ from rich.table import Table
 
 from legal_ai import __version__
 from legal_ai.tex_builder import build_tex_deck
-from legal_ai.prompts import list_frameworks, get_framework
+from legal_ai.prompts import list_frameworks, get_framework, export_frameworks_to_markdown
 
 console = Console()
 
@@ -204,7 +204,7 @@ def watch(directory: Path):
 
     event_handler = MarkdownChangeHandler()
     observer = Observer()
-    observer.schedule(event_handler, str(directory), recursive=False)
+    observer.schedule(event_handler, str(directory), recursive=True)
     observer.start()
     
     console.print(f"[bold cyan][WATCH] Monitoreando cambios en:[/bold cyan] {directory}")
@@ -261,6 +261,23 @@ def prompt_show(code: str):
 
     console.print(Panel(fw.template, title=f"[bold green]{fw.name} - Plantilla[/bold green]"))
     console.print(Panel(fw.example, title=f"[bold blue]Ejemplo Práctico en Derecho[/bold blue]"))
+
+
+@prompt_group.command(name="export-slides")
+@click.option("--output", "-o", type=click.Path(path_type=Path), default=None, help="Ruta del archivo Markdown de salida (.md).")
+def prompt_export_slides(output: Optional[Path]):
+    """Exporta todos los frameworks de prompting como una presentación Beamer Markdown."""
+    if not output:
+        orig_dir = Path("clients/UniSabana/original_documents")
+        if orig_dir.exists():
+            output = orig_dir / "modulo_3_2_anexo.md"
+        else:
+            output = Path("original_documents/modulo_3_2_anexo.md")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    md_content = export_frameworks_to_markdown()
+    output.write_text(md_content, encoding="utf-8")
+    console.print(f"[bold green][OK] Slides exportadas exitosamente en:[/bold green] {output}")
+
 
 
 if __name__ == "__main__":

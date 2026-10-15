@@ -234,3 +234,85 @@ def list_frameworks() -> List[PromptFramework]:
             seen.add(fw.code)
             unique_frameworks.append(fw)
     return unique_frameworks
+
+
+def export_frameworks_to_markdown(
+    title: str = "Módulo 3.2 (Anexo): Catálogo de Frameworks y Prompts Jurídicos",
+    subtitle: str = "Plantillas Maestras y Ejemplos Prácticos de Ingeniería de Prompts",
+    author: str = "Ricardo A. Reyes",
+    institute: str = "Universidad de La Sabana",
+    background_image: str = "Images/UniSabana.jpg"
+) -> str:
+    """Exports all prompt frameworks as Beamer presentation slides in Markdown format."""
+    lines = [
+        "---",
+        f'title: "{title}"',
+        f'subtitle: "{subtitle}"',
+        f'author: "{author}"',
+        f'institute: "{institute}"',
+        "format: revealjs",
+        f"background_image: {background_image}",
+        "---",
+        "",
+        "# Módulo 3.2: Anexo de Prompts",
+        "",
+        "## Portada",
+        f"**Título:** {title}",
+        f"**Subtítulo:** {subtitle}",
+        "**Notas del Mentor:** *Compendio completo de frameworks de prompting legal para la firma.*",
+        "",
+        "---",
+        "",
+        "## Catálogo de Frameworks de Prompting Legal",
+        "",
+        "Frameworks de estandarización cognitiva y flujos de trabajo para la firma:",
+        ""
+    ]
+
+    for fw in list_frameworks():
+        lines.append(f"* **{fw.code}:** {fw.description}")
+
+    for fw in list_frameworks():
+        lines.extend([
+            "",
+            "---",
+            "",
+            f"## Framework {fw.code}: Estructura y Plantilla",
+            "",
+            f"* **Nombre:** {fw.name}",
+            f"* **Objetivo:** {fw.description}",
+            "* **Plantilla Maestra:**"
+        ])
+        for t_line in fw.template.splitlines():
+            if t_line.strip():
+                lines.append(f"  * {t_line.strip()}")
+
+        lines.extend([
+            "",
+            "---",
+            "",
+            f"## Framework {fw.code}: Caso Práctico en Derecho",
+            "",
+            "* **Aplicación Forense / Caso Real:**"
+        ])
+        for e_line in fw.example.splitlines():
+            if e_line.strip():
+                lines.append(f"  * {e_line.strip()}")
+
+    lines.extend([
+        "",
+        "---",
+        "",
+        "## ¡Sigamos en Contacto!",
+        "",
+        "La Inteligencia Artificial avanza todos los días. ¡No duden en escribirme para compartir ideas, resolver dudas o seguir conversando sobre cómo la IA puede transformar su práctica jurídica!",
+        "",
+        "* **WhatsApp:** (57) 3012726157",
+        "* **Email:** [rareyesj@gmail.com](mailto:rareyesj@gmail.com)",
+        "",
+        "**¡Muchas gracias por su participación!**",
+        ""
+    ])
+
+    return "\n".join(lines)
+
